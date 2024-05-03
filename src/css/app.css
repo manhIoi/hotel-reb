@@ -1,0 +1,24 @@
+/* app global css */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary-font: Barlow;
+  --font-size: 16px;
+  --line-height: 1.9em;
+  --letter-spacing: 0px;
+  --width-sidebar: 410px;
+  --main-content: calc(100% - 410px);
+  --container-width: 1290px;
+  --boxed-offset: 20px;
+  --woo-layout: layout_1c;
+  --woo-width-sidebar: 320px;
+  --woo-main-content: calc(100% - 320px)
+}
