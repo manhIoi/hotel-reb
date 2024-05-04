@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="q-mx-auto screen-container q-mt-lg">
+  <div class="q-mx-auto screen-container q-pa-md">
     <slot />
   </div>
 </template>

@@ -2,7 +2,7 @@
 import { useI18n } from "vue-i18n"
 import {ref} from "vue";
 import OutStandingItem from "components/OutStandingItem.vue";
-import HomeWrapper from "layouts/HomeWrapper.vue";
+import MainWrapper from "layouts/MainWrapper.vue";
 import SectionTitle from "components/SectionTitle.vue";
 const { t } = useI18n();
 const slide = ref(1)
@@ -24,8 +24,8 @@ const outstandingList = [
 </script>
 
 <template>
-  <q-page class="">
-    <home-wrapper>
+  <q-page>
+    <main-wrapper>
       <q-carousel
         animated
         v-model="slide"
@@ -45,7 +45,7 @@ const outstandingList = [
           <out-standing-item :title="item.title" :value="item.value" />
         </div>
       </div>
-    </home-wrapper>
+    </main-wrapper>
     <section-title title="OUR FAVORITE ROOMS" background-color="bg-grey-3">
       <template v-slot:right-title>
         <p>View more</p>

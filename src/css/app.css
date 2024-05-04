@@ -10,7 +10,9 @@ p {
 }
 
 :root {
+  --primary-color: #0f97aa;
   --primary-font: Barlow;
+  --footer-color: #063c43;
   --font-size: 16px;
   --line-height: 1.9em;
   --letter-spacing: 0px;
@@ -20,5 +22,22 @@ p {
   --boxed-offset: 20px;
   --woo-layout: layout_1c;
   --woo-width-sidebar: 320px;
-  --woo-main-content: calc(100% - 320px)
+  --woo-main-content: calc(100% - 320px);
+}
+/* Radius style */
+
+.br-xs {
+  border-radius: 4px;
+}
+.br-sm {
+  border-radius: 8px;
+}
+.br-md {
+  border-radius: 16px;
+}
+.br-lg {
+  border-radius: 24px;
+}
+.br-xl {
+  border-radius: 42px;
 }

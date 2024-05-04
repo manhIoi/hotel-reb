@@ -1,9 +1,13 @@
 <script setup>
-const { title, backgroundColor} = defineProps({
+const { title, backgroundColor, centerTitle} = defineProps({
   title: String,
   backgroundColor: {
     type: String,
-    default: 'bg-white'
+    default: 'bg-transparent',
+  },
+  centerTitle: {
+    type: Boolean,
+    default: false
   }
 })
 const _title = title.toUpperCase();
@@ -11,7 +15,7 @@ const _title = title.toUpperCase();
 
 <template>
   <div>
-    <div class="row justify-between q-pa-lg items-center" :class="backgroundColor">
+    <div class="row q-pa-lg items-center" :class="[backgroundColor, centerTitle ? 'justify-center' : 'justify-between']">
       <p class="text-h4 text-weight-medium">{{_title}}</p>
       <slot name="right-title" />
     </div>
