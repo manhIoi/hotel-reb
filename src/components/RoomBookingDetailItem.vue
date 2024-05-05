@@ -1,23 +1,19 @@
 <script setup>
-// const { bookingItem } = defineProps({
-//   bookingItem: Object
-// })
-const bookingItem = {
-  id: 'roomBookingItem_1',
-  image: 'https://demo.ovatheme.com/hotelft/wp-content/uploads/2022/02/room-04.jpg',
-  amount: 300,
-  name: 'Vip room',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum debitis deserunt, dolor doloribus eos esse facilis harum mollitia nisi, odit officiis quisquam? Asperiores consequuntur esse molestias quas quis, sunt totam?',
-  adultNumber: 5,
-  childrenNumber: 2,
-  acreage: 250
-}
+
+const emit = defineEmits(['clickItem']);
+const { bookingItem } = defineProps({
+  bookingItem: Object
+});
+
+const background = bookingItem.images?.[0];
+const {information} = bookingItem;
+
 </script>
 
 <template>
-  <q-card flat class="booking-item-container bg-white row">
+  <q-card flat class="booking-item-container bg-white row" @click="emit('clickItem', bookingItem)">
     <div class="col-xs-12 col-sm-6">
-      <q-img class="full-width full-height" :src="bookingItem.image" :alt="`booking_item_${bookingItem.id}`"/>
+      <q-img class="full-width full-height" :src="background" :alt="`booking_item_${bookingItem.id}`"/>
     </div>
     <div class="col-xs-12 col-sm-6">
       <div class="q-pa-md">
@@ -31,15 +27,15 @@ const bookingItem = {
             <div class="row q-mb-lg">
               <div class="row flex-center bg-grey-1 br-xs q-pa-sm q-mr-lg text-grey-9">
                 <q-icon name="person" class="q-mr-xs" size="24px"/>
-                <p>{{ bookingItem.adultNumber }} Adults</p>
+                <p>{{ information.adultNumber }} Adults</p>
               </div>
               <div class="row flex-center bg-grey-1 br-xs q-pa-sm q-mr-lg text-grey-9">
                 <q-icon name="person" class="q-mr-xs" size="24px"/>
-                <p>{{ bookingItem.adultNumber }} Adults</p>
+                <p>{{ information.childrenNumber }} Adults</p>
               </div>
               <div class="row flex-center bg-grey-1 br-xs q-pa-sm q-mr-lg text-grey-9">
                 <q-icon name="person" class="q-mr-xs" size="24px"/>
-                <p>{{ bookingItem.adultNumber }} Adults</p>
+                <p>{{ information.acreage }} Adults</p>
               </div>
             </div>
           </div>

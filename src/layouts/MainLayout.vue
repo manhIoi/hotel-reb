@@ -1,11 +1,13 @@
 <script setup>
-import {computed, ref} from "vue";
-import {useRouter} from "vue-router";
+import {computed, ref, watch} from "vue";
+import {useRoute, useRouter} from "vue-router";
 import {ROUTES_PATH} from "src/router/routes";
+import LanguageSwitch from "components/LanguageSwitch.vue";
 
 const navbarList = [
   {
     title: 'Branch',
+    link: ROUTES_PATH.branch,
     subItems: [
       {
         title: 'Branch 1'
@@ -19,70 +21,67 @@ const navbarList = [
     ]
   },
   {
+    link: ROUTES_PATH.search,
     title: 'Search',
   },
   {
     title: 'Contact',
+    link: ROUTES_PATH.contact
   },
 ]
 
 const router = useRouter();
-const currentHover = ref(-1);
+const route = useRoute();
+const selectedNavIndex = ref(-1);
 const leftDrawerOpen = ref(false);
-const menuStates = computed(() => {
-  return navbarList.reduce((current, item, index) => {
-    return {
-      ...current,
-      [index]: index === currentHover.value
-    }
-  }, {})
+
+watch(route, () => {
+  selectedNavIndex.value = navbarList.findIndex((item) => {
+    if (route.path === ROUTES_PATH.home && item.link === ROUTES_PATH.home) return -1;
+    return route.path.includes(item.link);
+  })
 })
-
-function onHoverItem(item, index) {
-  currentHover.value = index;
-}
-
-function onBlurItem(item, index) {
-  currentHover.value = -1;
-}
 
 function onClickLogo() {
   router.push(ROUTES_PATH.home);
+}
+
+function onClickSearch() {
+  router.push(ROUTES_PATH.search);
 }
 
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
 
+function onClickNavItem(item) {
+  router.push(item.link);
+}
+
 </script>
 
 <template>
   <q-layout>
-    <q-header bordered reveal class="text-white bg-white q-py-md" height-hint="61.59">
-      <q-toolbar class="q-py-sm q-px-md justify-between">
-        <q-avatar size="32px" @click="onClickLogo" class="bg-primary cursor-pointer">
+    <q-header bordered reveal class="text-white bg-white" height-hint="61.59">
+      <q-toolbar class="header q-mx-auto q-py-sm q-px-md justify-between">
+        <q-avatar size="32px" @click="onClickLogo" class="bg-primary q-mx-md cursor-pointer">
           <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" alt="logo_app">
         </q-avatar>
+        <q-separator color="grey-3" inset vertical/>
+        <div class="q-mx-md">
+          <language-switch />
+        </div>
         <q-space/>
         <q-list v-if="$q.screen.gt.sm" class="row items-center no-wrap">
-          <q-item v-for="(item, index) in navbarList" :key="item.title" class="text-grey-7 items-center nav-item"
-                  :class="{ 'item-hovered': currentHover === index }"
-                  @mouseenter="() => onHoverItem(item, index)" @mouseleave="() => onBlurItem(item, index)">
-            <p class="text-weight-bold q-mr-xs">{{ item.title }}</p>
-            <q-icon name="expand_more"/>
-            <q-menu v-model="menuStates[index]" v-if="item.subItems?.length > 0" class="bg-white text-primary"
-                    auto-close>
-              <q-list style="min-width: 200px">
-                <q-item v-for="(subItem, index) in item.subItems" :key="`subitem_${item.title}_${index}`" clickable>
-                  <q-item-section>{{ subItem.title }}</q-item-section>
-                </q-item>
-              </q-list>
-            </q-menu>
+          <q-item clickable v-for="(item, index) in navbarList" :key="item.title"
+                  class="items-center nav-item"
+                  :class="[selectedNavIndex === index ? 'text-primary' : 'text-grey-7']"
+                  @click="() => onClickNavItem(item)">
+            <p class="text-uppercase text-weight-bold text-overline q-mr-xs">{{ item.title }}</p>
           </q-item>
         </q-list>
-        <q-space/>
-        <q-btn color="primary" class="q-mr-md">
-          <p>Hello</p>
+        <q-btn color="primary" class="q-mx-md" @click="onClickSearch">
+          <p>Reservation</p>
         </q-btn>
         <transition
           transition-show="jump-down"
@@ -95,6 +94,23 @@ function toggleLeftDrawer() {
       </q-toolbar>
     </q-header>
 
+    <q-drawer v-if="!$q.screen.gt.sm" v-model="leftDrawerOpen" side="left" bordered class="flex column bg-primary">
+      <div class="flex flex-center q-pa-lg bg-primary full-width">
+        <q-avatar size="32px" @click="onClickLogo" class="bg-primary cursor-pointer">
+          <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" alt="logo_app">
+        </q-avatar>
+        <p class="text-weight-bolder text-overline q-ml-sm text-white">RoomB</p>
+      </div>
+      <q-list class="drawer-list bg-white">
+        <q-item clickable v-for="(item, index) in navbarList" :key="item.title"
+                class="justify-center"
+                :class="[selectedNavIndex === index ? 'text-primary' : 'text-grey-7']"
+                @click="() => onClickNavItem(item)">
+          <p class="text-uppercase text-weight-bold text-overline q-mr-xs">{{ item.title }}</p>
+        </q-item>
+      </q-list>
+    </q-drawer>
+
     <q-page-container>
       <router-view/>
     </q-page-container>
@@ -106,8 +122,18 @@ function toggleLeftDrawer() {
 </template>
 
 <style lang="css">
-.item-hovered > i,
-.item-hovered > p {
+.header {
+  max-width: var(--container-width);
+}
+
+.drawer-list {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  flex: 1;
+}
+
+.nav-item:hover > i,
+.nav-item:hover > p {
   color: var(--q-primary) !important;
 }
 
