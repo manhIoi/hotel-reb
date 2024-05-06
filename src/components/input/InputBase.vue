@@ -1,7 +1,10 @@
 <script setup>
 
 const { label } = defineProps({
-  label: String,
+  label: {
+    required: false,
+    type: String
+  },
 })
 
 </script>

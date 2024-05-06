@@ -1,9 +1,9 @@
 import MainLayout from "layouts/MainLayout.vue";
-import HomePage from "pages/HomePage.vue";
-import SearchPage from "pages/SearchPage.vue";
-import ContactPage from "pages/ContactPage.vue";
-import BranchPage from "pages/BranchPage.vue";
-import RoomDetailPage from "pages/RoomDetailPage.vue";
+import HomePage from "pages/home/HomePage.vue";
+import SearchPage from "pages/search/SearchPage.vue";
+import ContactPage from "pages/contact/ContactPage.vue";
+import BranchPage from "pages/branch/BranchPage.vue";
+import RoomDetailPage from "pages/room/RoomDetailPage.vue";
 
 export const ROUTES_PATH = {
   home: '/',
@@ -23,7 +23,7 @@ const routes = [
       { path: ROUTES_PATH.search, component: SearchPage },
       { path: ROUTES_PATH.contact, component: ContactPage },
       { path: ROUTES_PATH.branch, component: BranchPage },
-      { path: ROUTES_PATH.roomDetail, name:'room-detail',component: RoomDetailPage }
+      { path: ROUTES_PATH.roomDetail,component: RoomDetailPage }
     ]
   },
   {

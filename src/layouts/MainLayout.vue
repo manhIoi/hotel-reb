@@ -81,7 +81,7 @@ function onClickNavItem(item) {
           </q-item>
         </q-list>
         <q-btn color="primary" class="q-mx-md" @click="onClickSearch">
-          <p>Reservation</p>
+          <p class="text-weight-bold">Reservation</p>
         </q-btn>
         <transition
           transition-show="jump-down"

@@ -44,3 +44,7 @@ p {
 .br-xl {
   border-radius: 42px;
 }
+
+.custom-shadow {
+  box-shadow: 0 12px 8px rgba(1, 146, 243, 0.06), 0 12px 4px rgba(1, 146, 243, 0.06), 0 12px 100px -4px rgba(1, 146, 243, 0.06) !important;
+}

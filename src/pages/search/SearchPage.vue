@@ -1,6 +1,6 @@
 <script setup>
 
-import {ref} from "vue";
+import {ref, watch} from "vue";
 import MainWrapper from "layouts/MainWrapper.vue";
 import SectionTitle from "components/SectionTitle.vue";
 import RoomBookingDetailItem from "components/RoomBookingDetailItem.vue";
@@ -9,10 +9,15 @@ import {ROUTES_PATH} from "src/router/routes";
 import {generateRoomBookingList} from "src/server";
 
 
-const router = useRouter()
-const branchModel = ref('');
-const dateStartModel = ref(new Date());
-const dateEndModel = ref(new Date());
+const router = useRouter();
+const filterData = ref({
+  branch: null,
+  dateCheckIn: null,
+  dateCheckOut: null,
+  adultNumber: null,
+  childrenNumber: null,
+  bedNumber: null
+})
 const currentPage = ref(1);
 const branchOptions = ['Branch 1', 'Branch 2', 'Branch 3']
 
@@ -21,6 +26,10 @@ const roomBookingList = generateRoomBookingList(10);
 function onClickItem(item) {
   router.push(ROUTES_PATH.roomDetail)
 }
+
+watch(filterData.value, () => {
+  console.log("LOG_IT:: filterData", filterData.value);
+})
 
 </script>
 
@@ -31,14 +40,14 @@ function onClickItem(item) {
         <section-title center-title title="Search picker">
           <div class="row q-col-gutter-lg q-pa-md">
             <div class="col-md-4 col-xs-12">
-              <q-select outlined v-model="branchModel" :options="branchOptions" label="Select branch" />
+              <q-select outlined v-model="filterData.branch" :options="branchOptions" label="Select branch" />
             </div>
             <div class="col-md-4 col-xs-12">
-              <q-input outlined v-model="dateStartModel" mask="date" placeholder="Check in" readonly>
+              <q-input outlined v-model="filterData.dateCheckIn" mask="date" placeholder="Check in" readonly>
                 <template v-slot:append>
                   <q-icon name="event" class="cursor-pointer">
                     <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                      <q-date v-model="dateStartModel">
+                      <q-date v-model="filterData.dateCheckIn">
                         <div class="row items-center justify-end">
                           <q-btn v-close-popup label="Close" color="primary" flat />
                         </div>
@@ -49,11 +58,11 @@ function onClickItem(item) {
               </q-input>
             </div>
             <div class="col-md-4 col-xs-12">
-              <q-input outlined v-model="dateEndModel" mask="date" placeholder="Check out" readonly>
+              <q-input outlined v-model="filterData.dateCheckOut" mask="date" placeholder="Check out" readonly>
                 <template v-slot:append>
                   <q-icon name="event" class="cursor-pointer">
                     <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                      <q-date v-model="dateEndModel">
+                      <q-date v-model="filterData.dateCheckOut">
                         <div class="row items-center justify-end">
                           <q-btn v-close-popup label="Close" color="primary" flat />
                         </div>

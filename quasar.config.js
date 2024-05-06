@@ -101,6 +101,9 @@ module.exports = configure(function (/* ctx */) {
       config: {
         brand: {
           primary: '#0192f3'
+        },
+        notify: {
+
         }
       },
 
@@ -115,7 +118,7 @@ module.exports = configure(function (/* ctx */) {
       // directives: [],
 
       // Quasar plugins
-      plugins: []
+      plugins: ['Notify']
     },
 
     // animations: 'all', // --- includes all animations
