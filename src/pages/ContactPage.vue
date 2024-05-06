@@ -20,7 +20,7 @@ function onSubmit() {
       <div class="bg-white q-pa-md form-container">
         <div class="row q-col-gutter-lg">
           <div class="col-sm-4 col-xs-12">
-            <q-card class="column my-card bg-primary text-white full-height">
+            <q-card flat class="column my-card bg-primary text-white full-height">
               <q-card-section>
                 <div class="text-h4 text-weight-medium">FT. HOTEL</div>
                 <div class="text-subtitle2 text-weight-regular">Contact information</div>

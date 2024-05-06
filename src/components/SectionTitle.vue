@@ -15,7 +15,7 @@ const _title = title.toUpperCase();
 
 <template>
   <div>
-    <div class="row q-py-lg items-center" :class="[backgroundColor, centerTitle ? 'justify-center' : 'justify-between']">
+    <div class="row q-pb-lg items-center" :class="[backgroundColor, centerTitle ? 'justify-center' : 'justify-between']">
       <p class="text-h4 text-weight-medium">{{_title}}</p>
       <slot name="right-title" />
     </div>

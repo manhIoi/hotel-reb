@@ -25,7 +25,7 @@ const background = bookingItem.images?.[0]
         </div>
         <div class="row flex-center q-pa-sm q-mr-xs text-grey-9">
           <q-icon name="person" class="q-mr-xs" size="24px"/>
-          <p>{{ bookingItem.information.childrenNumber }} Adults</p>
+          <p>{{ bookingItem.information.childrenNumber }} Children</p>
         </div>
         <div class="row flex-center q-pa-sm q-mr-xs text-grey-9">
           <q-icon name="person" class="q-mr-xs" size="24px"/>

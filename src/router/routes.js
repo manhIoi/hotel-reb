@@ -26,9 +26,6 @@ const routes = [
       { path: ROUTES_PATH.roomDetail, name:'room-detail',component: RoomDetailPage }
     ]
   },
-
-  // Always leave this as last one,
-  // but you can also remove it
   {
     path: '/:catchAll(.*)*',
     component: () => import('pages/ErrorNotFound.vue')

@@ -7,11 +7,13 @@
 p {
   margin: 0;
   padding: 0;
+  font-family: "Barlow", sans-serif !important;
+
 }
 
 :root {
   --primary-color: #0192f3;
-  --primary-font: Barlow;
+  --primary-font: "Barlow";
   --footer-color: #1d2930;
   --font-size: 16px;
   --line-height: 1.9em;
@@ -24,6 +26,7 @@ p {
   --woo-width-sidebar: 320px;
   --woo-main-content: calc(100% - 320px);
 }
+
 /* Radius style */
 
 .br-xs {
