@@ -1,9 +1,10 @@
 import { faker } from '@faker-js/faker';
 
 export function generateRoomBooking() {
-  const images = [1,2,3,4,5].map(() => faker.image.city(undefined, undefined, true));
+  const images = [1,2,3,4,5].map(() => faker.image.urlLoremFlickr({ category: 'city' }));
+
   return {
-    id: faker.datatype.uuid(),
+    id: faker.string.uuid(),
     images,
     amount: faker.number.int({ min: 50, max: 2000 }),
     name: faker.lorem.words({ min: 2, max: 4 }),

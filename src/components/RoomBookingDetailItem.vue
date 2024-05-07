@@ -26,15 +26,15 @@ const {information} = bookingItem;
             <p class="text-h4 text-weight-bold q-mb-lg"> {{ bookingItem.name }}</p>
             <div class="row q-mb-lg">
               <div class="row flex-center bg-grey-1 br-xs q-pa-sm q-mr-lg text-grey-9">
-                <q-icon name="person" class="q-mr-xs" size="24px"/>
+                <q-icon name="fa-solid fa-person" class="q-mr-xs" size="24px"/>
                 <p>{{ information.adultNumber }} Adults</p>
               </div>
               <div class="row flex-center bg-grey-1 br-xs q-pa-sm q-mr-lg text-grey-9">
-                <q-icon name="person" class="q-mr-xs" size="24px"/>
+                <q-icon name="fa-solid fa-child-reaching" class="q-mr-xs" size="24px"/>
                 <p>{{ information.childrenNumber }} Adults</p>
               </div>
               <div class="row flex-center bg-grey-1 br-xs q-pa-sm q-mr-lg text-grey-9">
-                <q-icon name="person" class="q-mr-xs" size="24px"/>
+                <q-icon name="fa-solid fa-expand" class="q-mr-xs" size="24px"/>
                 <p>{{ information.acreage }} Adults</p>
               </div>
             </div>

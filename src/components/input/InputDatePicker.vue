@@ -1,8 +1,8 @@
 <script setup>
 import InputBase from "components/input/InputBase.vue";
-import {InputBaseProps} from "components/input/InputProps";
+import {InputDatePickerProps} from "components/input/InputProps";
 
-const {label, inputProps} = defineProps(InputBaseProps)
+const {label, inputProps, datePickerProps } = defineProps(InputDatePickerProps)
 
 const model = defineModel({
   type: true,
@@ -17,7 +17,7 @@ const model = defineModel({
       <template v-slot:append>
         <q-icon name="event" class="cursor-pointer">
           <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-            <q-date v-model="model">
+            <q-date v-model="model" v-bind="datePickerProps">
               <div class="row items-center justify-end">
                 <q-btn v-close-popup label="Close" color="primary" flat/>
               </div>

@@ -1,4 +1,4 @@
-import {QInput} from "quasar";
+import {QDate, QInput} from "quasar";
 
 export const InputBaseProps = {
   label: {
@@ -7,6 +7,14 @@ export const InputBaseProps = {
   },
   inputProps: {
     type: QInput,
+    required: false,
+  }
+}
+
+export const InputDatePickerProps = {
+  ...InputBaseProps,
+  datePickerProps: {
+    type: QDate,
     required: false,
   }
 }

@@ -7,7 +7,7 @@ export function generateHomeData() {
   return {
     title: 'Our world is your playground',
     description: 'Make yourself at home in our sophisticated guest rooms, take in the incredible views and enjoy fresh air from our beautiful sea city.',
-    slideImageList: [1,2,3,4,5].map(() => faker.image.city(undefined, undefined, true)),
+    slideImageList: [1,2,3,4,5].map(() => faker.image.urlLoremFlickr({ category: 'city' })),
     outstandingList: [
       {
         title: 'VARIOUS SERVICES',

@@ -2,7 +2,7 @@ import {faker} from "@faker-js/faker";
 
 export function generateComment() {
   return {
-    id: faker.datatype.uuid(),
+    id: faker.string.uuid(),
     content: faker.lorem.paragraph(5),
     user: {
       avatar: faker.image.avatar(),

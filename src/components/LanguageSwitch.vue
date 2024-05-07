@@ -1,10 +1,10 @@
 <script setup>
-import { useQuasar } from 'quasar'
+import {useQuasar} from 'quasar'
 import languages from 'quasar/lang/index.json'
-import { ref, watch } from 'vue'
+import {ref, watch} from 'vue'
 
 const appLanguages = languages.filter(lang =>
-  [ 'de', 'en-US' ].includes(lang.isoName)
+  ['de', 'en-US'].includes(lang.isoName)
 )
 
 const langOptions = appLanguages.map(lang => ({
@@ -30,7 +30,6 @@ watch(lang, val => {
   <q-select
     v-model="lang"
     :options="langOptions"
-    label="Quasar Language"
     dense
     borderless
     emit-value

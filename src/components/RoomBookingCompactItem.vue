@@ -20,15 +20,15 @@ const background = bookingItem.images?.[0]
       </div>
       <div class="row">
         <div class="row flex-center q-pa-sm q-mr-xs text-grey-9">
-          <q-icon name="person" class="q-mr-xs" size="24px"/>
+          <q-icon name="fa-solid fa-person" class="q-mr-xs" size="24px"/>
           <p>{{ bookingItem.information.adultNumber }} Adults</p>
         </div>
         <div class="row flex-center q-pa-sm q-mr-xs text-grey-9">
-          <q-icon name="person" class="q-mr-xs" size="24px"/>
+          <q-icon name="fa-solid fa-child-reaching" class="q-mr-xs" size="24px"/>
           <p>{{ bookingItem.information.childrenNumber }} Children</p>
         </div>
         <div class="row flex-center q-pa-sm q-mr-xs text-grey-9">
-          <q-icon name="person" class="q-mr-xs" size="24px"/>
+          <q-icon name="fa-solid fa-expand" class="q-mr-xs" size="24px"/>
           <p>{{ bookingItem.information.acreage }} ft</p>
         </div>
       </div>

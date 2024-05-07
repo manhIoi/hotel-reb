@@ -2,9 +2,9 @@
 
 import {ref} from "vue";
 import {validators} from "src/utils";
-import {useQuasar} from "quasar";
+import {useDialog} from "src/composables";
+import {useToast} from "src/composables/useToast";
 
-const $q = useQuasar()
 const formData = ref({
   email: '',
   firstName: '',
@@ -13,14 +13,13 @@ const formData = ref({
   message: '',
 })
 
+const {showDialog} = useDialog()
+const {showToast} = useToast()
+
 function onSubmit() {
-  $q.notify({
-    color: 'positive',
-    message: "123123",
-    position: "bottom-right",
-    timeout: 3000,
-    icon: "success",
-  })
+  showDialog('confirm', {
+    message: "Are you sure send this message ?"
+  }).onOk(() => showToast('success', 'Thanks you for your message'))
 }
 
 </script>
