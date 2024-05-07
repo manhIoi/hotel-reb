@@ -1,9 +1,7 @@
 <script setup>
-
 import MainWrapper from "layouts/MainWrapper.vue";
 import ContactCard from "pages/contact/views/ContactCard.vue";
 import ContactForm from "pages/contact/views/ContactForm.vue";
-
 </script>
 
 <template>
@@ -23,5 +21,4 @@ import ContactForm from "pages/contact/views/ContactForm.vue";
   </q-page>
 </template>
 
-<style lang="css">
-</style>
+<style lang="css"></style>

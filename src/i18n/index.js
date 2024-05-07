@@ -1,20 +1,19 @@
-
 const enUS = {
   navbarList: {
     search: "Search",
     contact: "Contact",
   },
-  reservation: "Reservation"
-}
+  reservation: "Reservation",
+};
 
 const vi = {
   navbarList: {
     search: "Tìm kiếm",
     contact: "Liên hệ",
   },
-}
+};
 
 export default {
-  'en-US': enUS,
-  vi
-}
+  "en-US": enUS,
+  vi,
+};

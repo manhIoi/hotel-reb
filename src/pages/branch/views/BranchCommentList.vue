@@ -1,14 +1,13 @@
 <script setup>
-import {ref} from "vue";
+import { ref } from "vue";
 import SectionTitle from "components/SectionTitle.vue";
 import CommentItem from "components/CommentItem.vue";
 
 const { commentList } = defineProps({
-  commentList: Array
-})
+  commentList: Array,
+});
 
 const commentSlide = ref(0);
-
 </script>
 
 <template>
@@ -24,7 +23,12 @@ const commentSlide = ref(0);
       height="300px"
       arrows
     >
-      <q-carousel-slide v-for="(item, index) in commentList" :name="index" :key="`comment_${item.id}`" class="column no-wrap">
+      <q-carousel-slide
+        v-for="(item, index) in commentList"
+        :name="index"
+        :key="`comment_${item.id}`"
+        class="column no-wrap"
+      >
         <div class="row q-col-gutter-lg">
           <div class="rounded-borders col-12">
             <div class="fit flex justify-center">

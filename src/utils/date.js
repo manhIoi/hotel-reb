@@ -7,6 +7,5 @@ export const getRangeDate = (start, end) => {
     if (start) return _date >= _start;
     if (end) return _date <= _end;
     return true;
-  }
-
-}
+  };
+};

@@ -1,14 +1,12 @@
 <script setup>
-
 import PlaceNearbyCardItem from "components/PlaceNearbyCardItem.vue";
 import SectionTitle from "components/SectionTitle.vue";
 
-const { placeNearbyList} = defineProps({
-  placeNearbyList: Array
-})
+const { placeNearbyList } = defineProps({
+  placeNearbyList: Array,
+});
 
-const [ firstPlaceNearbyItem, ...otherPlaceNearbyItem] = placeNearbyList
-
+const [firstPlaceNearbyItem, ...otherPlaceNearbyItem] = placeNearbyList;
 </script>
 
 <template>
@@ -19,7 +17,11 @@ const [ firstPlaceNearbyItem, ...otherPlaceNearbyItem] = placeNearbyList
       </div>
       <div class="col-md-6 col-xs-12">
         <div class="row q-col-gutter-lg">
-          <div class="col-6" v-for="item in otherPlaceNearbyItem" :key="`place_nearby_item_${item.id}`">
+          <div
+            class="col-6"
+            v-for="item in otherPlaceNearbyItem"
+            :key="`place_nearby_item_${item.id}`"
+          >
             <place-nearby-card-item :nearby-item="item" />
           </div>
         </div>
@@ -28,6 +30,4 @@ const [ firstPlaceNearbyItem, ...otherPlaceNearbyItem] = placeNearbyList
   </section-title>
 </template>
 
-<style scoped lang="css">
-
-</style>
+<style scoped lang="css"></style>

@@ -1,57 +1,63 @@
 <script setup>
-
-import {onMounted, reactive, ref, watch, watchEffect} from "vue";
+import { onMounted, reactive, ref, watch, watchEffect } from "vue";
 import MainWrapper from "layouts/MainWrapper.vue";
 import SectionTitle from "components/SectionTitle.vue";
 import RoomBookingDetailItem from "components/RoomBookingDetailItem.vue";
-import {useRoute, useRouter} from "vue-router";
-import {ROUTES_PATH} from "src/router/routes";
-import {generateRoomBookingList} from "src/server";
+import { useRoute, useRouter } from "vue-router";
+import { ROUTES_PATH } from "src/router/routes";
+import { generateRoomBookingList } from "src/server";
 import InputDatePicker from "components/input/InputDatePicker.vue";
 import InputCounter from "components/input/InputCounter.vue";
 import InputBase from "components/input/InputBase.vue";
-import {debounce} from "lodash";
+import { debounce } from "lodash";
 
 const router = useRouter();
 const route = useRoute();
 const filterData = ref({
-  branch: '',
-  dateCheckIn: '',
-  dateCheckOut: '',
+  branch: "",
+  dateCheckIn: "",
+  dateCheckOut: "",
   adultNumber: 0,
   childrenNumber: 0,
   bedNumber: 0,
   currentPage: 1,
-})
-const branchOptions = ['Branch 1', 'Branch 2', 'Branch 3']
+});
+const branchOptions = ["Branch 1", "Branch 2", "Branch 3"];
 
 const roomBookingList = ref([]);
 
 function onClickItem(item) {
-  router.push(ROUTES_PATH.roomDetail)
+  router.push(ROUTES_PATH.roomDetail);
 }
 
 watch(filterData.value, () => {
-  router.replace({query: {...filterData.value}})
-})
+  router.replace({ query: { ...filterData.value } });
+});
 
 watchEffect(() => {
   if (route.query) {
-    const {currentPage, branch, dateCheckIn, dateCheckOut, adultNumber, childrenNumber, bedNumber} = route.query
+    const {
+      currentPage,
+      branch,
+      dateCheckIn,
+      dateCheckOut,
+      adultNumber,
+      childrenNumber,
+      bedNumber,
+    } = route.query;
     filterData.value.branch = branch;
     filterData.value.dateCheckIn = dateCheckIn;
     filterData.value.dateCheckOut = dateCheckOut;
-    filterData.value.bedNumber = parseInt(bedNumber || '0');
-    filterData.value.adultNumber = parseInt(adultNumber || '0');
-    filterData.value.childrenNumber = parseInt(childrenNumber || '0');
-    filterData.value.currentPage = parseInt(currentPage || '0');
+    filterData.value.bedNumber = parseInt(bedNumber || "0");
+    filterData.value.adultNumber = parseInt(adultNumber || "0");
+    filterData.value.childrenNumber = parseInt(childrenNumber || "0");
+    filterData.value.currentPage = parseInt(currentPage || "0");
 
-     debounce(() => {
-       roomBookingList.value = generateRoomBookingList(10);
-     }, 1000)();
+    debounce(() => {
+      roomBookingList.value = generateRoomBookingList(10);
+    }, 1000)();
   }
-})
-
+});
 </script>
 
 <template>
@@ -62,23 +68,37 @@ watchEffect(() => {
           <div class="row q-col-gutter-lg q-pa-md">
             <div class="col-md-4 col-xs-6">
               <input-base label="Branch">
-                <q-select outlined v-model="filterData.branch" :options="branchOptions" label="Select branch"/>
+                <q-select
+                  outlined
+                  v-model="filterData.branch"
+                  :options="branchOptions"
+                  label="Select branch"
+                />
               </input-base>
             </div>
             <div class="col-md-4 col-xs-6">
-              <input-date-picker label="Check In" v-model="filterData.dateCheckIn"/>
+              <input-date-picker
+                label="Check In"
+                v-model="filterData.dateCheckIn"
+              />
             </div>
             <div class="col-md-4 col-xs-6">
-              <input-date-picker label="Check Out" v-model="filterData.dateCheckOut"/>
+              <input-date-picker
+                label="Check Out"
+                v-model="filterData.dateCheckOut"
+              />
             </div>
             <div class="col-md-4 col-xs-6">
-              <input-counter label="Adults" v-model="filterData.adultNumber"/>
+              <input-counter label="Adults" v-model="filterData.adultNumber" />
             </div>
             <div class="col-md-4 col-xs-6">
-              <input-counter label="Childrens" v-model="filterData.childrenNumber"/>
+              <input-counter
+                label="Childrens"
+                v-model="filterData.childrenNumber"
+              />
             </div>
             <div class="col-md-4 col-xs-6">
-              <input-counter label="Bed rooms" v-model="filterData.bedNumber"/>
+              <input-counter label="Bed rooms" v-model="filterData.bedNumber" />
             </div>
           </div>
         </section-title>
@@ -92,11 +112,13 @@ watchEffect(() => {
             once
           >
             <div class="col-12">
-              <room-booking-detail-item :booking-item="item" @click-item="onClickItem"/>
+              <room-booking-detail-item
+                :booking-item="item"
+                @click-item="onClickItem"
+              />
             </div>
           </q-intersection>
         </div>
-
       </section-title>
       <div class="q-pa-lg flex flex-center">
         <q-pagination
@@ -114,4 +136,3 @@ watchEffect(() => {
   border-radius: 8px;
 }
 </style>
-

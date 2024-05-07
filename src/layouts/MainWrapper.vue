@@ -1,16 +1,16 @@
 <script setup>
-const {backgroundColor} = defineProps({
+const { backgroundColor } = defineProps({
   backgroundColor: {
     type: String,
-    default: 'bg-transparent',
+    default: "bg-transparent",
   },
-})
+});
 </script>
 
 <template>
   <div :class="backgroundColor">
     <div class="q-mx-auto screen-container q-pa-md">
-      <slot/>
+      <slot />
     </div>
   </div>
 </template>

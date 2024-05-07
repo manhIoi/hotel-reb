@@ -1,17 +1,16 @@
-import {useQuasar} from "quasar";
+import { useQuasar } from "quasar";
 
 export function useToast() {
-
   const $q = useQuasar();
 
   function buildNotifyParamsByType(type, message) {
-    if (type === 'success') {
+    if (type === "success") {
       return {
-        type: 'positive',
+        type: "positive",
         timeout: 3000,
-        position: 'bottom-right',
-        message: `🎉 ${message}`
-      }
+        position: "bottom-right",
+        message: `🎉 ${message}`,
+      };
     }
   }
 
@@ -20,10 +19,10 @@ export function useToast() {
     return $q.notify({
       message,
       ...params,
-    })
+    });
   }
 
   return {
-    showToast
-  }
+    showToast,
+  };
 }

@@ -1,17 +1,17 @@
 <script setup>
-import {ROUTES_PATH} from "src/router/routes";
+import { ROUTES_PATH } from "src/router/routes";
 import RoomBookingCompactItem from "components/RoomBookingCompactItem.vue";
 import SectionTitle from "components/SectionTitle.vue";
-import {useRouter} from "vue-router";
+import { useRouter } from "vue-router";
 
-const {roomBookingList} = defineProps({
-  roomBookingList: Array
-})
+const { roomBookingList } = defineProps({
+  roomBookingList: Array,
+});
 
-const router = useRouter()
+const router = useRouter();
 
 function onClickRoomBookingItem(item) {
-  router.push(ROUTES_PATH.roomDetail)
+  router.push(ROUTES_PATH.roomDetail);
 }
 </script>
 
@@ -25,12 +25,13 @@ function onClickRoomBookingItem(item) {
         class="col-lg-4 col-md-6 col-sm-12 col-xs-12"
         once
       >
-        <room-booking-compact-item :booking-item="item" @click-item="onClickRoomBookingItem"/>
+        <room-booking-compact-item
+          :booking-item="item"
+          @click-item="onClickRoomBookingItem"
+        />
       </q-intersection>
     </div>
   </SectionTitle>
 </template>
 
-<style scoped lang="css">
-
-</style>
+<style scoped lang="css"></style>

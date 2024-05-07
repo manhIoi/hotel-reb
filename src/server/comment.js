@@ -1,4 +1,4 @@
-import {faker} from "@faker-js/faker";
+import { faker } from "@faker-js/faker";
 
 export function generateComment() {
   return {
@@ -8,12 +8,12 @@ export function generateComment() {
       avatar: faker.image.avatar(),
       name: faker.person.fullName(),
       country: faker.location.country(),
-    }
-  }
+    },
+  };
 }
 
 export function generateCommentList(num) {
-  const result = []
+  const result = [];
   for (let i = 0; i < num; i++) {
     result.push(generateComment());
   }

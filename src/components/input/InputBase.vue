@@ -1,9 +1,7 @@
 <script setup>
+import { InputBaseProps } from "components/input/InputProps";
 
-import {InputBaseProps} from "components/input/InputProps";
-
-const { label } = defineProps(InputBaseProps)
-
+const { label } = defineProps(InputBaseProps);
 </script>
 
 <template>
@@ -11,6 +9,4 @@ const { label } = defineProps(InputBaseProps)
   <slot />
 </template>
 
-<style scoped lang="css">
-
-</style>
+<style scoped lang="css"></style>

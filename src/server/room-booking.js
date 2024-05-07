@@ -1,7 +1,9 @@
-import { faker } from '@faker-js/faker';
+import { faker } from "@faker-js/faker";
 
 export function generateRoomBooking() {
-  const images = [1,2,3,4,5].map(() => faker.image.urlLoremFlickr({ category: 'city' }));
+  const images = [1, 2, 3, 4, 5].map(() =>
+    faker.image.urlLoremFlickr({ category: "city" })
+  );
 
   return {
     id: faker.string.uuid(),
@@ -14,11 +16,11 @@ export function generateRoomBooking() {
       childrenNumber: faker.number.int({ min: 1, max: 10 }),
       acreage: faker.number.int({ min: 100, max: 200 }),
     },
-  }
+  };
 }
 
 export function generateRoomBookingList(num) {
-  const result = []
+  const result = [];
   for (let i = 0; i < num; i++) {
     result.push(generateRoomBooking());
   }

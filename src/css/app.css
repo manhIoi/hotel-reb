@@ -8,7 +8,6 @@ p {
   margin: 0;
   padding: 0;
   font-family: "Lato", sans-serif !important;
-
 }
 
 :root {
@@ -45,5 +44,7 @@ p {
 }
 
 .custom-shadow {
-  box-shadow: 0 12px 8px rgba(1, 146, 243, 0.06), 0 12px 4px rgba(1, 146, 243, 0.06), 0 12px 100px -4px rgba(1, 146, 243, 0.06) !important;
+  box-shadow: 0 12px 8px rgba(1, 146, 243, 0.06),
+    0 12px 4px rgba(1, 146, 243, 0.06),
+    0 12px 100px -4px rgba(1, 146, 243, 0.06) !important;
 }

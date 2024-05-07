@@ -1,29 +1,29 @@
 <script setup>
-import {useQuasar} from 'quasar'
-import languages from 'quasar/lang/index.json'
-import {ref, watch} from 'vue'
+import { useQuasar } from "quasar";
+import languages from "quasar/lang/index.json";
+import { ref, watch } from "vue";
 
-const appLanguages = languages.filter(lang =>
-  ['de', 'en-US'].includes(lang.isoName)
-)
+const appLanguages = languages.filter((lang) =>
+  ["de", "en-US"].includes(lang.isoName)
+);
 
-const langOptions = appLanguages.map(lang => ({
-  label: lang.nativeName, value: lang.isoName
-}))
+const langOptions = appLanguages.map((lang) => ({
+  label: lang.nativeName,
+  value: lang.isoName,
+}));
 
-const $q = useQuasar()
-const lang = ref($q.lang.isoName)
+const $q = useQuasar();
+const lang = ref($q.lang.isoName);
 
-watch(lang, val => {
+watch(lang, (val) => {
   // dynamic import, so loading on demand only
   import(
     /* webpackInclude: /(de|en-US)\.js$/ */
-  'quasar/lang/' + val
-    ).then(lang => {
-    $q.lang.set(lang.default)
-  })
-})
-
+    "quasar/lang/" + val
+  ).then((lang) => {
+    $q.lang.set(lang.default);
+  });
+});
 </script>
 
 <template>
@@ -39,6 +39,4 @@ watch(lang, val => {
   />
 </template>
 
-<style scoped lang="css">
-
-</style>
+<style scoped lang="css"></style>

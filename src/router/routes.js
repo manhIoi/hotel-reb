@@ -6,30 +6,29 @@ import BranchPage from "pages/branch/BranchPage.vue";
 import RoomDetailPage from "pages/room/RoomDetailPage.vue";
 
 export const ROUTES_PATH = {
-  home: '/',
-  search: '/search',
-  contact: '/contact',
-  branch: '/branch',
-  roomDetail: '/room-detail',
-}
-
+  home: "/",
+  search: "/search",
+  contact: "/contact",
+  branch: "/branch",
+  roomDetail: "/room-detail",
+};
 
 const routes = [
   {
-    path: '/',
+    path: "/",
     component: MainLayout,
     children: [
       { path: ROUTES_PATH.home, component: HomePage },
       { path: ROUTES_PATH.search, component: SearchPage },
       { path: ROUTES_PATH.contact, component: ContactPage },
       { path: ROUTES_PATH.branch, component: BranchPage },
-      { path: ROUTES_PATH.roomDetail,component: RoomDetailPage }
-    ]
+      { path: ROUTES_PATH.roomDetail, component: RoomDetailPage },
+    ],
   },
   {
-    path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue')
-  }
-]
+    path: "/:catchAll(.*)*",
+    component: () => import("pages/ErrorNotFound.vue"),
+  },
+];
 
-export default routes
+export default routes;
