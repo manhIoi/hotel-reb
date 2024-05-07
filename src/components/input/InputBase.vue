@@ -1,11 +1,8 @@
 <script setup>
 
-const { label } = defineProps({
-  label: {
-    required: false,
-    type: String
-  },
-})
+import {InputBaseProps} from "components/input/InputProps";
+
+const { label } = defineProps(InputBaseProps)
 
 </script>
 

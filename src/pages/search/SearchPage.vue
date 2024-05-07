@@ -1,34 +1,51 @@
 <script setup>
 
-import {ref, watch} from "vue";
+import {onMounted, reactive, ref, watch, watchEffect} from "vue";
 import MainWrapper from "layouts/MainWrapper.vue";
 import SectionTitle from "components/SectionTitle.vue";
 import RoomBookingDetailItem from "components/RoomBookingDetailItem.vue";
-import {useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {ROUTES_PATH} from "src/router/routes";
 import {generateRoomBookingList} from "src/server";
-
+import InputDatePicker from "components/input/InputDatePicker.vue";
+import InputCounter from "components/input/InputCounter.vue";
 
 const router = useRouter();
+const route = useRoute();
 const filterData = ref({
-  branch: null,
-  dateCheckIn: null,
-  dateCheckOut: null,
-  adultNumber: null,
-  childrenNumber: null,
-  bedNumber: null
+  branch: '',
+  dateCheckIn: '',
+  dateCheckOut: '',
+  adultNumber: 0,
+  childrenNumber: 0,
+  bedNumber: 0
 })
+
 const currentPage = ref(1);
 const branchOptions = ['Branch 1', 'Branch 2', 'Branch 3']
 
-const roomBookingList = generateRoomBookingList(10);
+const roomBookingList = ref(generateRoomBookingList(10));
 
 function onClickItem(item) {
   router.push(ROUTES_PATH.roomDetail)
 }
 
 watch(filterData.value, () => {
-  console.log("LOG_IT:: filterData", filterData.value);
+  router.replace({ query: { ...filterData.value } })
+})
+
+watchEffect(() => {
+  if (route.query) {
+    roomBookingList.value = generateRoomBookingList(3);
+    filterData.value = {
+      branch: route.query.branch,
+      dateCheckIn: route.query.dateCheckIn,
+      dateCheckOut: route.query.dateCheckOut,
+      adultNumber: parseInt(route.query.adutNumber || '0'),
+      childrenNumber: parseInt(route.query.childrenNumber || '0'),
+      bedNumber: parseInt(route.query.bedNumber || '0')
+    }
+  }
 })
 
 </script>
@@ -43,49 +60,19 @@ watch(filterData.value, () => {
               <q-select outlined v-model="filterData.branch" :options="branchOptions" label="Select branch" />
             </div>
             <div class="col-md-4 col-xs-12">
-              <q-input outlined v-model="filterData.dateCheckIn" mask="date" placeholder="Check in" readonly>
-                <template v-slot:append>
-                  <q-icon name="event" class="cursor-pointer">
-                    <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                      <q-date v-model="filterData.dateCheckIn">
-                        <div class="row items-center justify-end">
-                          <q-btn v-close-popup label="Close" color="primary" flat />
-                        </div>
-                      </q-date>
-                    </q-popup-proxy>
-                  </q-icon>
-                </template>
-              </q-input>
+              <input-date-picker v-model="filterData.dateCheckIn" />
             </div>
             <div class="col-md-4 col-xs-12">
-              <q-input outlined v-model="filterData.dateCheckOut" mask="date" placeholder="Check out" readonly>
-                <template v-slot:append>
-                  <q-icon name="event" class="cursor-pointer">
-                    <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                      <q-date v-model="filterData.dateCheckOut">
-                        <div class="row items-center justify-end">
-                          <q-btn v-close-popup label="Close" color="primary" flat />
-                        </div>
-                      </q-date>
-                    </q-popup-proxy>
-                  </q-icon>
-                </template>
-              </q-input>
+              <input-date-picker v-model="filterData.dateCheckOut" />
             </div>
             <div class="col-md-4 col-xs-12">
-              <q-input outlined mask="date" placeholder="Adults" readonly>
-                <template v-slot:append>
-                  <q-avatar>
-                    <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg">
-                  </q-avatar>
-                </template>
-              </q-input>
+              <input-counter v-model="filterData.adultNumber" />
             </div>
             <div class="col-md-4 col-xs-12">
-              <q-input outlined mask="date" placeholder="Childrens" readonly />
+              <input-counter v-model="filterData.childrenNumber" />
             </div>
             <div class="col-md-4 col-xs-12">
-              <q-input outlined mask="date" placeholder="Beds" readonly />
+              <input-counter v-model="filterData.bedNumber" />
             </div>
           </div>
         </section-title>
@@ -94,7 +81,7 @@ watch(filterData.value, () => {
         <div class="row q-gutter-lg">
           <q-intersection
             v-for="item in roomBookingList"
-            :key="item?.in"
+            :key="item?.id"
             transition="scale"
             once
           >

@@ -1,22 +1,25 @@
 <script setup>
-import {ref} from "vue";
 import InputBase from "components/input/InputBase.vue";
-const { label } = defineProps({
-  label: String,
+import {InputBaseProps} from "components/input/InputProps";
+
+const {label, inputProps} = defineProps(InputBaseProps)
+
+const model = defineModel({
+  type: true,
+  required: true
 })
 
-const dateSelected = ref();
 </script>
 
 <template>
-  <input-base :label="label" >
-    <q-input outlined v-model="dateSelected" mask="date" placeholder="Check in" readonly>
+  <input-base :label="label">
+    <q-input placeholder="dd/mm/yyyy" outlined v-model="model" mask="date" readonly v-bind="inputProps">
       <template v-slot:append>
         <q-icon name="event" class="cursor-pointer">
           <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-            <q-date v-model="dateSelected">
+            <q-date v-model="model">
               <div class="row items-center justify-end">
-                <q-btn v-close-popup label="Close" color="primary" flat />
+                <q-btn v-close-popup label="Close" color="primary" flat/>
               </div>
             </q-date>
           </q-popup-proxy>
