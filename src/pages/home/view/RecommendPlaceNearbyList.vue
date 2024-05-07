@@ -1,12 +1,17 @@
 <script setup>
 import PlaceNearbyCardItem from "components/PlaceNearbyCardItem.vue";
 import SectionTitle from "components/SectionTitle.vue";
+import { useRouter } from "vue-router";
 
 const { placeNearbyList } = defineProps({
   placeNearbyList: Array,
 });
 
+const router = useRouter();
+
 const [firstPlaceNearbyItem, ...otherPlaceNearbyItem] = placeNearbyList;
+
+function onClickItem(item) {}
 </script>
 
 <template>

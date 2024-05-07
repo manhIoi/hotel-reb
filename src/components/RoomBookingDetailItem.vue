@@ -11,7 +11,7 @@ const { information } = bookingItem;
 <template>
   <q-card
     flat
-    class="booking-item-container bg-white row"
+    class="booking-item-container bg-white row cursor-pointer"
     @click="emit('clickItem', bookingItem)"
   >
     <div class="col-xs-12 col-sm-6">

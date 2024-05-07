@@ -6,7 +6,7 @@ const background = bookingItem.images[0];
 </script>
 
 <template>
-  <q-card flat class="full-height full-width">
+  <q-card flat class="full-height full-width cursor-pointer">
     <q-img :src="background" class="full-width full-height">
       <div class="absolute-top-left q-pa-md bg-transparent">
         <div class="bg-white br-xs">
