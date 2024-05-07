@@ -22,6 +22,7 @@ const commentSlide = ref(0);
       padding
       height="300px"
       arrows
+      class="bg-transparent"
     >
       <q-carousel-slide
         v-for="(item, index) in commentList"

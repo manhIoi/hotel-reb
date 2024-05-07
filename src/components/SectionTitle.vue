@@ -14,19 +14,21 @@ const _title = title.toUpperCase();
 </script>
 
 <template>
-  <div>
-    <div
-      class="row q-pb-lg items-center"
-      :class="[
-        backgroundColor,
-        centerTitle ? 'justify-center' : 'justify-between',
-      ]"
-    >
-      <p class="text-h4 text-weight-medium">{{ _title }}</p>
-      <slot name="right-title" />
-    </div>
-    <slot />
+  <div
+    class="row items-center title-container"
+    :class="[
+      backgroundColor,
+      centerTitle ? 'justify-center' : 'justify-between',
+    ]"
+  >
+    <p class="text-h4 text-weight-medium title">{{ _title }}</p>
+    <slot name="right-title" />
   </div>
+  <slot />
 </template>
 
-<style scoped lang="css"></style>
+<style scoped lang="css">
+.title-container {
+  padding: 60px 0;
+}
+</style>

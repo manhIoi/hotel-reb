@@ -18,7 +18,5 @@ const { backgroundColor } = defineProps({
 <style scoped lang="css">
 .screen-container {
   max-width: var(--container-width);
-  padding-bottom: 60px;
-  padding-top: 60px;
 }
 </style>

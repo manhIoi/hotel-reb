@@ -22,13 +22,13 @@ const commentList = generateCommentList(5);
 
 <template>
   <q-page class="bg-grey-2">
-    <main-wrapper background-color="bg-white">
+    <main-wrapper background-color="bg-grey-2">
       <branch-room-list :room-booking-list="roomBookingList" />
     </main-wrapper>
-    <main-wrapper background-color="bg-grey-1">
+    <main-wrapper background-color="bg-white">
       <branch-nearby-place-list :place-nearby-list="placeNearbyList" />
     </main-wrapper>
-    <main-wrapper background-color="bg-white">
+    <main-wrapper background-color="bg-grey-2">
       <branch-comment-list :comment-list="commentList" />
     </main-wrapper>
   </q-page>

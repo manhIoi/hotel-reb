@@ -38,7 +38,7 @@ const commentSlide = ref(0);
         :outstanding-list="outstandingList"
       />
     </main-wrapper>
-    <main-wrapper background-color="bg-grey-1">
+    <main-wrapper background-color="bg-grey-2">
       <favoritve-room-list :room-booking-list="roomBookingList" />
     </main-wrapper>
 
@@ -50,7 +50,7 @@ const commentSlide = ref(0);
       </section-title>
     </main-wrapper>
 
-    <main-wrapper background-color="bg-grey-1">
+    <main-wrapper background-color="bg-grey-2">
       <recommend-place-nearby-list :place-nearby-list="placeNearbyList" />
     </main-wrapper>
 

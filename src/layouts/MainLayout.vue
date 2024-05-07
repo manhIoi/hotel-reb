@@ -90,7 +90,14 @@ function onClickNavItem(item) {
             ]"
             @click="() => onClickNavItem(item)"
           >
-            <p class="text-uppercase text-weight-bold text-overline q-mr-xs">
+            <p
+              class="text-uppercase text-weight-bold text-overline q-mr-xs"
+              :class="[
+                selectedNavIndex === index
+                  ? 'text-weight-bolder'
+                  : 'text-weight-medium',
+              ]"
+            >
               {{ item.title }}
             </p>
           </q-item>

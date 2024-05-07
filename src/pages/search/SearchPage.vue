@@ -51,7 +51,7 @@ watchEffect(() => {
     filterData.value.bedNumber = parseInt(bedNumber || "0");
     filterData.value.adultNumber = parseInt(adultNumber || "0");
     filterData.value.childrenNumber = parseInt(childrenNumber || "0");
-    filterData.value.currentPage = parseInt(currentPage || "0");
+    filterData.value.currentPage = parseInt(currentPage || "1");
 
     debounce(() => {
       roomBookingList.value = generateRoomBookingList(10);
