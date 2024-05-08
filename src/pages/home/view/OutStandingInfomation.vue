@@ -2,7 +2,7 @@
 import OutStandingItem from "pages/home/components/OutStandingItem.vue";
 import { ref } from "vue";
 
-const { slideImageList, outstandingList } = defineProps({
+const { slideImageList = [], outstandingList = [] } = defineProps({
   slideImageList: Array,
   outstandingList: Array,
 });

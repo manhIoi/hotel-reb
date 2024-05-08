@@ -1,47 +1,51 @@
 <script setup>
 import { useI18n } from "vue-i18n";
 import { computed, onMounted, ref, watch } from "vue";
-import OutStandingItem from "pages/home/components/OutStandingItem.vue";
 import MainWrapper from "layouts/MainWrapper.vue";
 import SectionTitle from "components/SectionTitle.vue";
-import { generateHomeData } from "src/server/home-data";
-import RoomBookingCardItem from "components/RoomBookingCardItem.vue";
-import PlaceNearbyItem from "components/PlaceNearbyItem.vue";
-import PlaceNearbyCardItem from "components/PlaceNearbyCardItem.vue";
-import CommentItem from "components/CommentItem.vue";
-import { useQuasar } from "quasar";
 import OutStandingInfomation from "pages/home/view/OutStandingInfomation.vue";
 import FavoritveRoomList from "pages/home/view/FavoritveRoomList.vue";
 import RecommendPlaceNearbyList from "pages/home/view/RecommendPlaceNearbyList.vue";
 import BestCommentList from "pages/home/view/BestCommentList.vue";
 import server from "src/server";
-import { isEmpty } from "lodash";
-const { t } = useI18n();
-const $q = useQuasar();
+import SectionTitleSkeleton from "components/skeleton/section-title-skeleton.vue";
 
-const homeData = ref({});
-
-const commentSlide = ref(0);
+const homeData = ref({
+  title: "Our world is your playground",
+  description:
+    "Make yourself at home in our sophisticated guest rooms, take in the incredible views and enjoy fresh air from our beautiful sea city.",
+  slideImageList: null,
+  outstandingList: null,
+  placeNearbyList: null,
+  roomBookingList: null,
+  commentList: null,
+});
 
 onMounted(async () => {
   try {
     const response = await server.getHomeData();
-    homeData.value = response.data;
+    homeData.value = { ...response.data };
   } catch (e) {}
 });
 </script>
 
 <template>
   <q-page>
-    <div v-if="!isEmpty(homeData)">
+    <div>
       <main-wrapper>
-        <out-standing-infomation
-          :slide-image-list="homeData.slideImageList"
-          :outstanding-list="homeData.outstandingList"
-        />
+        <section-title-skeleton
+          :is-show="!homeData.slideImageList || !homeData.outstandingList"
+        >
+          <out-standing-infomation
+            :slide-image-list="homeData.slideImageList"
+            :outstanding-list="homeData.outstandingList"
+          />
+        </section-title-skeleton>
       </main-wrapper>
       <main-wrapper background-color="bg-grey-2">
-        <favoritve-room-list :room-booking-list="homeData.roomBookingList" />
+        <section-title-skeleton :is-show="!homeData.roomBookingList">
+          <favoritve-room-list :room-booking-list="homeData.roomBookingList" />
+        </section-title-skeleton>
       </main-wrapper>
 
       <main-wrapper>
@@ -53,13 +57,17 @@ onMounted(async () => {
       </main-wrapper>
 
       <main-wrapper background-color="bg-grey-2">
-        <recommend-place-nearby-list
-          :place-nearby-list="homeData.placeNearbyList"
-        />
+        <section-title-skeleton :is-show="!homeData.placeNearbyList">
+          <recommend-place-nearby-list
+            :place-nearby-list="homeData.placeNearbyList"
+          />
+        </section-title-skeleton>
       </main-wrapper>
 
       <main-wrapper>
-        <best-comment-list :comment-list="homeData.commentList" />
+        <section-title-skeleton :is-show="!homeData.commentList">
+          <best-comment-list :comment-list="homeData.commentList" />
+        </section-title-skeleton>
       </main-wrapper>
     </div>
   </q-page>

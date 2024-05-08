@@ -1,13 +1,13 @@
 <script setup>
 import MainWrapper from "layouts/MainWrapper.vue";
-import SectionTitle from "components/SectionTitle.vue";
 import { useRouter } from "vue-router";
 import { ROUTES_PATH } from "src/router/routes";
-import { generatePlaceNearByList, generateRoomBookingList } from "src/server";
+import server from "src/server";
 import BranchRoomList from "pages/branch/views/BranchRoomList.vue";
 import BranchNearbyPlaceList from "pages/branch/views/BranchNearbyPlaceList.vue";
 import BranchCommentList from "pages/branch/views/BranchCommentList.vue";
-import { generateCommentList } from "src/server/comment";
+import { onMounted, ref } from "vue";
+import SectionTitleSkeleton from "components/skeleton/section-title-skeleton.vue";
 
 const router = useRouter();
 
@@ -15,21 +15,41 @@ function onClickRoomBookingItem(item) {
   router.push(ROUTES_PATH.roomDetail);
 }
 
-const roomBookingList = generateRoomBookingList(6);
-const placeNearbyList = generatePlaceNearByList(4);
-const commentList = generateCommentList(5);
+const branchData = ref({
+  roomBookingList: null,
+  placeNearbyList: null,
+  commentList: null,
+});
+
+onMounted(async () => {
+  try {
+    const response = await server.getDetailBranchData();
+    const { roomBookingList, placeNearbyList, commentList } =
+      response.data || {};
+
+    branchData.value.placeNearbyList = placeNearbyList;
+    branchData.value.roomBookingList = roomBookingList;
+    branchData.value.commentList = commentList;
+  } catch (e) {}
+});
 </script>
 
 <template>
   <q-page class="bg-grey-2">
     <main-wrapper background-color="bg-grey-2">
-      <branch-room-list :room-booking-list="roomBookingList" />
+      <section-title-skeleton :is-show="!branchData.roomBookingList">
+        <branch-room-list :room-booking-list="branchData.roomBookingList" />
+      </section-title-skeleton>
     </main-wrapper>
     <main-wrapper background-color="bg-white">
-      <branch-nearby-place-list :place-nearby-list="placeNearbyList" />
+      <section-title-skeleton :is-show="!branchData.placeNearbyList">
+        <branch-nearby-place-list
+          :place-nearby-list="branchData.placeNearbyList"
+        />
+      </section-title-skeleton>
     </main-wrapper>
     <main-wrapper background-color="bg-grey-2">
-      <branch-comment-list :comment-list="commentList" />
+      <branch-comment-list :comment-list="branchData.commentList" />
     </main-wrapper>
   </q-page>
 </template>

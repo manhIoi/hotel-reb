@@ -59,14 +59,14 @@ class MockApi {
       setTimeout(() => {
         const result = generateHomeData(this.branchList);
         resolve(this.formatResponse(result));
-      }, 500);
+      }, 3000);
     });
   }
 
   getDetailBranchData() {
     return new Promise((resolve) => {
       setTimeout(() => {
-        const roomBookingList = generateRoomBookingList(6);
+        const roomBookingList = generateRoomBookingList(6, this.branchList);
         const placeNearbyList = generatePlaceNearByList(4);
         const commentList = generateCommentList(5);
         resolve(

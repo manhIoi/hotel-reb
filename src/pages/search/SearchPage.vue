@@ -28,6 +28,7 @@ const { branchList } = useBranchStore();
 
 const roomBookingList = ref([]);
 const totalPage = ref(0);
+const loading = ref(false);
 
 const branchOptions = computed(() => {
   return branchList.map((item) => item.name);
@@ -60,11 +61,11 @@ watchEffect(() => {
     filterData.value.childrenNumber = parseInt(childrenNumber || "0");
     filterData.value.currentPage = parseInt(currentPage || "1");
 
-    console.info("LOG_IT:: filterData.value", filterData.value);
-
+    loading.value = true;
     debounce(async () => {
       try {
         const response = await server.getRoomListBySearchParams(route.query);
+        loading.value = false;
         const { totalPage: _totalPage = 0, roomList = [] } =
           response.data || {};
         roomBookingList.value = roomList;
@@ -119,7 +120,12 @@ watchEffect(() => {
         </section-title>
       </div>
       <section-title center-title title="Search result">
-        <div class="row q-gutter-lg">
+        <div v-if="loading" class="flex column flex-center q-pa-md">
+          <q-spinner-gears color="primary" size="100px" />
+          <p>Loading...</p>
+        </div>
+
+        <div v-else class="row q-gutter-lg">
           <q-intersection
             v-for="item in roomBookingList"
             :key="item?.id"
