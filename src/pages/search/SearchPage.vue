@@ -1,15 +1,16 @@
 <script setup>
-import { onMounted, reactive, ref, watch, watchEffect } from "vue";
+import { computed, ref, watch, watchEffect } from "vue";
 import MainWrapper from "layouts/MainWrapper.vue";
 import SectionTitle from "components/SectionTitle.vue";
 import RoomBookingDetailItem from "components/RoomBookingDetailItem.vue";
 import { useRoute, useRouter } from "vue-router";
 import { ROUTES_PATH } from "src/router/routes";
-import { generateRoomBookingList } from "src/server";
+import server, { generateRoomBookingList } from "src/server";
 import InputDatePicker from "components/input/InputDatePicker.vue";
 import InputCounter from "components/input/InputCounter.vue";
 import InputBase from "components/input/InputBase.vue";
 import { debounce } from "lodash";
+import { useBranchStore } from "stores/branch-store";
 
 const router = useRouter();
 const route = useRoute();
@@ -22,9 +23,15 @@ const filterData = ref({
   bedNumber: 0,
   currentPage: 1,
 });
-const branchOptions = ["Branch 1", "Branch 2", "Branch 3"];
+
+const { branchList } = useBranchStore();
 
 const roomBookingList = ref([]);
+const totalPage = ref(0);
+
+const branchOptions = computed(() => {
+  return branchList.map((item) => item.name);
+});
 
 function onClickItem(item) {
   router.push(ROUTES_PATH.roomDetail);
@@ -53,8 +60,16 @@ watchEffect(() => {
     filterData.value.childrenNumber = parseInt(childrenNumber || "0");
     filterData.value.currentPage = parseInt(currentPage || "1");
 
-    debounce(() => {
-      roomBookingList.value = generateRoomBookingList(10);
+    console.info("LOG_IT:: filterData.value", filterData.value);
+
+    debounce(async () => {
+      try {
+        const response = await server.getRoomListBySearchParams(route.query);
+        const { totalPage: _totalPage = 0, roomList = [] } =
+          response.data || {};
+        roomBookingList.value = roomList;
+        totalPage.value = _totalPage;
+      } catch (e) {}
     }, 1000)();
   }
 });
@@ -123,7 +138,8 @@ watchEffect(() => {
       <div class="q-pa-lg flex flex-center">
         <q-pagination
           v-model="filterData.currentPage"
-          :max="5"
+          :max="totalPage"
+          :max-pages="5"
           direction-links
         />
       </div>

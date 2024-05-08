@@ -3,7 +3,7 @@ import { generatePlaceNearByList } from "src/server/place";
 import { generateRoomBookingList } from "src/server/room-booking";
 import { generateCommentList } from "src/server/comment";
 
-export function generateHomeData() {
+export function generateHomeData(branchList) {
   return {
     title: "Our world is your playground",
     description:
@@ -26,7 +26,7 @@ export function generateHomeData() {
       },
     ],
     placeNearbyList: generatePlaceNearByList(5),
-    roomBookingList: generateRoomBookingList(5),
+    roomBookingList: generateRoomBookingList(5, branchList),
     commentList: generateCommentList(5),
   };
 }

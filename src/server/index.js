@@ -1,2 +1,82 @@
+import { generateBranchList } from "src/server/branch";
+import { generateRoomBookingList } from "src/server/room-booking";
+import { generatePlaceNearByList } from "src/server/place";
+import { generateHomeData } from "src/server/home-data";
+import { generateCommentList } from "src/server/comment";
+
+class MockApi {
+  constructor() {
+    this.branchList = generateBranchList(5);
+    this.roomList = generateRoomBookingList(150, this.branchList);
+    this.placeNearbyList = generatePlaceNearByList(20);
+  }
+
+  formatResponse(data) {
+    return {
+      statusCode: 200,
+      data,
+      message: "Success",
+    };
+  }
+
+  getBranchList() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(this.formatResponse(this.branchList));
+      }, 500);
+    });
+  }
+
+  getHomeRoomList() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(this.roomList.slice(0, 6));
+      }, 500);
+    });
+  }
+
+  getRoomListBySearchParams(params) {
+    const currentPage = parseInt(params.currentPage) || 1;
+    const offset = 10;
+    const totalPage = this.roomList.length / offset;
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const result = this.roomList.filter((item) => {
+          // TODO: search with params here
+          return true;
+        });
+        const start = (currentPage - 1) * offset;
+        const end = Math.min(currentPage * offset, this.roomList.length);
+        console.info("LOG_IT:: start, end", start, end);
+        const resultWithPage = result.slice(start, end);
+        resolve(this.formatResponse({ roomList: resultWithPage, totalPage }));
+      }, 1000);
+    });
+  }
+
+  getHomeData() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const result = generateHomeData(this.branchList);
+        resolve(this.formatResponse(result));
+      }, 500);
+    });
+  }
+
+  getDetailBranchData() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const roomBookingList = generateRoomBookingList(6);
+        const placeNearbyList = generatePlaceNearByList(4);
+        const commentList = generateCommentList(5);
+        resolve(
+          this.formatResponse({ roomBookingList, placeNearbyList, commentList })
+        );
+      }, 500);
+    });
+  }
+}
+export default new MockApi();
 export * from "./room-booking";
 export * from "./place";
+export * from "./branch";

@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 
-export function generateRoomBooking() {
+export function generateRoomBooking(branchList) {
   const images = [1, 2, 3, 4, 5].map(() =>
     faker.image.urlLoremFlickr({ category: "city" })
   );
@@ -16,13 +16,15 @@ export function generateRoomBooking() {
       childrenNumber: faker.number.int({ min: 1, max: 10 }),
       acreage: faker.number.int({ min: 100, max: 200 }),
     },
+    branch:
+      branchList[faker.number.int({ min: 0, max: branchList.length - 1 })],
   };
 }
 
-export function generateRoomBookingList(num) {
+export function generateRoomBookingList(num, branchList) {
   const result = [];
   for (let i = 0; i < num; i++) {
-    result.push(generateRoomBooking());
+    result.push(generateRoomBooking(branchList));
   }
   return result;
 }
