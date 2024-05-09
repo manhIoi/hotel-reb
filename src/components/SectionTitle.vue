@@ -21,7 +21,7 @@ const _title = title.toUpperCase();
       centerTitle ? 'justify-center' : 'justify-between',
     ]"
   >
-    <p class="text-h4 text-weight-medium title">{{ _title }}</p>
+    <p class="text-h4 text-weight-bold text-grey-9 title">{{ _title }}</p>
     <slot name="right-title" />
   </div>
   <slot />

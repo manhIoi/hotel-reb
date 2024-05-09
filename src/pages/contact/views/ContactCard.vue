@@ -9,19 +9,19 @@
         <div class="row items-center q-mb-md">
           <q-icon name="fa-solid fa-envelope" size="24px" />
           <p class="text-subtitle1 text-white q-ml-sm text-weight-regular">
-            Hotel.np002@gmai.com
+            roomb@gmail.com
           </p>
         </div>
         <div class="row items-center q-mb-md">
           <q-icon name="fa-solid fa-phone" size="24px" />
           <p class="text-subtitle1 text-white q-ml-sm text-weight-regular">
-            Hotel.np002@gmai.com
+            +8412345677
           </p>
         </div>
         <div class="row items-center">
           <q-icon name="fa-solid fa-location-dot" size="24px" />
           <p class="text-subtitle1 text-white q-ml-sm text-weight-regular">
-            Hotel.np002@gmai.com
+            189 Thai Phien Street, Ho Chi Minh City
           </p>
         </div>
       </div>

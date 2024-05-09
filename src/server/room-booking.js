@@ -1,6 +1,10 @@
 import { faker } from "@faker-js/faker";
+import { isEmpty } from "lodash";
 
 export function generateRoomBooking(branchList) {
+  const branch = isEmpty(branchList)
+    ? null
+    : branchList[faker.number.int({ min: 0, max: branchList.length - 1 })];
   const images = [1, 2, 3, 4, 5].map(() =>
     faker.image.urlLoremFlickr({ category: "city" })
   );
@@ -16,8 +20,7 @@ export function generateRoomBooking(branchList) {
       childrenNumber: faker.number.int({ min: 1, max: 10 }),
       acreage: faker.number.int({ min: 100, max: 200 }),
     },
-    branch:
-      branchList[faker.number.int({ min: 0, max: branchList.length - 1 })],
+    branch,
   };
 }
 
