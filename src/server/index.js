@@ -37,19 +37,35 @@ class MockApi {
 
   getRoomListBySearchParams(params) {
     const currentPage = parseInt(params.currentPage) || 1;
+    const adultNumber = parseInt(params.adultNumber);
+    const childrenNumber = parseInt(params.childrenNumber);
+    const bedNumber = parseInt(params.bedNumber);
     const offset = 10;
-    const totalPage = this.roomList.length / offset;
     return new Promise((resolve) => {
       setTimeout(() => {
         const result = this.roomList.filter((item) => {
-          // TODO: search with params here
+          const { branch } = params || {};
+          if (branch && item.branch?.id !== branch) return false;
+          if (adultNumber && item?.information?.adultNumber < adultNumber)
+            return false;
+          if (
+            childrenNumber &&
+            item?.information?.childrenNumber < childrenNumber
+          )
+            return false;
+          if (bedNumber && item?.information?.bedNumber < bedNumber)
+            return false;
           return true;
         });
         const start = (currentPage - 1) * offset;
-        const end = Math.min(currentPage * offset, this.roomList.length);
-        console.info("LOG_IT:: start, end", start, end);
+        const end = Math.min(currentPage * offset, result?.length);
         const resultWithPage = result.slice(start, end);
-        resolve(this.formatResponse({ roomList: resultWithPage, totalPage }));
+        resolve(
+          this.formatResponse({
+            roomList: resultWithPage,
+            totalPage: Math.max(result?.length / offset, 1),
+          })
+        );
       }, 1000);
     });
   }

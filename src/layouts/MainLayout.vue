@@ -3,6 +3,7 @@ import { computed, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { ROUTES_PATH } from "src/router/routes";
 import LanguageSwitch from "components/LanguageSwitch.vue";
+import { useUserStore } from "stores/user-store";
 
 const navbarList = [
   {
@@ -34,6 +35,7 @@ const router = useRouter();
 const route = useRoute();
 const selectedNavIndex = ref(-1);
 const leftDrawerOpen = ref(false);
+const userStore = useUserStore();
 
 watch(route, () => {
   selectedNavIndex.value = navbarList.findIndex((item) => {
@@ -57,6 +59,12 @@ function toggleLeftDrawer() {
 
 function onClickNavItem(item) {
   router.push(item.link);
+}
+
+function onClickLogout() {
+  userStore.logout().onOk(() => {
+    leftDrawerOpen.value = false;
+  });
 }
 </script>
 
@@ -105,6 +113,39 @@ function onClickNavItem(item) {
         <q-btn color="primary" class="q-mx-md" @click="onClickSearch">
           <p class="text-weight-bold">Reservation</p>
         </q-btn>
+        <q-avatar
+          v-if="userStore.isUserLogin"
+          color="primary"
+          text-color="white"
+          class="cursor-pointer"
+        >
+          <q-img
+            v-if="userStore.user?.avatar"
+            src="https://cdn.quasar.dev/img/avatar.png"
+          />
+          <p v-else>{{ userStore.user?.name?.[0] }}</p>
+          <q-menu>
+            <q-list style="min-width: 200px">
+              <q-item
+                clickable
+                class="row items-center text-primary text-weight-medium"
+              >
+                <q-icon name="person" class="q-mr-xs" />
+                <p>Update profile</p>
+              </q-item>
+              <q-separator />
+              <q-item
+                clickable
+                class="row items-center text-primary text-weight-medium"
+                :on-click="onClickLogout"
+              >
+                <q-icon name="logout" class="q-mr-xs" />
+                <p>Logout</p>
+              </q-item>
+            </q-list>
+          </q-menu>
+        </q-avatar>
+
         <transition transition-show="jump-down">
           <q-btn
             v-if="!$q.screen.gt.sm"
@@ -154,6 +195,16 @@ function onClickNavItem(item) {
             {{ item.title }}
           </p>
         </q-item>
+        <q-btn
+          v-if="userStore.isUserLogin"
+          flat
+          color="primary"
+          label="Logout"
+          icon="home"
+          class="text-weight-bolder flex-center full-width"
+          size="md"
+          @click="onClickLogout"
+        />
       </q-list>
     </q-drawer>
 

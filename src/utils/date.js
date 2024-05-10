@@ -1,3 +1,5 @@
+import { date } from "quasar";
+
 export const getRangeDate = (start, end) => {
   return (date) => {
     const _date = new Date(date).getTime();
@@ -8,4 +10,8 @@ export const getRangeDate = (start, end) => {
     if (end) return _date <= _end;
     return true;
   };
+};
+
+export const formatDate = (time, formatString = "YYYY/MM/DD") => {
+  return date.formatDate(time, formatString);
 };

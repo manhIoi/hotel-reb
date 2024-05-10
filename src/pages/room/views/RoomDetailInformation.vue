@@ -1,7 +1,9 @@
 <script setup>
 import SectionTitle from "components/SectionTitle.vue";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import AmenityItem from "pages/room/components/AmenityItem.vue";
+import RoomDetailServicePrice from "pages/room/views/RoomDetailServicePrice.vue";
+import { formatDate } from "src/utils";
 
 const { room } = defineProps({
   room: Object,
@@ -40,7 +42,7 @@ const amenityList = [
     name: "Hairdryer",
   },
 ];
-const date = ref(new Date());
+const date = ref(formatDate(new Date()));
 
 function events(date) {
   return (
@@ -62,7 +64,7 @@ function events(date) {
       <section-title title="Free Amenities">
         <div class="row q-col-gutter-lg">
           <div
-            class="col-xs-4 col-md-3"
+            class="col-xs-6 col-sm-4 col-md-3"
             v-for="item in amenityList"
             :key="item.icon"
           >
@@ -86,7 +88,7 @@ function events(date) {
         </div>
         <div>
           <q-date
-            class="fit"
+            class="fit shadow-0 custom-shadow"
             v-model="date"
             :events="events"
             :event-color="
@@ -94,6 +96,9 @@ function events(date) {
             "
           />
         </div>
+      </section-title>
+      <section-title title="Room Service Price">
+        <room-detail-service-price />
       </section-title>
     </div>
   </div>

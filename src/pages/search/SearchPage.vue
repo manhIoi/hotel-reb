@@ -5,17 +5,21 @@ import SectionTitle from "components/SectionTitle.vue";
 import RoomBookingDetailItem from "components/RoomBookingDetailItem.vue";
 import { useRoute, useRouter } from "vue-router";
 import { ROUTES_PATH } from "src/router/routes";
-import server, { generateRoomBookingList } from "src/server";
+import server from "src/server";
 import InputDatePicker from "components/input/InputDatePicker.vue";
 import InputCounter from "components/input/InputCounter.vue";
 import InputBase from "components/input/InputBase.vue";
 import { debounce } from "lodash";
 import { useBranchStore } from "stores/branch-store";
+import { useLoading } from "src/composables";
 
 const router = useRouter();
 const route = useRoute();
 const filterData = ref({
-  branch: "",
+  branch: {
+    name: "",
+    id: "",
+  },
   dateCheckIn: "",
   dateCheckOut: "",
   adultNumber: 0,
@@ -24,25 +28,28 @@ const filterData = ref({
   currentPage: 1,
 });
 
-const { branchList } = useBranchStore();
+const branchStore = useBranchStore();
+const { isLoading, hideLoading, showLoading } = useLoading();
 
 const roomBookingList = ref([]);
 const totalPage = ref(0);
-const loading = ref(false);
-
-const branchOptions = computed(() => {
-  return branchList.map((item) => item.name);
-});
 
 function onClickItem(item) {
   router.push(ROUTES_PATH.roomDetail);
 }
 
 watch(filterData.value, () => {
-  router.replace({ query: { ...filterData.value } });
+  debounce(() => {
+    router.replace({
+      query: {
+        ...filterData.value,
+        branch: filterData.value?.branch?.id || "",
+      },
+    });
+  }, 1000)();
 });
 
-watchEffect(() => {
+watchEffect(async () => {
   if (route.query) {
     const {
       currentPage,
@@ -53,25 +60,25 @@ watchEffect(() => {
       childrenNumber,
       bedNumber,
     } = route.query;
-    filterData.value.branch = branch;
+    filterData.value.branch = branchStore.branchList?.find?.(
+      (item) => item?.id === branch
+    );
     filterData.value.dateCheckIn = dateCheckIn;
     filterData.value.dateCheckOut = dateCheckOut;
     filterData.value.bedNumber = parseInt(bedNumber || "0");
     filterData.value.adultNumber = parseInt(adultNumber || "0");
     filterData.value.childrenNumber = parseInt(childrenNumber || "0");
     filterData.value.currentPage = parseInt(currentPage || "1");
-
-    loading.value = true;
-    debounce(async () => {
-      try {
-        const response = await server.getRoomListBySearchParams(route.query);
-        loading.value = false;
-        const { totalPage: _totalPage = 0, roomList = [] } =
-          response.data || {};
-        roomBookingList.value = roomList;
-        totalPage.value = _totalPage;
-      } catch (e) {}
-    }, 1000)();
+    try {
+      showLoading();
+      const response = await server.getRoomListBySearchParams(route.query);
+      const { totalPage: _totalPage = 0, roomList = [] } = response.data || {};
+      roomBookingList.value = roomList;
+      totalPage.value = _totalPage;
+    } catch (e) {
+    } finally {
+      hideLoading();
+    }
   }
 });
 </script>
@@ -87,7 +94,9 @@ watchEffect(() => {
                 <q-select
                   outlined
                   v-model="filterData.branch"
-                  :options="branchOptions"
+                  :options="branchStore.branchList"
+                  option-value="id"
+                  option-label="name"
                   label="Select branch"
                 />
               </input-base>
@@ -120,7 +129,7 @@ watchEffect(() => {
         </section-title>
       </div>
       <section-title center-title title="Search result">
-        <div v-if="loading" class="flex column flex-center q-pa-md">
+        <div v-if="isLoading" class="flex column flex-center q-pa-md">
           <q-spinner-gears color="primary" size="100px" />
           <p>Loading...</p>
         </div>
