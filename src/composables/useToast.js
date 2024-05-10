@@ -12,6 +12,14 @@ export function useToast() {
         message: `🎉 ${message}`,
       };
     }
+    if (type === "error") {
+      return {
+        type: "negative",
+        timeout: 3000,
+        position: "bottom-right",
+        message: `${message}`,
+      };
+    }
   }
 
   function showToast(type, message) {

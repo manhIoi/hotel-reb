@@ -1,9 +1,11 @@
 <script setup>
-import { computed, ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { ROUTES_PATH } from "src/router/routes";
 import LanguageSwitch from "components/LanguageSwitch.vue";
 import { useUserStore } from "stores/user-store";
+import { storeToRefs } from "pinia";
+import { isEmpty } from "lodash";
 
 const navbarList = [
   {
@@ -29,6 +31,10 @@ const navbarList = [
     title: "Contact",
     link: ROUTES_PATH.contact,
   },
+  {
+    title: "Profile",
+    link: ROUTES_PATH.profile,
+  },
 ];
 
 const router = useRouter();
@@ -36,6 +42,20 @@ const route = useRoute();
 const selectedNavIndex = ref(-1);
 const leftDrawerOpen = ref(false);
 const userStore = useUserStore();
+const { user } = storeToRefs(userStore);
+
+const handleChangeRouteByUserProfile = (userValue) => {
+  if (isEmpty(userValue)) {
+    router.replace({ path: "/auth" });
+  }
+};
+
+onMounted(() => {
+  handleChangeRouteByUserProfile(user.value);
+  userStore.$subscribe((mutation, state) => {
+    handleChangeRouteByUserProfile(state.user);
+  });
+});
 
 watch(route, () => {
   selectedNavIndex.value = navbarList.findIndex((item) => {
@@ -65,6 +85,10 @@ function onClickLogout() {
   userStore.logout().onOk(() => {
     leftDrawerOpen.value = false;
   });
+}
+
+function onClickProfile() {
+  router.push(ROUTES_PATH.profile);
 }
 </script>
 
@@ -114,7 +138,7 @@ function onClickLogout() {
           <p class="text-weight-bold">Reservation</p>
         </q-btn>
         <q-avatar
-          v-if="userStore.isUserLogin"
+          v-if="$q.screen.gt.sm"
           color="primary"
           text-color="white"
           class="cursor-pointer"
@@ -123,21 +147,22 @@ function onClickLogout() {
             v-if="userStore.user?.avatar"
             src="https://cdn.quasar.dev/img/avatar.png"
           />
-          <p v-else>{{ userStore.user?.name?.[0] }}</p>
+          <p v-else>{{ userStore.user?.fullName?.[0] }}</p>
           <q-menu>
             <q-list style="min-width: 200px">
               <q-item
                 clickable
-                class="row items-center text-primary text-weight-medium"
+                class="cursor-pointer row items-center text-primary text-weight-medium"
+                @click="onClickProfile"
               >
                 <q-icon name="person" class="q-mr-xs" />
-                <p>Update profile</p>
+                <p>Profile</p>
               </q-item>
               <q-separator />
               <q-item
                 clickable
                 class="row items-center text-primary text-weight-medium"
-                :on-click="onClickLogout"
+                @click="onClickLogout"
               >
                 <q-icon name="logout" class="q-mr-xs" />
                 <p>Logout</p>
@@ -169,18 +194,29 @@ function onClickLogout() {
       bordered
       class="flex column bg-primary"
     >
-      <div class="flex flex-center q-pa-lg bg-primary full-width">
-        <q-avatar
-          size="32px"
-          @click="onClickLogo"
-          class="bg-primary cursor-pointer"
-        >
-          <img
-            src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg"
-            alt="logo_app"
-          />
-        </q-avatar>
-        <p class="text-weight-bolder text-overline q-ml-sm text-white">RoomB</p>
+      <div class="q-pa-lg bg-primary full-width">
+        <div class="flex flex-center">
+          <q-avatar
+            size="32px"
+            @click="onClickLogo"
+            class="bg-primary cursor-pointer"
+          >
+            <img
+              src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg"
+              alt="logo_app"
+            />
+          </q-avatar>
+          <p class="text-weight-bolder text-overline q-ml-sm text-white">
+            RoomB
+          </p>
+        </div>
+        <div>
+          <div class="flex justify-center items-center q-mt-sm">
+            <p class="text-weight-bold text-body1 text-white">
+              Welcome, {{ userStore.user.fullName }}
+            </p>
+          </div>
+        </div>
       </div>
       <q-list class="drawer-list bg-white">
         <q-item
