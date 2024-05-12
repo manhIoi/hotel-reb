@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { generatePlaceNearByList } from "src/server/place";
-import { generateRoomBookingList } from "src/server/room-booking";
+import { generateRoomBookingList, roomImages } from "src/server/room-booking";
 import { generateCommentList } from "src/server/comment";
 
 export function generateHomeData(branchList) {
@@ -8,9 +8,7 @@ export function generateHomeData(branchList) {
     title: "Our world is your playground",
     description:
       "Make yourself at home in our sophisticated guest rooms, take in the incredible views and enjoy fresh air from our beautiful sea city.",
-    slideImageList: [1, 2, 3, 4, 5].map(() =>
-      faker.image.urlLoremFlickr({ category: "city" })
-    ),
+    slideImageList: faker.helpers.arrayElements(roomImages, 3),
     outstandingList: [
       {
         title: "VARIOUS SERVICES",

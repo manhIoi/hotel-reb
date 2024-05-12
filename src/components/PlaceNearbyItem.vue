@@ -5,8 +5,8 @@ const { nearbyItem } = defineProps({
 </script>
 
 <template>
-  <q-card class="my-card cursor-pointer" flat>
-    <q-img :src="nearbyItem.image">
+  <q-card class="my-card cursor-pointer fit" flat>
+    <q-img :src="nearbyItem.image" class="card-image">
       <q-card-section
         class="flex absolute-bottom row items-center full-width no-wrap"
       >
@@ -22,4 +22,8 @@ const { nearbyItem } = defineProps({
   </q-card>
 </template>
 
-<style scoped lang="css"></style>
+<style scoped lang="css">
+.card-image {
+  height: 400px;
+}
+</style>

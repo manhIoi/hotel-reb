@@ -1,6 +1,6 @@
 <script setup>
 import MainWrapper from "layouts/MainWrapper.vue";
-import RoomBookingHistoryTable from "pages/room-booking-history/views/room-booking-history-table.vue";
+import RoomBookingHistoryTable from "pages/room-booking-history/views/RoomBookingHistoryTable.vue";
 </script>
 
 <template>

@@ -51,7 +51,14 @@ onMounted(async () => {
       <main-wrapper>
         <section-title title="OUR SERVICE">
           <template v-slot:right-title>
-            <p>View more</p>
+            <q-btn
+              flat
+              outline
+              color="primary"
+              icon-right="arrow_right_alt"
+              label="View more"
+              class="text-weight-bold"
+            />
           </template>
         </section-title>
       </main-wrapper>

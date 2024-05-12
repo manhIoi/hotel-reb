@@ -12,6 +12,6 @@ export const getRangeDate = (start, end) => {
   };
 };
 
-export const formatDate = (time, formatString = "YYYY/MM/DD") => {
+export const formatDate = (time, formatString = "DD/MM/YYYY") => {
   return date.formatDate(time, formatString);
 };

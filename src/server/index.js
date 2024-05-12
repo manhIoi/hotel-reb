@@ -5,6 +5,10 @@ import { generateHomeData } from "src/server/home-data";
 import { generateCommentList } from "src/server/comment";
 import { delay } from "lodash";
 import { generateUser } from "src/server/user";
+import {
+  createRoomBookingHistory,
+  generateRoomBookingHistoryList,
+} from "src/server/room-booking-history";
 
 class MockApi {
   constructor() {
@@ -27,8 +31,8 @@ class MockApi {
     return {
       status: 200,
       message: message,
-      data: null
-    }
+      data: null,
+    };
   }
 
   getBranchList() {
@@ -107,23 +111,44 @@ class MockApi {
   signIn(username, password) {
     return new Promise((resolve) => {
       delay(() => {
-        if (username === this.user?.username && password === this.user?.password) {
-          resolve(this.formatResponse(this.user))
+        if (
+          username === this.user?.username &&
+          password === this.user?.password
+        ) {
+          resolve(this.formatResponse(this.user));
         } else {
           resolve(this.formatFailureResponse("Invalid username or password"));
         }
-      }, 1000)
-    })
+      }, 1000);
+    });
   }
 
   signUp(username, fullName, password) {
     return new Promise((resolve) => {
       delay(() => {
-        this.user = generateUser(username, fullName, password)
-        this.user.password = password
-        resolve(this.formatResponse(this.user))
+        this.user = generateUser(username, fullName, password);
+        this.user.password = password;
+        resolve(this.formatResponse(this.user));
+      }, 1000);
+    });
+  }
+
+  postBookRoom(room) {
+    return new Promise((resolve) => {
+      delay(() => {
+        const data = createRoomBookingHistory(room);
+        resolve(this.formatResponse(data))
       }, 1000)
     })
+  }
+
+  getRoomBookingHistory() {
+    return new Promise((resolve) => {
+      delay(() => {
+        const data = generateRoomBookingHistoryList(10, this.roomList)
+        resolve(this.formatResponse(data));
+      }, 1000);
+    });
   }
 }
 export default new MockApi();

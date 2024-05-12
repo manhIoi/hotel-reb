@@ -14,11 +14,25 @@ const [firstBookingItem, ...otherBookingItem] = roomBookingList;
 function onClickItem(item) {
   router.push(ROUTES_PATH.roomDetail);
 }
+
+function onClickViewMore() {
+  router.push(ROUTES_PATH.search);
+}
 </script>
 
 <template>
   <section-title title="OUR FAVORITE ROOMS">
-    <template v-slot:right-title> View more </template>
+    <template v-slot:right-title>
+      <q-btn
+        flat
+        outline
+        color="primary"
+        icon-right="arrow_right_alt"
+        label="View more"
+        class="text-weight-bold"
+        @click="onClickViewMore"
+      />
+    </template>
     <div class="row q-col-gutter-lg">
       <div class="col-md-6 col-xs-12">
         <room-booking-card-item

@@ -15,7 +15,7 @@ const [firstImage, ...otherImages] = imageList;
     <div class="col-md-6 col-xs-12">
       <div class="row q-col-gutter-lg">
         <div v-for="image in otherImages" :key="image" class="col-6">
-          <q-img :src="firstImage" class="br-sm" />
+          <q-img :src="image" class="br-sm" />
         </div>
       </div>
     </div>

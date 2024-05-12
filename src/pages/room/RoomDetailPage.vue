@@ -8,6 +8,7 @@ import { generateRoomBooking, generateRoomBookingList } from "src/server";
 import RoomDetailImageList from "pages/room/views/RoomDetailImageList.vue";
 import RoomDetailInformation from "pages/room/views/RoomDetailInformation.vue";
 import RoomDetailSuggestList from "pages/room/views/RoomDetailSuggestList.vue";
+import RoomDetailHeader from "pages/room/views/RoomDetailHeader.vue";
 
 const router = useRouter();
 const route = useRoute();
@@ -22,6 +23,7 @@ const fabRight = ref(false);
 
 <template>
   <q-page class="bg-grey-2">
+    <room-detail-header :room="roomData" />
     <main-wrapper background-color="bg-white">
       <room-detail-image-list :image-list="images" />
     </main-wrapper>

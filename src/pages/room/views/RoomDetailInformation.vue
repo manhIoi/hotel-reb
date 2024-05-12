@@ -3,7 +3,7 @@ import SectionTitle from "components/SectionTitle.vue";
 import { onMounted, ref } from "vue";
 import AmenityItem from "pages/room/components/AmenityItem.vue";
 import RoomDetailServicePrice from "pages/room/views/RoomDetailServicePrice.vue";
-import { formatDate } from "src/utils";
+import { formatDate, getRangeDate } from "src/utils";
 
 const { room } = defineProps({
   room: Object,
@@ -43,6 +43,7 @@ const amenityList = [
   },
 ];
 const date = ref(formatDate(new Date()));
+const yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
 
 function events(date) {
   return (
@@ -94,6 +95,7 @@ function events(date) {
             :event-color="
               (date) => (date[9] % 2 === 0 ? 'positive' : 'negative')
             "
+            :options="getRangeDate(yesterday, null)"
           />
         </div>
       </section-title>

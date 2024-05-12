@@ -1,6 +1,22 @@
 import { faker } from "@faker-js/faker";
 import { isEmpty } from "lodash";
 
+export const roomImages = [
+  "https://demo.ovatheme.com/hotelft/wp-content/uploads/2022/02/luxe-room.jpg",
+  "https://demo.ovatheme.com/hotelft/wp-content/uploads/2022/02/gallery-product-room-06.jpg",
+  "https://demo.ovatheme.com/hotelft/wp-content/uploads/2022/02/gallery-product-room-03.jpg",
+  "https://demo.ovatheme.com/hotelft/wp-content/uploads/2022/02/gallery-product-room-04.jpg",
+  "https://demo.ovatheme.com/hotelft/wp-content/uploads/2022/02/gallery-product-room-02.jpg",
+  "https://demo.ovatheme.com/hotelft/wp-content/uploads/2022/02/gallery-product-room-01.jpg",
+  "https://demo.ovatheme.com/hotelft/wp-content/uploads/2022/02/premium-room.jpg",
+  "https://demo.ovatheme.com/hotelft/wp-content/uploads/2022/02/room-03.jpg",
+  "https://demo.ovatheme.com/hotelft/wp-content/uploads/2022/02/gallery-product-room-05.jpg",
+  "https://demo.ovatheme.com/hotelft/wp-content/uploads/2022/02/gallery-product-room-07.jpg",
+  "https://demo.ovatheme.com/hotelft/wp-content/uploads/2022/02/room-01.jpg",
+  "https://demo.ovatheme.com/hotelft/wp-content/uploads/2022/02/standard-room.jpg",
+  "https://demo.ovatheme.com/hotelft/wp-content/uploads/2022/02/deluxe-room.jpg",
+];
+
 export function generateRoomBooking(branchList) {
   const branch = isEmpty(branchList)
     ? null
@@ -11,7 +27,7 @@ export function generateRoomBooking(branchList) {
 
   return {
     id: faker.string.uuid(),
-    images,
+    images: faker.helpers.arrayElements(roomImages, 5),
     amount: faker.number.int({ min: 50, max: 2000 }),
     name: faker.lorem.words({ min: 2, max: 4 }),
     description: faker.lorem.paragraph({ min: 5, max: 10 }),

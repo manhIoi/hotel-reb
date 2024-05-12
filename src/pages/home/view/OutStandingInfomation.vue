@@ -11,22 +11,40 @@ const slide = ref(0);
 </script>
 
 <template>
-  <q-carousel
-    animated
-    v-model="slide"
-    arrows
-    navigation
-    infinite
-    autoplay
-    class="br-sm"
-  >
-    <q-carousel-slide
-      v-for="(item, index) in slideImageList"
-      :name="index"
-      :img-src="item"
-      :key="item"
-    />
-  </q-carousel>
+  <div class="row q-col-gutter-lg">
+    <div class="col-md-6 col-xs-12">
+      <div class="fit flex items-center">
+        <p class="text-primary text-weight-bold text-subtitle1 q-mb-lg">
+          Welcome to RoomB
+        </p>
+        <p class="text-weight-bold text-h3 q-mb-lg">
+          Our world is your playground.
+        </p>
+        <p class="text-h6 text-grey-8" style="line-height: 2.4rem">
+          Make yourself at home in our sophisticated guest rooms, take in the
+          incredible views and enjoy fresh air from our beautiful sea city.
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6 col-xs-12">
+      <q-carousel
+        animated
+        v-model="slide"
+        arrows
+        navigation
+        infinite
+        autoplay
+        class="br-sm"
+      >
+        <q-carousel-slide
+          v-for="(item, index) in slideImageList"
+          :name="index"
+          :img-src="item"
+          :key="item"
+        />
+      </q-carousel>
+    </div>
+  </div>
   <div class="row q-ma-lg">
     <div
       v-for="(item, index) in outstandingList"

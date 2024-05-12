@@ -1,13 +1,30 @@
 <script setup>
 import SectionTitle from "components/SectionTitle.vue";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import RoomBookingCompactItem from "components/RoomBookingCompactItem.vue";
-import RoomBookingDetailItem from "components/RoomBookingDetailItem.vue";
+import { useQuasar } from "quasar";
 
 const slide = ref(0);
+const $q = useQuasar();
 
 const { roomList } = defineProps({
   roomList: Array,
+});
+
+const numOfItemInRow = computed(() => {
+  return $q.screen.gt.sm ? 3 : 1;
+});
+
+const _roomList = computed(() => {
+  let tmp = [];
+  return roomList.reduce((current, item, index) => {
+    tmp.push(item);
+    if (tmp.length === numOfItemInRow.value) {
+      current.push(tmp);
+      tmp = [];
+    }
+    return current;
+  }, []);
 });
 </script>
 
@@ -29,19 +46,17 @@ const { roomList } = defineProps({
       padding
     >
       <q-carousel-slide
-        v-for="(item, index) in roomList"
+        v-for="(item, index) in _roomList"
         :name="index"
-        :key="`room_suggest_${item.id}`"
+        :key="`room_suggest_${index}`"
       >
         <div class="row q-col-gutter-lg">
-          <div class="col-md-4 col-xs-12">
-            <room-booking-compact-item :booking-item="item" />
-          </div>
-          <div class="col-md-4 col-xs-12">
-            <room-booking-compact-item :booking-item="item" />
-          </div>
-          <div class="col-md-4 col-xs-12">
-            <room-booking-compact-item :booking-item="item" />
+          <div
+            v-for="subItem in item"
+            class="col-md-4 col-xs-12"
+            :key="`room_suggest_${subItem?.id}`"
+          >
+            <room-booking-compact-item :booking-item="subItem" />
           </div>
         </div>
       </q-carousel-slide>

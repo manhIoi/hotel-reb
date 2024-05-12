@@ -5,21 +5,23 @@ const { nearbyItem } = defineProps({
 </script>
 
 <template>
-  <q-card
-    flat
-    class="my-card full-width full-height flex overflow-hidden cursor-pointer"
-  >
-    <q-img :src="nearbyItem.image" />
-    <div class="absolute-bottom column q-pa-sm card-info q-ma-sm">
-      <p class="text-body1 text-weight-medium text-white text-no-wrap">
-        {{ nearbyItem.name }}
-      </p>
-      <p class="text-subtitle2 text-weight-bolder text-primary">
-        {{ nearbyItem.distance }}m
-      </p>
-      <div class="overlay"></div>
-    </div>
-  </q-card>
+  <q-responsive :ratio="1">
+    <q-card
+      flat
+      class="my-card full-width full-height flex overflow-hidden cursor-pointer"
+    >
+      <q-img :src="nearbyItem.image" class="full-width full-height" />
+      <div class="absolute-bottom column q-pa-sm card-info q-ma-sm">
+        <p class="text-body1 text-weight-medium text-white text-no-wrap">
+          {{ nearbyItem.name }}
+        </p>
+        <p class="text-subtitle2 text-weight-bolder text-primary">
+          {{ nearbyItem.distance }}m
+        </p>
+        <div class="overlay"></div>
+      </div>
+    </q-card>
+  </q-responsive>
 </template>
 
 <style scoped lang="css">

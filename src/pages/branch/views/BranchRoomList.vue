@@ -22,7 +22,7 @@ function onClickRoomBookingItem(item) {
         v-for="item in roomBookingList"
         :key="`favorite_${item.id}`"
         transition="scale"
-        class="col-lg-4 col-md-6 col-sm-12 col-xs-12"
+        class="col-lg-4 col-md-6 col-xs-12"
         once
       >
         <room-booking-compact-item
