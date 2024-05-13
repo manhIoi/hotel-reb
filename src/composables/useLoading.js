@@ -1,8 +1,8 @@
 import { useQuasar } from "quasar";
 import { ref } from "vue";
 
-export function useLoading() {
-  const isLoading = ref(false);
+export function useLoading(defaultValue = false) {
+  const isLoading = ref(defaultValue);
   function hideLoading() {
     isLoading.value = false;
   }

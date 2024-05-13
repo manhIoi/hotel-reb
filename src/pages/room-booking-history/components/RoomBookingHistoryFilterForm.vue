@@ -17,6 +17,30 @@ const { typeOptions } = defineProps({
         label="Select status"
       />
     </div>
+    <div class="col-6">
+      <q-input
+        outlined
+        type="number"
+        label="Adult number"
+        v-model="filterData.adultNumber"
+      />
+    </div>
+    <div class="col-6">
+      <q-input
+        outlined
+        type="number"
+        label="Children number"
+        v-model="filterData.childrenNumber"
+      />
+    </div>
+    <div class="col-6">
+      <q-input
+        outlined
+        type="number"
+        label="Bed number"
+        v-model="filterData.bedNumber"
+      />
+    </div>
   </div>
 </template>
 

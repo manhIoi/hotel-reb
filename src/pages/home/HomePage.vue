@@ -8,7 +8,7 @@ import FavoritveRoomList from "pages/home/view/FavoritveRoomList.vue";
 import RecommendPlaceNearbyList from "pages/home/view/RecommendPlaceNearbyList.vue";
 import BestCommentList from "pages/home/view/BestCommentList.vue";
 import server from "src/server";
-import SectionTitleSkeleton from "components/skeleton/section-title-skeleton.vue";
+import SectionTitleSkeleton from "components/skeleton/SectionTitleSkeleton.vue";
 
 const homeData = ref({
   title: "Our world is your playground",

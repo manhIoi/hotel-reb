@@ -20,11 +20,11 @@ watchEffect(() => {
 });
 
 function onClickLogo() {
-  router.push(ROUTES_PATH.home);
+  router.push({ name: ROUTES_PATH.home });
 }
 
 function onClickNavItem(item) {
-  router.push(item.link);
+  router.push({ name: item.link });
 }
 
 function onClickLogout() {

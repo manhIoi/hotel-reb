@@ -5,6 +5,7 @@ import useRoomBookingHistoryTable from "pages/room-booking-history/composables/u
 import RoomBookingHistoryFilterForm from "pages/room-booking-history/components/RoomBookingHistoryFilterForm.vue";
 
 const roomBookingHistoryList = ref([]);
+
 const {
   roomBookingHistoryRows,
   roomBookingHistoryColumns,
@@ -12,6 +13,7 @@ const {
   typeOptions,
   getColorByStatus,
   getTextByStatus,
+  isLoading,
 } = useRoomBookingHistoryTable(roomBookingHistoryList);
 </script>
 
@@ -21,7 +23,11 @@ const {
       :rows="roomBookingHistoryRows"
       :columns="roomBookingHistoryColumns"
       row-key="name"
+      :loading="isLoading"
     >
+      <template v-slot:loading>
+        <q-inner-loading showing color="primary" />
+      </template>
       <template v-slot:top>
         <q-btn flat round color="primary" icon="filter_alt">
           <q-popup-proxy>

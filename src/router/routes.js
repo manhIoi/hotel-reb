@@ -46,14 +46,16 @@ const routes = [
       },
       {
         name: ROUTES_PATH.roomDetail,
-        path: ROUTES_PATH.roomDetail,
+        path: `${ROUTES_PATH.roomDetail}/:id`,
         component: RoomDetailPage,
       },
       {
+        name: ROUTES_PATH.roomBookingHistory,
         path: ROUTES_PATH.roomBookingHistory,
         component: RoomBookingHistoryPage,
       },
       {
+        name: ROUTES_PATH.profile,
         path: ROUTES_PATH.profile,
         component: ProfilePage,
       },

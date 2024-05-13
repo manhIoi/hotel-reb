@@ -14,13 +14,22 @@ export function createRoomBookingHistory(roomBooking) {
   };
 }
 
-export function generateRoomBookingHistory(room) {
+export function generateRoomBookingHistory(room, customTime = false) {
   return {
     room,
     status: faker.helpers.arrayElement(
       Object.values(ROOM_BOOKING_HISTORY_STATUS)
     ),
-    createdAt: faker.date.past(),
+    createdAt: !!customTime ? new Date() : faker.date.past(),
+    extraInformation: {
+      dateCheckIn: faker.date.past(),
+      dateCheckOut: faker.date.past(),
+      adultNumber: faker.number.int({ min: 2, max: 4 }),
+      childrenNumber: faker.number.int({ min: 2, max: 4 }),
+      bedNumber: faker.number.int({ min: 2, max: 4 }),
+      message: faker.lorem.words({ min: 2, max: 4 }),
+      roomNumber: faker.number.int({ min: 2, max: 4 }),
+    },
   };
 }
 

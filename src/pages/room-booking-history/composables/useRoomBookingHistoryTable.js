@@ -1,15 +1,19 @@
 import { computed, onMounted, ref, watch, watchEffect } from "vue";
 import server from "src/server";
 import { formatDate, formatMoney } from "src/utils";
-import { debounce } from "lodash";
+import { debounce, isEmpty } from "lodash";
 import { useRoute, useRouter } from "vue-router";
+import { useLoading } from "src/composables";
 
 export default function useRoomBookingHistoryTable() {
   const router = useRouter();
   const route = useRoute();
   const roomBookingHistoryList = ref([]);
+  const { showLoading, hideLoading, isLoading } = useLoading(true);
   const filterData = ref({
     type: null,
+    bedNumber: 0,
+    childrenNumber: 0,
   });
   const typeOptions = [
     { status: 0, name: "NEW" },
@@ -44,7 +48,7 @@ export default function useRoomBookingHistoryTable() {
         name: "adult",
         label: "Adult",
         align: "center",
-        field: (row) => row.room?.information?.adultNumber,
+        field: (row) => row.extraInformation?.adultNumber,
         sortable: true,
         sort: (a, b) => parseInt(a) - parseInt(b),
       },
@@ -85,7 +89,10 @@ export default function useRoomBookingHistoryTable() {
     try {
       const response = await server.getRoomBookingHistory();
       roomBookingHistoryList.value = response.data;
-    } catch (e) {}
+    } catch (e) {
+    } finally {
+      hideLoading();
+    }
   });
 
   watch(filterData.value, () => {
@@ -100,21 +107,29 @@ export default function useRoomBookingHistoryTable() {
   });
 
   watchEffect(async () => {
-    if (route.query) {
+    if (!isEmpty(route.query)) {
       const { type } = route.query;
       filterData.value.type = typeOptions?.find?.(
-        (item) => item?.status === type
+        (item) => item?.status === parseInt(type)
       ) || {
         status: "",
         name: "",
       };
+      try {
+        showLoading();
+        const response = await server.getRoomBookingHistory(route.query);
+        roomBookingHistoryList.value = response.data;
+      } catch (e) {
+      } finally {
+        hideLoading();
+      }
     }
   });
 
   function getColorByStatus(status) {
-    if (status === 0) return "negative";
+    if (status === 0) return "positive";
     if (status === 1) return "warning";
-    if (status === 2) return "success";
+    if (status === 2) return "primary";
   }
 
   function getTextByStatus(status) {
@@ -128,5 +143,6 @@ export default function useRoomBookingHistoryTable() {
     typeOptions,
     getColorByStatus,
     getTextByStatus,
+    isLoading,
   };
 }

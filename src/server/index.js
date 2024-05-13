@@ -1,3 +1,4 @@
+import { faker } from "@faker-js/faker";
 import { generateBranchList } from "src/server/branch";
 import { generateRoomBookingList } from "src/server/room-booking";
 import { generatePlaceNearByList } from "src/server/place";
@@ -7,6 +8,7 @@ import { delay } from "lodash";
 import { generateUser } from "src/server/user";
 import {
   createRoomBookingHistory,
+  generateRoomBookingHistory,
   generateRoomBookingHistoryList,
 } from "src/server/room-booking-history";
 
@@ -15,6 +17,7 @@ class MockApi {
     this.branchList = generateBranchList(5);
     this.roomList = generateRoomBookingList(150, this.branchList);
     this.placeNearbyList = generatePlaceNearByList(20);
+    this.historyBookingList = generateRoomBookingHistoryList(10, this.roomList);
     this.user = generateUser("admin@gmail.com", "admin", "123456");
     this.user.password = "123456";
   }
@@ -89,7 +92,7 @@ class MockApi {
   getHomeData() {
     return new Promise((resolve) => {
       delay(() => {
-        const result = generateHomeData(this.branchList);
+        const result = generateHomeData(this.branchList, this.roomList);
         resolve(this.formatResponse(result));
       }, 2000);
     });
@@ -98,7 +101,7 @@ class MockApi {
   getDetailBranchData() {
     return new Promise((resolve) => {
       delay(() => {
-        const roomBookingList = generateRoomBookingList(6, this.branchList);
+        const roomBookingList = faker.helpers.arrayElements(this.roomList, 6);
         const placeNearbyList = generatePlaceNearByList(4);
         const commentList = generateCommentList(5);
         resolve(
@@ -137,16 +140,62 @@ class MockApi {
     return new Promise((resolve) => {
       delay(() => {
         const data = createRoomBookingHistory(room);
-        resolve(this.formatResponse(data))
-      }, 1000)
-    })
+        resolve(this.formatResponse(data));
+      }, 1000);
+    });
   }
 
-  getRoomBookingHistory() {
+  getRoomBookingHistory(params) {
+    const adultNumber = parseInt(params?.adultNumber || 0);
+    const childrenNumber = parseInt(params?.childrenNumber || 0);
+    const bedNumber = parseInt(params?.bedNumber || 0);
+    const type = params?.type ? parseInt(params?.type) : null;
     return new Promise((resolve) => {
       delay(() => {
-        const data = generateRoomBookingHistoryList(10, this.roomList)
-        resolve(this.formatResponse(data));
+        const result = this.historyBookingList.filter((item) => {
+          if (typeof type === "number" && item.status !== type) return false;
+          if (adultNumber && item.extraInformation?.adultNumber !== adultNumber)
+            return false;
+          if (
+            childrenNumber &&
+            item.extraInformation?.childrenNumber !== childrenNumber
+          )
+            return false;
+          if (bedNumber && item.extraInformation?.bedNumber !== bedNumber)
+            return false;
+          return true;
+        });
+        resolve(this.formatResponse(result));
+      }, 1000);
+    });
+  }
+
+  createBookingRoomHistory(params) {
+    return new Promise((resolve) => {
+      delay(() => {
+        const { roomId, ...extraInformation } = params || {};
+        const roomSelected = this.roomList.find(
+          (item) => item.id === params?.roomId
+        );
+        const newHistory = generateRoomBookingHistory(roomSelected, true);
+        this.historyBookingList = [
+          { ...newHistory, extraInformation },
+          ...this.historyBookingList,
+        ];
+        console.info(
+          "LOG_IT:: this.historyBookingList",
+          this.historyBookingList
+        );
+        resolve(this.formatResponse(newHistory));
+      }, 1000);
+    });
+  }
+
+  getRoomBookingDetail(roomId) {
+    return new Promise((resolve) => {
+      delay(() => {
+        const currentRoom = this.roomList.find((item) => item.id === roomId);
+        resolve(this.formatResponse(currentRoom));
       }, 1000);
     });
   }

@@ -12,7 +12,7 @@ const router = useRouter();
 const [firstBookingItem, ...otherBookingItem] = roomBookingList;
 
 function onClickItem(item) {
-  router.push(ROUTES_PATH.roomDetail);
+  router.push(`${ROUTES_PATH.roomDetail}/${item?.id}`);
 }
 
 function onClickViewMore() {
@@ -37,7 +37,7 @@ function onClickViewMore() {
       <div class="col-md-6 col-xs-12">
         <room-booking-card-item
           :booking-item="firstBookingItem"
-          @click="onClickItem"
+          @click-item="onClickItem"
         />
       </div>
       <div class="col-md-6 col-xs-12">
@@ -47,7 +47,10 @@ function onClickViewMore() {
             v-for="item in otherBookingItem"
             :key="`booking_card_item_${item.id}`"
           >
-            <room-booking-card-item :booking-item="item" @click="onClickItem" />
+            <room-booking-card-item
+              :booking-item="item"
+              @click-item="onClickItem"
+            />
           </div>
         </div>
       </div>

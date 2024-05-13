@@ -1,5 +1,5 @@
 <script setup>
-import CardSkeleton from "components/skeleton/card-skeleton.vue";
+import CardSkeleton from "components/skeleton/CardSkeleton.vue";
 
 const { isShow } = defineProps({
   isShow: {

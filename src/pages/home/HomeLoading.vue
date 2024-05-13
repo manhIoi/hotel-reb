@@ -1,7 +1,7 @@
 <script setup>
-import CardSkeleton from "components/skeleton/card-skeleton.vue";
+import CardSkeleton from "components/skeleton/CardSkeleton.vue";
 import MainWrapper from "layouts/MainWrapper.vue";
-import SectionTitleSkeleton from "components/skeleton/section-title-skeleton.vue";
+import SectionTitleSkeleton from "components/skeleton/SectionTitleSkeleton.vue";
 </script>
 
 <template>

@@ -7,7 +7,7 @@ import BranchRoomList from "pages/branch/views/BranchRoomList.vue";
 import BranchNearbyPlaceList from "pages/branch/views/BranchNearbyPlaceList.vue";
 import BranchCommentList from "pages/branch/views/BranchCommentList.vue";
 import { onMounted, ref } from "vue";
-import SectionTitleSkeleton from "components/skeleton/section-title-skeleton.vue";
+import SectionTitleSkeleton from "components/skeleton/SectionTitleSkeleton.vue";
 
 const router = useRouter();
 

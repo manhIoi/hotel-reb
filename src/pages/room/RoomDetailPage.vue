@@ -2,36 +2,59 @@
 import MainWrapper from "layouts/MainWrapper.vue";
 import { useRoute, useRouter } from "vue-router";
 import SectionTitle from "components/SectionTitle.vue";
-import { ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import RoomDetailBookingForm from "pages/room/views/RoomDetailBookingForm.vue";
-import { generateRoomBooking, generateRoomBookingList } from "src/server";
+import server, {
+  generateRoomBooking,
+  generateRoomBookingList,
+} from "src/server";
 import RoomDetailImageList from "pages/room/views/RoomDetailImageList.vue";
 import RoomDetailInformation from "pages/room/views/RoomDetailInformation.vue";
 import RoomDetailSuggestList from "pages/room/views/RoomDetailSuggestList.vue";
 import RoomDetailHeader from "pages/room/views/RoomDetailHeader.vue";
+import SectionTitleSkeleton from "components/skeleton/SectionTitleSkeleton.vue";
+import { useLoading } from "src/composables";
 
 const router = useRouter();
 const route = useRoute();
 
-const roomData = generateRoomBooking();
+const roomData = ref(null);
 const roomList = generateRoomBookingList(6);
-const { images } = roomData;
+const { hideLoading, showLoading, isLoading } = useLoading(true);
 
+onMounted(async () => {
+  try {
+    showLoading();
+    const response = await server.getRoomBookingDetail(route.params?.id);
+    roomData.value = response.data;
+  } catch (e) {
+  } finally {
+    hideLoading();
+  }
+});
 const dialogBooking = ref(false);
 const fabRight = ref(false);
 </script>
 
 <template>
   <q-page class="bg-grey-2">
-    <room-detail-header :room="roomData" />
+    <section-title-skeleton :is-show="isLoading">
+      <room-detail-header :room="roomData" />
+    </section-title-skeleton>
     <main-wrapper background-color="bg-white">
-      <room-detail-image-list :image-list="images" />
+      <section-title-skeleton :is-show="isLoading">
+        <room-detail-image-list :image-list="roomData.images" />
+      </section-title-skeleton>
     </main-wrapper>
     <main-wrapper background-color="bg-white" style="padding-bottom: 90px">
-      <room-detail-information :room="roomData" />
+      <section-title-skeleton :is-show="isLoading">
+        <room-detail-information :room="roomData" />
+      </section-title-skeleton>
     </main-wrapper>
     <main-wrapper background-color="bg-grey-2">
-      <room-detail-suggest-list :roomList="roomList" />
+      <section-title-skeleton :is-show="isLoading">
+        <room-detail-suggest-list :roomList="roomList" />
+      </section-title-skeleton>
     </main-wrapper>
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
       <q-fab
@@ -53,7 +76,12 @@ const fabRight = ref(false);
       </q-fab>
     </q-page-sticky>
     <q-dialog v-model="dialogBooking">
-      <room-detail-booking-form />
+      <section-title-skeleton :is-show="isLoading">
+        <room-detail-booking-form
+          :room="roomData"
+          v-model:dialog="dialogBooking"
+        />
+      </section-title-skeleton>
     </q-dialog>
   </q-page>
 </template>

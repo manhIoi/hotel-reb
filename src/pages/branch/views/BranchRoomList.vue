@@ -11,7 +11,7 @@ const { roomBookingList } = defineProps({
 const router = useRouter();
 
 function onClickRoomBookingItem(item) {
-  router.push(ROUTES_PATH.roomDetail);
+  router.push(`${ROUTES_PATH.roomDetail}/${item.id}`);
 }
 </script>
 

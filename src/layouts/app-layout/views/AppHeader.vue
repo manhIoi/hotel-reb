@@ -24,11 +24,11 @@ watchEffect(() => {
 });
 
 function onClickLogo() {
-  router.push(ROUTES_PATH.home);
+  router.replace({ name: ROUTES_PATH.home });
 }
 
 function onClickSearch() {
-  router.push(ROUTES_PATH.search);
+  router.push({ name: ROUTES_PATH.search });
 }
 
 function toggleLeftDrawer() {
@@ -36,7 +36,7 @@ function toggleLeftDrawer() {
 }
 
 function onClickNavItem(item) {
-  router.push(item.link);
+  router.push({ name: item.link });
 }
 
 function onClickLogout() {
@@ -46,7 +46,7 @@ function onClickLogout() {
 }
 
 function onClickProfileItem(item) {
-  router.push(item.link);
+  router.push({ name: item.link });
 }
 </script>
 

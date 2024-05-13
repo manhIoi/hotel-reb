@@ -6,12 +6,19 @@ import InputBase from "components/input/InputBase.vue";
 import { getRangeDate, validators } from "src/utils";
 import { useDialog } from "src/composables";
 import { useToast } from "src/composables/useToast";
+import server from "src/server";
+
+const { room } = defineProps({
+  room: Object,
+});
+const dialog = defineModel("dialog");
 
 const formData = ref({
   dateCheckIn: "",
   dateCheckOut: "",
-  guestNumber: 0,
-  roomNumber: 0,
+  adultNumber: 0,
+  childrenNumber: 0,
+  bedNumber: 0,
   message: "",
 });
 
@@ -26,11 +33,15 @@ const formInputProps = computed(() => {
     checkOut: {
       rules: [validators.required],
     },
-    guests: {
+    adults: {
       placeholder: "Check In",
       rules: [validators.required],
     },
-    rooms: {
+    childrens: {
+      placeholder: "Check In",
+      rules: [validators.required],
+    },
+    beds: {
       placeholder: "Room Number",
       rules: [validators.required],
     },
@@ -63,15 +74,29 @@ function onSubmit() {
   );
 }
 
-function handleSubmit() {
+async function handleSubmit() {
   const dialogLoading = showDialog("loading");
-  setTimeout(() => {
-    dialogLoading
-      .hide()
-      .onDismiss(() =>
-        showToast("success", "Book room successfully submitted")
-      );
-  }, 2000);
+  try {
+    const _params = {
+      roomId: room?.id,
+      ...formData.value,
+    };
+    const response = await server.createBookingRoomHistory({
+      roomId: room?.id,
+      ...formData.value,
+    });
+    if (response.data) {
+      dialogLoading
+        .hide()
+        .onDismiss(() =>
+          showToast("success", "Book room successfully submitted")
+        );
+      dialog.value = false;
+    }
+  } catch (e) {
+  } finally {
+    dialogLoading.hide();
+  }
 }
 </script>
 
@@ -104,16 +129,23 @@ function handleSubmit() {
           </div>
           <div class="col-6">
             <input-counter
-              v-model="formData.guestNumber"
-              :input-props="formInputProps.guests"
-              label="Guests"
+              v-model="formData.adultNumber"
+              :input-props="formInputProps.adults"
+              label="Adult Number"
             />
           </div>
           <div class="col-6">
             <input-counter
-              v-model="formData.roomNumber"
-              :input-props="formInputProps.rooms"
-              label="Rooms"
+              v-model="formData.childrenNumber"
+              :input-props="formInputProps.childrens"
+              label="Children Number"
+            />
+          </div>
+          <div class="col-6">
+            <input-counter
+              v-model="formData.bedNumber"
+              :input-props="formInputProps.beds"
+              label="Bed Number"
             />
           </div>
           <div class="col-12">
