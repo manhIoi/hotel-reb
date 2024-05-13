@@ -9,6 +9,7 @@ import RecommendPlaceNearbyList from "pages/home/view/RecommendPlaceNearbyList.v
 import BestCommentList from "pages/home/view/BestCommentList.vue";
 import server from "src/server";
 import SectionTitleSkeleton from "components/skeleton/SectionTitleSkeleton.vue";
+import OurService from "pages/home/view/OurService.vue";
 
 const homeData = ref({
   title: "Our world is your playground",
@@ -50,16 +51,7 @@ onMounted(async () => {
 
       <main-wrapper>
         <section-title title="OUR SERVICE">
-          <template v-slot:right-title>
-            <q-btn
-              flat
-              outline
-              color="primary"
-              icon-right="arrow_right_alt"
-              label="View more"
-              class="text-weight-bold"
-            />
-          </template>
+          <our-service />
         </section-title>
       </main-wrapper>
 

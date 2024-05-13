@@ -7,6 +7,8 @@ import { getRangeDate, validators } from "src/utils";
 import { useDialog } from "src/composables";
 import { useToast } from "src/composables/useToast";
 import server from "src/server";
+import { useRouter } from "vue-router";
+import { ROUTES_PATH } from "src/router/routes";
 
 const { room } = defineProps({
   room: Object,
@@ -24,6 +26,7 @@ const formData = ref({
 
 const { showDialog } = useDialog();
 const { showToast } = useToast();
+const router = useRouter();
 
 const formInputProps = computed(() => {
   return {
@@ -77,10 +80,6 @@ function onSubmit() {
 async function handleSubmit() {
   const dialogLoading = showDialog("loading");
   try {
-    const _params = {
-      roomId: room?.id,
-      ...formData.value,
-    };
     const response = await server.createBookingRoomHistory({
       roomId: room?.id,
       ...formData.value,
@@ -92,6 +91,7 @@ async function handleSubmit() {
           showToast("success", "Book room successfully submitted")
         );
       dialog.value = false;
+      router.push({ name: ROUTES_PATH.roomBookingHistory });
     }
   } catch (e) {
   } finally {
@@ -167,7 +167,7 @@ async function handleSubmit() {
         <q-btn
           size="md"
           color="primary"
-          label="Decline"
+          label="BOOK NOW"
           type="submit"
           class="fit q-ma-xs"
         />

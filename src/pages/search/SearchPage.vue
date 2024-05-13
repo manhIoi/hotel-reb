@@ -35,7 +35,7 @@ const roomBookingList = ref([]);
 const totalPage = ref(0);
 
 function onClickItem(item) {
-  router.push(ROUTES_PATH.roomDetail);
+  router.push(`${ROUTES_PATH.roomDetail}/${item.id}`);
 }
 
 watch(filterData.value, () => {

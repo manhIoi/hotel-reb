@@ -42,7 +42,7 @@ function onClickLogout() {
         @click="onClickLogo"
         class="bg-primary cursor-pointer"
       >
-        <img
+        <q-img
           src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg"
           alt="logo_app"
         />

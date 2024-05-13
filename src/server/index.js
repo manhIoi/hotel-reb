@@ -17,7 +17,7 @@ class MockApi {
     this.branchList = generateBranchList(5);
     this.roomList = generateRoomBookingList(150, this.branchList);
     this.placeNearbyList = generatePlaceNearByList(20);
-    this.historyBookingList = generateRoomBookingHistoryList(10, this.roomList);
+    this.historyBookingList = generateRoomBookingHistoryList(20, this.roomList);
     this.user = generateUser("admin@gmail.com", "admin", "123456");
     this.user.password = "123456";
   }
@@ -182,10 +182,6 @@ class MockApi {
           { ...newHistory, extraInformation },
           ...this.historyBookingList,
         ];
-        console.info(
-          "LOG_IT:: this.historyBookingList",
-          this.historyBookingList
-        );
         resolve(this.formatResponse(newHistory));
       }, 1000);
     });
@@ -195,7 +191,8 @@ class MockApi {
     return new Promise((resolve) => {
       delay(() => {
         const currentRoom = this.roomList.find((item) => item.id === roomId);
-        resolve(this.formatResponse(currentRoom));
+        const suggestRoomList = faker.helpers.arrayElements(this.roomList, 6);
+        resolve(this.formatResponse({ ...currentRoom, suggestRoomList }));
       }, 1000);
     });
   }

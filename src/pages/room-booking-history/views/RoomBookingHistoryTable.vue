@@ -24,6 +24,7 @@ const {
       :columns="roomBookingHistoryColumns"
       row-key="name"
       :loading="isLoading"
+      class="no-shadow custom-shadow"
     >
       <template v-slot:loading>
         <q-inner-loading showing color="primary" />

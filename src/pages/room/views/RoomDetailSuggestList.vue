@@ -3,9 +3,11 @@ import SectionTitle from "components/SectionTitle.vue";
 import { computed, ref } from "vue";
 import RoomBookingCompactItem from "components/RoomBookingCompactItem.vue";
 import { useQuasar } from "quasar";
+import { useRouter } from "vue-router";
 
 const slide = ref(0);
 const $q = useQuasar();
+const router = useRouter();
 
 const { roomList } = defineProps({
   roomList: Array,
@@ -26,6 +28,10 @@ const _roomList = computed(() => {
     return current;
   }, []);
 });
+
+function onClickOtherRoom(item) {
+  router.replace(item.id);
+}
 </script>
 
 <template>
@@ -56,7 +62,10 @@ const _roomList = computed(() => {
             class="col-md-4 col-xs-12"
             :key="`room_suggest_${subItem?.id}`"
           >
-            <room-booking-compact-item :booking-item="subItem" />
+            <room-booking-compact-item
+              :booking-item="subItem"
+              @click-item="onClickOtherRoom"
+            />
           </div>
         </div>
       </q-carousel-slide>

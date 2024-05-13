@@ -8,8 +8,13 @@ import { computed, onMounted, ref } from "vue";
 const $q = useQuasar();
 const userStore = useUserStore();
 
-const username = ref(userStore.user.username);
-const prompt = ref(false);
+const formData = ref({
+  username: userStore.user.username,
+  currentPassword: "",
+  newPassword: "",
+});
+const promptUsername = ref(false);
+const promptPassword = ref(false);
 
 const styles = computed(() => {
   return {
@@ -51,7 +56,7 @@ const styles = computed(() => {
               color="primary"
               class="self-start"
               label="Edit"
-              @click="prompt = true"
+              @click="promptUsername = true"
             />
           </div>
           <q-separator class="q-my-lg" />
@@ -62,19 +67,54 @@ const styles = computed(() => {
           <div :style="styles.containerField">
             <p class="text-weight-bolder" style="min-width: 200px">Password</p>
             <p style="flex: 1">{{ userStore.user.fullName }}</p>
-            <q-btn color="primary" class="self-start" label="Change password" />
+            <q-btn
+              color="primary"
+              class="self-start"
+              label="Change password"
+              @click="promptPassword = true"
+            />
           </div>
         </div>
       </section-title>
     </main-wrapper>
-    <q-dialog v-model="prompt">
+    <q-dialog v-model="promptUsername">
       <q-card style="min-width: 350px">
         <q-card-section>
           <div class="text-h6">Edit your name</div>
         </q-card-section>
 
         <q-card-section class="q-pt-none">
-          <q-input outlined dense v-model="username" autofocus />
+          <q-input outlined dense v-model="formData.username" autofocus />
+        </q-card-section>
+
+        <q-card-actions align="right" class="text-primary">
+          <q-btn flat label="Confirm" v-close-popup />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+    <q-dialog v-model="promptPassword">
+      <q-card style="min-width: 350px">
+        <q-card-section>
+          <div class="text-h6">Change your password</div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+          <q-input
+            label="Current password"
+            outlined
+            dense
+            v-model="formData.currentPassword"
+            autofocus
+            class="q-mb-md"
+            type="password"
+          />
+          <q-input
+            label="New password"
+            outlined
+            dense
+            type="password"
+            v-model="formData.newPassword"
+          />
         </q-card-section>
 
         <q-card-actions align="right" class="text-primary">

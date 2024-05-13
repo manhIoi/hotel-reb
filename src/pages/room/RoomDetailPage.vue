@@ -2,7 +2,7 @@
 import MainWrapper from "layouts/MainWrapper.vue";
 import { useRoute, useRouter } from "vue-router";
 import SectionTitle from "components/SectionTitle.vue";
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, watchEffect } from "vue";
 import RoomDetailBookingForm from "pages/room/views/RoomDetailBookingForm.vue";
 import server, {
   generateRoomBooking,
@@ -19,19 +19,21 @@ const router = useRouter();
 const route = useRoute();
 
 const roomData = ref(null);
-const roomList = generateRoomBookingList(6);
 const { hideLoading, showLoading, isLoading } = useLoading(true);
 
-onMounted(async () => {
-  try {
-    showLoading();
-    const response = await server.getRoomBookingDetail(route.params?.id);
-    roomData.value = response.data;
-  } catch (e) {
-  } finally {
-    hideLoading();
+watchEffect(async () => {
+  if (route.params?.id) {
+    try {
+      showLoading();
+      const response = await server.getRoomBookingDetail(route.params?.id);
+      roomData.value = response.data;
+    } catch (e) {
+    } finally {
+      hideLoading();
+    }
   }
 });
+
 const dialogBooking = ref(false);
 const fabRight = ref(false);
 </script>
@@ -53,7 +55,7 @@ const fabRight = ref(false);
     </main-wrapper>
     <main-wrapper background-color="bg-grey-2">
       <section-title-skeleton :is-show="isLoading">
-        <room-detail-suggest-list :roomList="roomList" />
+        <room-detail-suggest-list :roomList="roomData.suggestRoomList" />
       </section-title-skeleton>
     </main-wrapper>
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
