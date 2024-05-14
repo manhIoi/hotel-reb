@@ -3,10 +3,12 @@ import RoomBookingCardItem from "components/RoomBookingCardItem.vue";
 import SectionTitle from "components/SectionTitle.vue";
 import { ROUTES_PATH } from "src/router/routes";
 import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
+
 const { roomBookingList } = defineProps({
   roomBookingList: Array,
 });
-
+const { t } = useI18n();
 const router = useRouter();
 
 const [firstBookingItem, ...otherBookingItem] = roomBookingList;
@@ -21,7 +23,7 @@ function onClickViewMore() {
 </script>
 
 <template>
-  <section-title title="OUR FAVORITE ROOMS">
+  <section-title :title="t('home.ourFavoriteRoom')">
     <template v-slot:right-title>
       <q-btn
         flat

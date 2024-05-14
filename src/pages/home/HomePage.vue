@@ -11,10 +11,8 @@ import server from "src/server";
 import SectionTitleSkeleton from "components/skeleton/SectionTitleSkeleton.vue";
 import OurService from "pages/home/view/OurService.vue";
 
+const { t } = useI18n();
 const homeData = ref({
-  title: "Our world is your playground",
-  description:
-    "Make yourself at home in our sophisticated guest rooms, take in the incredible views and enjoy fresh air from our beautiful sea city.",
   slideImageList: null,
   outstandingList: null,
   placeNearbyList: null,
@@ -50,9 +48,9 @@ onMounted(async () => {
       </main-wrapper>
 
       <main-wrapper>
-        <section-title title="OUR SERVICE">
+        <section-title-skeleton :is-show="!homeData.roomBookingList">
           <our-service />
-        </section-title>
+        </section-title-skeleton>
       </main-wrapper>
 
       <main-wrapper background-color="bg-grey-2">

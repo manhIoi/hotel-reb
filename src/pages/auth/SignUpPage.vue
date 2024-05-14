@@ -41,7 +41,7 @@ async function onSignUp() {
         <p class="q-mb-md">
           Have an account?
           <RouterLink
-            :to="{ path: ROUTES_PATH.signIn }"
+            :to="{ path: ROUTES_PATH.signUp }"
             class="text-primary text-weight-bolder"
           >
             Sign In

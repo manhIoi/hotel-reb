@@ -22,29 +22,27 @@ function decrease() {
 </script>
 
 <template>
-  <input-base :label="label">
-    <q-input outlined mask="date" readonly v-bind="inputProps" v-model="model">
-      <template v-slot:append>
-        <q-btn
-          round
-          color="primary"
-          glossy
-          icon="remove"
-          size="xs"
-          @click="decrease"
-        />
-        <q-btn
-          round
-          color="primary"
-          glossy
-          icon="add"
-          size="xs"
-          @click="increase"
-          class="q-ml-xs"
-        />
-      </template>
-    </q-input>
-  </input-base>
+  <q-input outlined v-bind="inputProps" v-model="model" type="number">
+    <template v-slot:append>
+      <q-btn
+        round
+        color="primary"
+        glossy
+        icon="remove"
+        size="xs"
+        @click="decrease"
+      />
+      <q-btn
+        round
+        color="primary"
+        glossy
+        icon="add"
+        size="xs"
+        @click="increase"
+        class="q-ml-xs"
+      />
+    </template>
+  </q-input>
 </template>
 
 <style scoped lang="css"></style>

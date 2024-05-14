@@ -8,12 +8,14 @@ import { useRoute, useRouter } from "vue-router";
 import { ref, watchEffect } from "vue";
 import { useUserStore } from "stores/user-store";
 import { ROUTES_PATH } from "src/router/routes";
+import { useI18n } from "vue-i18n";
 
 const leftDrawerOpen = defineModel("leftDrawerOpen");
 const router = useRouter();
 const route = useRoute();
 const selectedNavIndex = ref(-1);
 const userStore = useUserStore();
+const { t } = useI18n();
 
 watchEffect(() => {
   selectedNavIndex.value = navbarNavigationList.findIndex((item) => {
@@ -84,12 +86,12 @@ function onClickProfileItem(item) {
               : 'text-weight-medium',
           ]"
         >
-          {{ item.title }}
+          {{ t(item.title) }}
         </p>
       </q-item>
     </q-list>
     <q-btn color="primary" class="q-mx-md" @click="onClickSearch">
-      <p class="text-weight-bold">Reservation</p>
+      <p class="text-weight-bold">{{ t("appHeader.btnReservation") }}</p>
     </q-btn>
     <q-avatar
       v-if="$q.screen.gt.sm"
@@ -112,7 +114,7 @@ function onClickProfileItem(item) {
             @click="() => onClickProfileItem(item)"
           >
             <q-icon :name="item.icon" class="q-mr-xs" />
-            <p>{{ item.title }}</p>
+            <p>{{ t(item.title) }}</p>
           </q-item>
           <q-separator />
           <q-item
@@ -121,7 +123,7 @@ function onClickProfileItem(item) {
             @click="onClickLogout"
           >
             <q-icon name="logout" class="q-mr-xs" />
-            <p>Logout</p>
+            <p>{{ t("appHeader.btnLogout") }}</p>
           </q-item>
         </q-list>
       </q-menu>

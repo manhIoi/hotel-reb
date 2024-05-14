@@ -1,14 +1,16 @@
 <script setup>
 import SectionTitle from "components/SectionTitle.vue";
 import PlaceNearbyItem from "components/PlaceNearbyItem.vue";
+import { useI18n } from "vue-i18n";
 
 const { placeNearbyList } = defineProps({
   placeNearbyList: Array,
 });
+const { t } = useI18n();
 </script>
 
 <template>
-  <SectionTitle title="PLACES NEARBY">
+  <SectionTitle :title="t('branch.placeNearBy')">
     <div class="row q-col-gutter-lg">
       <div
         v-for="item in placeNearbyList"

@@ -196,6 +196,20 @@ class MockApi {
       }, 1000);
     });
   }
+
+  updateProfile(params) {
+    return new Promise((resolve) => {
+      delay(() => {
+        if (params?.fullName) {
+          this.user.fullName = params.fullName;
+        }
+        if (params?.password) {
+          this.user.password = params.password;
+        }
+        resolve(this.formatResponse(this.user));
+      }, 500);
+    });
+  }
 }
 export default new MockApi();
 export * from "./room-booking";

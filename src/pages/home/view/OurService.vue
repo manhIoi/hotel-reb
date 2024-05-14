@@ -2,11 +2,14 @@
 import ServiceItem from "pages/home/components/ServiceItem.vue";
 import ServiceImageList from "pages/home/components/ServiceImageList.vue";
 import { computed, ref, watch } from "vue";
+import SectionTitle from "components/SectionTitle.vue";
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n();
 const serviceCategoryList = [
   {
-    title: "SPA & WELLNESS",
-    desc: "Open Daily",
+    title: t("home.categoriesTitle.spa"),
+    desc: t("home.categoriesDesc.spa"),
     icon: "fa-solid fa-spa",
     color: "#81BF32",
     images: [
@@ -17,8 +20,8 @@ const serviceCategoryList = [
     ],
   },
   {
-    title: "TOP RESTAURANT",
-    desc: "Breakfast & Dinner",
+    title: t("home.categoriesTitle.restaurant"),
+    desc: t("home.categoriesDesc.restaurant"),
     icon: "fa-solid fa-utensils",
     color: "#BF380E",
     images: [
@@ -29,8 +32,8 @@ const serviceCategoryList = [
     ],
   },
   {
-    title: "BEST SUITES",
-    desc: "Cool View",
+    title: t("home.categoriesTitle.suite"),
+    desc: t("home.categoriesDesc.suite"),
     icon: "fa-solid fa-suitcase",
     color: "#063C43",
     images: [
@@ -41,8 +44,8 @@ const serviceCategoryList = [
     ],
   },
   {
-    title: "SWIMMING POOL",
-    desc: "Open Daily",
+    title: t("home.categoriesTitle.swim"),
+    desc: t("home.categoriesDesc.swim"),
     icon: "fa-solid fa-person-swimming",
     color: "#0DAEC3",
     images: [
@@ -62,25 +65,29 @@ function onClickServiceItem(index) {
 </script>
 
 <template>
-  <div class="row q-col-gutter-lg">
-    <div
-      class="col-md-3 col-xs-6"
-      v-for="(item, index) in serviceCategoryList"
-      :key="`service_${item.title}`"
-    >
-      <service-item
-        :service="item"
-        @click="() => onClickServiceItem(index)"
-        :style="{
-          backgroundColor:
-            selectedServiceIndex === index ? '#81BF321A' : 'transparent',
-        }"
+  <section-title title="OUR SERVICE">
+    <div class="row q-col-gutter-lg">
+      <div
+        class="col-md-3 col-xs-6"
+        v-for="(item, index) in serviceCategoryList"
+        :key="`service_${item.title}`"
+      >
+        <service-item
+          :service="item"
+          @click="() => onClickServiceItem(index)"
+          :style="{
+            backgroundColor:
+              selectedServiceIndex === index ? '#81BF321A' : 'transparent',
+          }"
+        />
+      </div>
+    </div>
+    <div style="padding: 60px 0">
+      <service-image-list
+        :service="serviceCategoryList[selectedServiceIndex]"
       />
     </div>
-  </div>
-  <div style="padding: 60px 0">
-    <service-image-list :service="serviceCategoryList[selectedServiceIndex]" />
-  </div>
+  </section-title>
 </template>
 
 <style scoped lang="css"></style>

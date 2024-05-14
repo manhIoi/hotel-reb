@@ -2,10 +2,12 @@
 import PlaceNearbyCardItem from "components/PlaceNearbyCardItem.vue";
 import SectionTitle from "components/SectionTitle.vue";
 import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 
 const { placeNearbyList } = defineProps({
   placeNearbyList: Array,
 });
+const { t } = useI18n();
 
 const router = useRouter();
 
@@ -15,7 +17,7 @@ function onClickItem(item) {}
 </script>
 
 <template>
-  <section-title title="PLACES NEARBY" center-title>
+  <section-title :title="t('home.placeNearBy')" center-title>
     <div class="row q-col-gutter-lg">
       <div class="col-md-6 col-xs-12">
         <place-nearby-card-item :nearby-item="firstPlaceNearbyItem" />

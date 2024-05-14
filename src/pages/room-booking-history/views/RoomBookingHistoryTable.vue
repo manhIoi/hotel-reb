@@ -4,8 +4,6 @@ import { ref } from "vue";
 import useRoomBookingHistoryTable from "pages/room-booking-history/composables/useRoomBookingHistoryTable";
 import RoomBookingHistoryFilterForm from "pages/room-booking-history/components/RoomBookingHistoryFilterForm.vue";
 
-const roomBookingHistoryList = ref([]);
-
 const {
   roomBookingHistoryRows,
   roomBookingHistoryColumns,
@@ -14,7 +12,8 @@ const {
   getColorByStatus,
   getTextByStatus,
   isLoading,
-} = useRoomBookingHistoryTable(roomBookingHistoryList);
+  clearFilter,
+} = useRoomBookingHistoryTable();
 </script>
 
 <template>
@@ -38,6 +37,12 @@ const {
             />
           </q-popup-proxy>
         </q-btn>
+        <q-btn
+          outline
+          label="Clear filter"
+          color="primary"
+          @click="clearFilter"
+        />
       </template>
       <template v-slot:body-cell-status="props">
         <q-td :props="props">

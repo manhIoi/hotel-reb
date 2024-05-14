@@ -12,6 +12,7 @@ export default function useRoomBookingHistoryTable() {
   const { showLoading, hideLoading, isLoading } = useLoading(true);
   const filterData = ref({
     type: null,
+    adultNumber: 0,
     bedNumber: 0,
     childrenNumber: 0,
   });
@@ -100,7 +101,7 @@ export default function useRoomBookingHistoryTable() {
       router.replace({
         query: {
           ...filterData.value,
-          type: filterData.value.type?.status,
+          type: filterData.value.type?.status || "",
         },
       });
     }, 1000)();
@@ -136,10 +137,18 @@ export default function useRoomBookingHistoryTable() {
     return typeOptions.find((item) => item.status === status)?.name;
   }
 
+  function clearFilter() {
+    filterData.value.type = null;
+    filterData.value.adultNumber = 0;
+    filterData.value.bedNumber = 0;
+    filterData.value.childrenNumber = 0;
+  }
+
   return {
     roomBookingHistoryRows,
     roomBookingHistoryColumns,
     filterData,
+    clearFilter,
     typeOptions,
     getColorByStatus,
     getTextByStatus,

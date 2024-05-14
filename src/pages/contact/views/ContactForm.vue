@@ -3,6 +3,7 @@ import { ref } from "vue";
 import { validators } from "src/utils";
 import { useDialog } from "src/composables";
 import { useToast } from "src/composables/useToast";
+import { useI18n } from "vue-i18n";
 
 const formData = ref({
   email: "",
@@ -14,20 +15,23 @@ const formData = ref({
 
 const { showDialog } = useDialog();
 const { showToast } = useToast();
+const { t } = useI18n();
 
 function onSubmit() {
   showDialog("confirm", {
-    message: "Are you sure send this message ?",
-  }).onOk(() => showToast("success", "Thanks you for your message"));
+    message: t("contact.messageDialog"),
+  }).onOk(() => showToast("success", t("contact.toastSuccess")));
 }
 </script>
 
 <template>
   <q-form method="post" @submit.prevent="onSubmit">
     <div class="q-mt-md">
-      <p class="text-weight-bold text-h5 text-grey-10">Leave your Message</p>
+      <p class="text-weight-bold text-h5 text-grey-10">
+        {{ t("contact.leaveYourMessage") }}
+      </p>
       <p class="text-weight-regular text-subtitle1 text-grey-8 q-my-md">
-        Contac us today using this form and we will reach you asap
+        {{ t("contact.descMessage") }}
       </p>
     </div>
     <div class="row q-col-gutter-md">
@@ -36,7 +40,7 @@ function onSubmit() {
           v-model="formData.email"
           outlined
           type="email"
-          placeholder="Email"
+          :label="t('contact.formLabel.email')"
           :rules="[validators.required, validators.email]"
         />
       </div>
@@ -45,7 +49,7 @@ function onSubmit() {
           v-model="formData.firstName"
           outlined
           type="text"
-          placeholder="First name"
+          :label="t('contact.formLabel.fistName')"
           :rules="[validators.required]"
         />
       </div>
@@ -54,7 +58,7 @@ function onSubmit() {
           v-model="formData.lasName"
           outlined
           type="text"
-          placeholder="Last name"
+          :label="t('contact.formLabel.lastName')"
           :rules="[validators.required]"
         />
       </div>
@@ -63,7 +67,7 @@ function onSubmit() {
           v-model="formData.phoneNumber"
           outlined
           type="text"
-          placeholder="Phone number"
+          :label="t('contact.formLabel.phoneNumber')"
           :rules="[validators.required]"
         />
       </div>
@@ -72,14 +76,14 @@ function onSubmit() {
           v-model="formData.message"
           outlined
           type="textarea"
-          placeholder="Message"
+          :label="t('contact.formLabel.message')"
           :rules="[validators.required]"
         />
       </div>
     </div>
     <q-btn
       type="submit"
-      label="Submit"
+      :label="t('contact.btnConfirm')"
       color="primary"
       size="lg"
       class="full-width q-mt-md"

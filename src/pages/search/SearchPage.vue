@@ -12,6 +12,7 @@ import InputBase from "components/input/InputBase.vue";
 import { debounce } from "lodash";
 import { useBranchStore } from "stores/branch-store";
 import { useLoading } from "src/composables";
+import { useI18n } from "vue-i18n";
 
 const router = useRouter();
 const route = useRoute();
@@ -30,9 +31,33 @@ const filterData = ref({
 
 const branchStore = useBranchStore();
 const { isLoading, hideLoading, showLoading } = useLoading();
+const { t } = useI18n();
 
 const roomBookingList = ref([]);
 const totalPage = ref(0);
+
+const inputProps = computed(() => {
+  return {
+    selectBranch: {
+      label: t("search.selectBranch"),
+    },
+    dateCheckIn: {
+      label: t("search.dateCheckIn"),
+    },
+    dateCheckOut: {
+      label: t("search.dateCheckOut"),
+    },
+    adultNumber: {
+      label: t("search.adultNumber"),
+    },
+    childNumber: {
+      label: t("search.childNumber"),
+    },
+    bedNumber: {
+      label: t("search.bedNumber"),
+    },
+  };
+});
 
 function onClickItem(item) {
   router.push(`${ROUTES_PATH.roomDetail}/${item.id}`);
@@ -87,51 +112,56 @@ watchEffect(async () => {
   <q-page class="bg-grey-2">
     <main-wrapper>
       <div class="search-picker q-pa-md bg-white">
-        <section-title center-title title="Search picker">
+        <section-title center-title :title="t('search.searchPicker')">
           <div class="row q-col-gutter-lg q-pa-md">
             <div class="col-md-4 col-xs-6">
-              <input-base label="Branch">
-                <q-select
-                  outlined
-                  v-model="filterData.branch"
-                  :options="branchStore.branchList"
-                  option-value="id"
-                  option-label="name"
-                  label="Select branch"
-                />
-              </input-base>
+              <q-select
+                outlined
+                v-model="filterData.branch"
+                :options="branchStore.branchList"
+                option-value="id"
+                option-label="name"
+                v-bind="inputProps.selectBranch"
+              />
             </div>
             <div class="col-md-4 col-xs-6">
               <input-date-picker
-                label="Check In"
                 v-model="filterData.dateCheckIn"
+                :inputProps="inputProps.dateCheckIn"
               />
             </div>
             <div class="col-md-4 col-xs-6">
               <input-date-picker
-                label="Check Out"
                 v-model="filterData.dateCheckOut"
+                :inputProps="inputProps.dateCheckOut"
               />
-            </div>
-            <div class="col-md-4 col-xs-6">
-              <input-counter label="Adults" v-model="filterData.adultNumber" />
             </div>
             <div class="col-md-4 col-xs-6">
               <input-counter
-                label="Childrens"
+                v-model="filterData.adultNumber"
+                :inputProps="inputProps.adultNumber"
+              />
+            </div>
+            <div class="col-md-4 col-xs-6">
+              <input-counter
+                :inputProps="inputProps.childNumber"
                 v-model="filterData.childrenNumber"
               />
             </div>
             <div class="col-md-4 col-xs-6">
-              <input-counter label="Bed rooms" v-model="filterData.bedNumber" />
+              <input-counter
+                label="Bed rooms"
+                v-model="filterData.bedNumber"
+                :inputProps="inputProps.bedNumber"
+              />
             </div>
           </div>
         </section-title>
       </div>
-      <section-title center-title title="Search result">
+      <section-title center-title :title="t('search.searchResult')">
         <div v-if="isLoading" class="flex column flex-center q-pa-md">
           <q-spinner-gears color="primary" size="100px" />
-          <p>Loading...</p>
+          <p>{{ t("search.searchLoading") }}</p>
         </div>
 
         <div v-else class="row q-gutter-lg">

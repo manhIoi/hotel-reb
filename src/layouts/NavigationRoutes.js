@@ -2,15 +2,15 @@ import { ROUTES_PATH } from "src/router/routes";
 
 export const navbarNavigationList = [
   {
-    title: "Branch",
+    title: "appHeader.navbarList.branch",
     link: "branch",
   },
   {
+    title: "appHeader.navbarList.search",
     link: "search",
-    title: "Search",
   },
   {
-    title: "Contact",
+    title: "appHeader.navbarList.contact",
     link: "contact",
   },
 ];

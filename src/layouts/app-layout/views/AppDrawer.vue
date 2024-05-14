@@ -4,12 +4,14 @@ import { ref, watch, watchEffect } from "vue";
 import { ROUTES_PATH } from "src/router/routes";
 import { useRoute, useRouter } from "vue-router";
 import { useUserStore } from "stores/user-store";
+import { useI18n } from "vue-i18n";
 
 const router = useRouter();
 const route = useRoute();
 const selectedDrawerItemIndex = ref(-1);
-const leftDrawerOpen = ref(false);
+const leftDrawerOpen = defineModel("leftDrawerOpen");
 const userStore = useUserStore();
+const { t } = useI18n();
 
 watchEffect(() => {
   selectedDrawerItemIndex.value = drawerNavigationList.findIndex((item) => {
@@ -52,7 +54,7 @@ function onClickLogout() {
     <div>
       <div class="flex justify-center items-center q-mt-sm">
         <p class="text-weight-bold text-body1 text-white">
-          Welcome, {{ userStore.user.fullName }}
+          {{ t("appDrawer.welcome", { fullName: userStore.user.fullName }) }}
         </p>
       </div>
     </div>
@@ -69,14 +71,14 @@ function onClickLogout() {
       @click="() => onClickNavItem(item)"
     >
       <p class="text-uppercase text-weight-bold text-overline q-mr-xs">
-        {{ item.title }}
+        {{ t(item.title) }}
       </p>
     </q-item>
     <q-btn
       v-if="userStore.isUserLogin"
       flat
       color="primary"
-      label="Logout"
+      :label="t('appDrawer.btnLogout')"
       icon="logout"
       class="text-weight-bolder flex-center full-width"
       size="md"

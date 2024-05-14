@@ -1,10 +1,16 @@
-<script setup></script>
+<script setup>
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
+</script>
 
 <template>
   <q-card flat class="column br-sm bg-primary text-white full-height">
     <q-card-section>
       <div class="text-h4 text-weight-medium">ROOMB</div>
-      <div class="text-subtitle2 text-weight-regular">Contact information</div>
+      <div class="text-subtitle2 text-weight-regular">
+        {{ t("contact.contactInformation") }}
+      </div>
       <div class="q-py-lg q-my-lg">
         <div class="row items-center q-mb-md">
           <q-icon name="fa-solid fa-envelope" size="24px" />

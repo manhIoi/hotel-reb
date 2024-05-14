@@ -31,22 +31,24 @@ const router = useRouter();
 const formInputProps = computed(() => {
   return {
     checkIn: {
+      label: "Date checkin",
       rules: [validators.required],
     },
     checkOut: {
+      label: "Date checkout",
       rules: [validators.required],
     },
     adults: {
-      placeholder: "Check In",
+      label: "Adult number",
       rules: [validators.required],
     },
     childrens: {
-      placeholder: "Check In",
       rules: [validators.required],
+      label: "Children number",
     },
     beds: {
-      placeholder: "Room Number",
       rules: [validators.required],
+      label: "Bed number",
     },
   };
 });
@@ -91,7 +93,7 @@ async function handleSubmit() {
           showToast("success", "Book room successfully submitted")
         );
       dialog.value = false;
-      router.push({ name: ROUTES_PATH.roomBookingHistory });
+      await router.push({ name: ROUTES_PATH.roomBookingHistory });
     }
   } catch (e) {
   } finally {
@@ -113,7 +115,6 @@ async function handleSubmit() {
         <div class="row q-col-gutter-lg">
           <div class="col-6">
             <input-date-picker
-              label="Check in"
               v-model="formData.dateCheckIn"
               :input-props="formInputProps.checkIn"
               :date-picker-props="datePickerProps.checkIn"
@@ -121,7 +122,6 @@ async function handleSubmit() {
           </div>
           <div class="col-6">
             <input-date-picker
-              label="Check out"
               v-model="formData.dateCheckOut"
               :input-props="formInputProps.checkOut"
               :date-picker-props="datePickerProps.checkOut"
@@ -149,14 +149,12 @@ async function handleSubmit() {
             />
           </div>
           <div class="col-12">
-            <input-base label="Message">
-              <q-input
-                outlined
-                v-model="formData.message"
-                type="textarea"
-                placeholder="Say something..."
-              />
-            </input-base>
+            <q-input
+              outlined
+              v-model="formData.message"
+              type="textarea"
+              label="Message"
+            />
           </div>
         </div>
       </q-card-section>

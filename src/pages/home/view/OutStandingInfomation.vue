@@ -1,7 +1,8 @@
 <script setup>
 import OutStandingItem from "pages/home/components/OutStandingItem.vue";
 import { ref } from "vue";
-
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
 const { slideImageList = [], outstandingList = [] } = defineProps({
   slideImageList: Array,
   outstandingList: Array,
@@ -15,14 +16,13 @@ const slide = ref(0);
     <div class="col-md-6 col-xs-12">
       <div class="fit flex items-center">
         <p class="text-primary text-weight-bold text-subtitle1 q-mb-lg">
-          Welcome to RoomB
+          {{ t("home.welcome") }}
         </p>
         <p class="text-weight-bold text-h3 q-mb-lg">
-          Our world is your playground.
+          {{ t("home.title") }}
         </p>
         <p class="text-h6 text-grey-8" style="line-height: 2.4rem">
-          Make yourself at home in our sophisticated guest rooms, take in the
-          incredible views and enjoy fresh air from our beautiful sea city.
+          {{ t("home.description") }}
         </p>
       </div>
     </div>

@@ -2,16 +2,18 @@
 import { ref } from "vue";
 import SectionTitle from "components/SectionTitle.vue";
 import CommentItem from "components/CommentItem.vue";
+import { useI18n } from "vue-i18n";
 
 const { commentList } = defineProps({
   commentList: Array,
 });
+const { t } = useI18n();
 
 const commentSlide = ref(0);
 </script>
 
 <template>
-  <section-title title="OUR GUESTS LOVE US" center-title>
+  <section-title :title="t('branch.ourGuestLoveUs')" center-title>
     <q-carousel
       v-model="commentSlide"
       transition-prev="slide-right"
