@@ -8,6 +8,18 @@ const enUS = {
     btnReservation: "Reservation",
     btnLogout: "Logout",
   },
+  appFooter: {
+    about: "About RoomB",
+    stayInTouch: "STAY IN TOUCH",
+    links: "USEFUL LINKS",
+    linkList: {
+      home: "Home",
+      branch: "Branch",
+      contact: "Contact",
+      search: "Search",
+    },
+    copyRight: "© 2022 RoomB Designed by p.manhloi",
+  },
   appDrawer: {
     search: "Search",
     branch: "Branch",

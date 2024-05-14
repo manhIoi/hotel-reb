@@ -6,6 +6,7 @@ import { storeToRefs } from "pinia";
 import { isEmpty } from "lodash";
 import AppHeader from "layouts/app-layout/views/AppHeader.vue";
 import AppDrawer from "layouts/app-layout/views/AppDrawer.vue";
+import AppFooter from "layouts/app-layout/views/AppFooter.vue";
 
 const router = useRouter();
 const leftDrawerOpen = ref(false);
@@ -46,14 +47,10 @@ onMounted(() => {
       <router-view />
     </q-page-container>
 
-    <q-footer class="footer q-pa-lg">
-      <div style="height: 300px"></div>
+    <q-footer>
+      <app-footer />
     </q-footer>
   </q-layout>
 </template>
 
-<style lang="css">
-.footer {
-  background-color: var(--footer-color);
-}
-</style>
+<style lang="css"></style>

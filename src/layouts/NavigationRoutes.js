@@ -50,3 +50,22 @@ export const profileNavigationList = [
     icon: "history",
   },
 ];
+
+export const footerNavigationList = [
+  {
+    title: "appFooter.linkList.home",
+    link: "home",
+  },
+  {
+    title: "appFooter.linkList.branch",
+    link: "branch",
+  },
+  {
+    title: "appFooter.linkList.contact",
+    link: "contact",
+  },
+  {
+    title: "appFooter.linkList.search",
+    link: "search",
+  },
+];

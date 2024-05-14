@@ -10,7 +10,7 @@ const { t } = useI18n();
 
 <template>
   <q-page class="bg-grey-2">
-    <main-wrapper>
+    <main-wrapper class="container">
       <section-title :title="t('contact.title')">
         <div class="bg-white q-pa-md br-md">
           <div class="row q-col-gutter-lg">
@@ -27,4 +27,8 @@ const { t } = useI18n();
   </q-page>
 </template>
 
-<style lang="css"></style>
+<style lang="css">
+.container {
+  padding-bottom: 80px;
+}
+</style>

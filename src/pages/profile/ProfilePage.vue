@@ -1,9 +1,7 @@
 <script setup>
 import MainWrapper from "layouts/MainWrapper.vue";
-import SectionTitle from "components/SectionTitle.vue";
-import { useQuasar } from "quasar";
 import { useUserStore } from "stores/user-store";
-import { computed, onMounted, ref } from "vue";
+import { ref } from "vue";
 import ProfileInformation from "pages/profile/views/ProfileInformation.vue";
 import ProfileDialogStack from "pages/profile/views/ProfileDialogStack.vue";
 const userStore = useUserStore();
@@ -19,7 +17,7 @@ const promptPassword = ref(false);
 
 <template>
   <q-page class="bg-grey-2">
-    <main-wrapper>
+    <main-wrapper class="container">
       <profile-information
         @update:fullName="promptFullName = true"
         @change:password="promptPassword = true"
@@ -33,4 +31,8 @@ const promptPassword = ref(false);
   </q-page>
 </template>
 
-<style scoped lang="css"></style>
+<style scoped lang="css">
+.container {
+  padding-bottom: 80px;
+}
+</style>
