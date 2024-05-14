@@ -54,6 +54,7 @@ const enUS = {
     ourGuestLoveUs: "Our guest love us",
   },
   contact: {
+    title: "Contact with RoomB",
     contactInformation: "Contact information",
     leaveYourMessage: "Leave your message",
     descMessage: "Contact us today using this form and we will reach you asap",

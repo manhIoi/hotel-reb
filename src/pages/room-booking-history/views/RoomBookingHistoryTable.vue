@@ -13,6 +13,7 @@ const {
   getTextByStatus,
   isLoading,
   clearFilter,
+  isFiltering,
 } = useRoomBookingHistoryTable();
 </script>
 
@@ -29,7 +30,12 @@ const {
         <q-inner-loading showing color="primary" />
       </template>
       <template v-slot:top>
-        <q-btn flat round color="primary" icon="filter_alt">
+        <q-btn
+          flat
+          round
+          :color="isFiltering ? 'primary' : 'grey-8'"
+          icon="filter_alt"
+        >
           <q-popup-proxy>
             <room-booking-history-filter-form
               :type-options="typeOptions"
@@ -38,6 +44,7 @@ const {
           </q-popup-proxy>
         </q-btn>
         <q-btn
+          v-if="isFiltering"
           outline
           label="Clear filter"
           color="primary"

@@ -19,6 +19,16 @@ export default function useRoomBookingHistoryTable() {
     bedNumber: 0,
     childrenNumber: 0,
   });
+
+  const isFiltering = computed(() => {
+    return (
+      filterData.value.type.status !== "" ||
+      filterData.value.adultNumber !== 0 ||
+      filterData.value.bedNumber !== 0 ||
+      filterData.value.childrenNumber !== 0
+    );
+  });
+
   const typeOptions = [
     { status: 0, name: "NEW" },
     { status: 1, name: "CHECK IN" },
@@ -159,5 +169,6 @@ export default function useRoomBookingHistoryTable() {
     getColorByStatus,
     getTextByStatus,
     isLoading,
+    isFiltering,
   };
 }
