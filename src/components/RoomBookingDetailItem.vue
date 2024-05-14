@@ -26,7 +26,7 @@ const { information } = bookingItem;
         <q-card-section>
           <div class="column items-start">
             <div
-              class="q-pa-sm row flex-center booking-item-content_btn text-primary q-mb-lg"
+              class="q-pa-sm row flex-center booking-item-content_btn text-primary q-mb-lg custom-shadow"
             >
               <p class="text-weight-bolder text-subtitle1 q-mr-xs">
                 ${{ bookingItem.amount }}
@@ -83,9 +83,5 @@ const { information } = bookingItem;
 .booking-item-content_btn {
   border-radius: 4px;
   border: 2px solid var(--primary-color);
-}
-
-.booking-item-container-wrapper {
-  padding: 0 !important;
 }
 </style>

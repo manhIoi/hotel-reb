@@ -20,18 +20,16 @@ function onClickRoomBookingItem(item) {
 <template>
   <SectionTitle :title="t('branch.ourFavoriteRoom')">
     <div class="row q-col-gutter-lg">
-      <q-intersection
+      <div
         v-for="item in roomBookingList"
         :key="`favorite_${item.id}`"
-        transition="scale"
         class="col-lg-4 col-md-6 col-xs-12"
-        once
       >
         <room-booking-compact-item
           :booking-item="item"
           @click-item="onClickRoomBookingItem"
         />
-      </q-intersection>
+      </div>
     </div>
   </SectionTitle>
 </template>

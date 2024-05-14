@@ -12,7 +12,7 @@ const { t } = useI18n();
   <q-page class="bg-grey-2">
     <main-wrapper class="container">
       <section-title :title="t('contact.title')">
-        <div class="bg-white q-pa-md br-md">
+        <div class="bg-white q-pa-lg br-md">
           <div class="row q-col-gutter-lg">
             <div class="col-sm-4 col-xs-12">
               <contact-card />

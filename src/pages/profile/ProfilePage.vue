@@ -17,7 +17,7 @@ const promptPassword = ref(false);
 
 <template>
   <q-page class="bg-grey-2">
-    <main-wrapper class="container">
+    <main-wrapper>
       <profile-information
         @update:fullName="promptFullName = true"
         @change:password="promptPassword = true"
@@ -31,8 +31,4 @@ const promptPassword = ref(false);
   </q-page>
 </template>
 
-<style scoped lang="css">
-.container {
-  padding-bottom: 80px;
-}
-</style>
+<style scoped lang="css"></style>

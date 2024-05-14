@@ -47,18 +47,20 @@ async function onSignIn() {
       </template>
       <q-input
         label="Email"
-        class="q-mb-sm"
+        class="q-mb-md"
         v-model="formData.email"
         outlined
         :rules="[validators.email, validators.required]"
+        hide-bottom-space
       />
       <q-input
         label="Password"
         v-model="formData.password"
         outlined
         type="password"
-        class="q-mb-sm"
+        class="q-mb-md"
         :rules="[validators.required]"
+        hide-bottom-space
       />
     </auth-form-container>
   </q-page>

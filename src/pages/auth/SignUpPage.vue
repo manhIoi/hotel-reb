@@ -41,7 +41,7 @@ async function onSignUp() {
         <p class="q-mb-md">
           Have an account?
           <RouterLink
-            :to="{ path: ROUTES_PATH.signUp }"
+            :to="{ path: ROUTES_PATH.signIn }"
             class="text-primary text-weight-bolder"
           >
             Sign In
@@ -50,24 +50,28 @@ async function onSignUp() {
       </template>
       <q-input
         label="Email"
-        class="q-mb-sm"
+        class="q-mb-md"
         v-model="formData.email"
         outlined
         :rules="[validators.required, validators.email]"
+        hide-bottom-space
       />
       <q-input
         label="Full Name"
-        class="q-mb-sm"
+        class="q-mb-md"
         v-model="formData.fullName"
         outlined
         :rules="[validators.required]"
+        hide-bottom-space
       />
       <q-input
         label="Password"
+        class="q-mb-md"
         v-model="formData.password"
         outlined
         type="password"
         :rules="[validators.required, validators.length(6)]"
+        hide-bottom-space
       >
         <template v-slot:error> Please use maximum 6 characters.</template>
       </q-input>
@@ -76,8 +80,9 @@ async function onSignUp() {
         v-model="formData.confirmPassword"
         outlined
         type="password"
-        class="q-mb-sm"
+        class="q-mb-md"
         :rules="[validators.matchPassword(formData.password)]"
+        hide-bottom-space
       />
     </auth-form-container>
   </q-page>

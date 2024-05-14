@@ -82,7 +82,7 @@ function onClickServiceItem(index) {
         />
       </div>
     </div>
-    <div style="padding: 60px 0">
+    <div class="q-mt-lg">
       <service-image-list
         :service="serviceCategoryList[selectedServiceIndex]"
       />

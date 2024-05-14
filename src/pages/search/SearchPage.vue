@@ -111,9 +111,9 @@ watchEffect(async () => {
 <template>
   <q-page class="bg-grey-2">
     <main-wrapper>
-      <div class="search-picker q-pa-md bg-white">
+      <div class="search-picker bg-white">
         <section-title center-title :title="t('search.searchPicker')">
-          <div class="row q-col-gutter-lg q-pa-md">
+          <div class="row q-col-gutter-lg q-px-md">
             <div class="col-md-4 col-xs-6">
               <q-select
                 outlined
@@ -161,33 +161,28 @@ watchEffect(async () => {
       <section-title center-title :title="t('search.searchResult')">
         <div v-if="isLoading" class="flex column flex-center q-pa-md">
           <q-spinner-gears color="primary" size="100px" />
-          <p>{{ t("search.searchLoading") }}</p>
+          <p class="q-mt-md">
+            {{ t("search.searchLoading") }}
+          </p>
         </div>
 
         <div v-else class="row q-gutter-lg">
-          <q-intersection
-            v-for="item in roomBookingList"
-            :key="item?.id"
-            transition="scale"
-            once
-          >
-            <div class="col-12">
-              <room-booking-detail-item
-                :booking-item="item"
-                @click-item="onClickItem"
-              />
-            </div>
-          </q-intersection>
+          <div class="col-12" v-for="item in roomBookingList" :key="item?.id">
+            <room-booking-detail-item
+              :booking-item="item"
+              @click-item="onClickItem"
+            />
+          </div>
+        </div>
+        <div class="flex flex-center q-mt-md">
+          <q-pagination
+            v-model="filterData.currentPage"
+            :max="totalPage"
+            :max-pages="5"
+            direction-links
+          />
         </div>
       </section-title>
-      <div class="q-pa-lg flex flex-center">
-        <q-pagination
-          v-model="filterData.currentPage"
-          :max="totalPage"
-          :max-pages="5"
-          direction-links
-        />
-      </div>
     </main-wrapper>
   </q-page>
 </template>

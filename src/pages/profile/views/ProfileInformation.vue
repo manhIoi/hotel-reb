@@ -40,12 +40,7 @@ const styles = computed(() => {
         <p style="flex: 1" class="q-my-md text-grey-8">
           {{ userStore.user.fullName }}
         </p>
-        <q-btn
-          color="primary"
-          class="self-start"
-          label="Edit"
-          @click="emits('update:fullName')"
-        />
+        <q-btn color="primary" label="Edit" @click="emits('update:fullName')" />
       </div>
       <q-separator class="q-my-lg" />
       <div :style="styles.containerField" class="q-mb-lg">
@@ -59,7 +54,6 @@ const styles = computed(() => {
         </p>
         <q-btn
           color="primary"
-          class="self-start"
           label="Change password"
           @click="emits('change:password')"
         />

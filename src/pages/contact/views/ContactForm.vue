@@ -26,14 +26,14 @@ function onSubmit() {
 
 <template>
   <q-form method="post" @submit.prevent="onSubmit">
-    <div class="q-mt-md">
-      <p class="text-weight-bold text-h5 text-grey-10">
-        {{ t("contact.leaveYourMessage") }}
-      </p>
-      <p class="text-weight-regular text-subtitle1 text-grey-8 q-my-md">
-        {{ t("contact.descMessage") }}
-      </p>
-    </div>
+    <q-item-label class="text-weight-bold text-h5 s">
+      {{ t("contact.leaveYourMessage") }}
+    </q-item-label>
+    <q-item-label
+      class="text-weight-regular text-subtitle1 text-grey-8 q-my-md"
+    >
+      {{ t("contact.descMessage") }}
+    </q-item-label>
     <div class="row q-col-gutter-md">
       <div class="col-sm-6 col-xs-12">
         <q-input
@@ -42,6 +42,7 @@ function onSubmit() {
           type="email"
           :label="t('contact.formLabel.email')"
           :rules="[validators.required, validators.email]"
+          hide-bottom-space
         />
       </div>
       <div class="col-sm-6 col-xs-12">
@@ -51,6 +52,7 @@ function onSubmit() {
           type="text"
           :label="t('contact.formLabel.fistName')"
           :rules="[validators.required]"
+          hide-bottom-space
         />
       </div>
       <div class="col-sm-6 col-xs-12">
@@ -60,6 +62,7 @@ function onSubmit() {
           type="text"
           :label="t('contact.formLabel.lastName')"
           :rules="[validators.required]"
+          hide-bottom-space
         />
       </div>
       <div class="col-sm-6 col-xs-12">
@@ -69,6 +72,7 @@ function onSubmit() {
           type="text"
           :label="t('contact.formLabel.phoneNumber')"
           :rules="[validators.required]"
+          hide-bottom-space
         />
       </div>
       <div class="col-sm-6 col-xs-12">
@@ -78,6 +82,7 @@ function onSubmit() {
           type="textarea"
           :label="t('contact.formLabel.message')"
           :rules="[validators.required]"
+          hide-bottom-space
         />
       </div>
     </div>
@@ -85,7 +90,6 @@ function onSubmit() {
       type="submit"
       :label="t('contact.btnConfirm')"
       color="primary"
-      size="lg"
       class="full-width q-mt-md"
     />
   </q-form>

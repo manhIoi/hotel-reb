@@ -24,7 +24,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <q-layout class="bg-amber">
+  <q-layout>
     <div class="container">
       <div class="row fit">
         <div class="col-md-4 col-xs-0">

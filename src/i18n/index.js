@@ -59,6 +59,7 @@ const enUS = {
     adultNumber: "Adult Number",
     childNumber: "Child Number",
     bedNumber: "Bed Number",
+    searchLoading: "Loading rooms ...",
   },
   branch: {
     ourFavoriteRoom: "Our favorite rooms",
@@ -71,7 +72,7 @@ const enUS = {
     leaveYourMessage: "Leave your message",
     descMessage: "Contact us today using this form and we will reach you asap",
     formLabel: {
-      email: "email",
+      email: "Email",
       fistName: "Fist name",
       lastName: "Last name",
       phoneNumber: "Phone number",

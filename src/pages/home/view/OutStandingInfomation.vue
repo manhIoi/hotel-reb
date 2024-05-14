@@ -45,7 +45,7 @@ const slide = ref(0);
       </q-carousel>
     </div>
   </div>
-  <div class="row q-ma-lg">
+  <div class="row">
     <div
       v-for="(item, index) in outstandingList"
       :key="`${item.title}_${index}`"

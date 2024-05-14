@@ -7,28 +7,34 @@ const { t } = useI18n();
 <template>
   <q-card flat class="column br-sm bg-primary text-white full-height">
     <q-card-section>
-      <div class="text-h4 text-weight-medium">ROOMB</div>
-      <div class="text-subtitle2 text-weight-regular">
+      <q-item-label class="text-h4 text-weight-medium">ROOMB</q-item-label>
+      <q-item-label class="text-subtitle2 text-weight-regular">
         {{ t("contact.contactInformation") }}
-      </div>
+      </q-item-label>
       <div class="q-py-lg q-my-lg">
         <div class="row items-center q-mb-md">
           <q-icon name="fa-solid fa-envelope" size="24px" />
-          <p class="text-subtitle1 text-white q-ml-sm text-weight-regular">
+          <q-item-label
+            class="text-subtitle1 text-white q-ml-sm text-weight-regular"
+          >
             roomb@gmail.com
-          </p>
+          </q-item-label>
         </div>
         <div class="row items-center q-mb-md">
           <q-icon name="fa-solid fa-phone" size="24px" />
-          <p class="text-subtitle1 text-white q-ml-sm text-weight-regular">
+          <q-item-label
+            class="text-subtitle1 text-white q-ml-sm text-weight-regular"
+          >
             +8412345677
-          </p>
+          </q-item-label>
         </div>
         <div class="row items-center">
           <q-icon name="fa-solid fa-location-dot" size="24px" />
-          <p class="text-subtitle1 text-white q-ml-sm text-weight-regular">
+          <q-item-label
+            class="text-subtitle1 text-white q-ml-sm text-weight-regular"
+          >
             189 Thai Phien Street, Ho Chi Minh City
-          </p>
+          </q-item-label>
         </div>
       </div>
     </q-card-section>
