@@ -18,15 +18,11 @@ const numOfItemInRow = computed(() => {
 });
 
 const _roomList = computed(() => {
-  let tmp = [];
-  return roomList.reduce((current, item, index) => {
-    tmp.push(item);
-    if (tmp.length === numOfItemInRow.value) {
-      current.push(tmp);
-      tmp = [];
-    }
-    return current;
-  }, []);
+  const result = [];
+  for (let i = 0; i < roomList.length; i += numOfItemInRow.value) {
+    result.push(roomList.slice(i, i + numOfItemInRow.value));
+  }
+  return result;
 });
 
 function onClickOtherRoom(item) {
