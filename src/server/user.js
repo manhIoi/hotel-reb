@@ -5,5 +5,6 @@ export function generateUser(username, fullName, password) {
     token: faker.string.uuid(),
     username,
     fullName,
+    password,
   };
 }

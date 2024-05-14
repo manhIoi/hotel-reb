@@ -11,7 +11,10 @@ export default function useRoomBookingHistoryTable() {
   const roomBookingHistoryList = ref([]);
   const { showLoading, hideLoading, isLoading } = useLoading(true);
   const filterData = ref({
-    type: null,
+    type: {
+      status: "",
+      name: "",
+    },
     adultNumber: 0,
     bedNumber: 0,
     childrenNumber: 0,
@@ -101,7 +104,7 @@ export default function useRoomBookingHistoryTable() {
       router.replace({
         query: {
           ...filterData.value,
-          type: filterData.value.type?.status || "",
+          type: filterData.value.type?.status,
         },
       });
     }, 1000)();
@@ -138,7 +141,10 @@ export default function useRoomBookingHistoryTable() {
   }
 
   function clearFilter() {
-    filterData.value.type = null;
+    filterData.value.type = {
+      status: "",
+      name: "",
+    };
     filterData.value.adultNumber = 0;
     filterData.value.bedNumber = 0;
     filterData.value.childrenNumber = 0;

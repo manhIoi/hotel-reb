@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { generatePlaceNearByList } from "src/server/place";
-import { generateRoomBookingList, roomImages } from "src/server/room-booking";
+import { roomImages } from "src/server/room-booking";
 import { generateCommentList } from "src/server/comment";
 
 export function generateHomeData(branchList, roomBookingList) {

@@ -14,12 +14,40 @@ import {
 
 class MockApi {
   constructor() {
-    this.branchList = generateBranchList(5);
-    this.roomList = generateRoomBookingList(150, this.branchList);
-    this.placeNearbyList = generatePlaceNearByList(20);
-    this.historyBookingList = generateRoomBookingHistoryList(20, this.roomList);
-    this.user = generateUser("admin@gmail.com", "admin", "123456");
-    this.user.password = "123456";
+    const KEYS = {
+      branchList: "api_branch_list",
+      roomList: "api_room_list",
+      placeNearbyList: "api_place_nearby_list",
+      historyBookingList: "api_history_booking_list",
+      user: "api_user",
+    };
+
+    const getDataByKey = (key, defaultData) => {
+      const result = localStorage.getItem(key);
+      if (!result) {
+        localStorage.setItem(key, JSON.stringify(defaultData));
+        return defaultData;
+      }
+      return JSON.parse(result);
+    };
+
+    this.branchList = getDataByKey(KEYS.branchList, generateBranchList(5));
+    this.roomList = getDataByKey(
+      KEYS.roomList,
+      generateRoomBookingList(150, this.branchList)
+    );
+    this.placeNearbyList = getDataByKey(
+      KEYS.placeNearbyList,
+      generatePlaceNearByList(20)
+    );
+    this.historyBookingList = getDataByKey(
+      KEYS.historyBookingList,
+      generateRoomBookingHistoryList(20, this.roomList)
+    );
+    this.user = getDataByKey(
+      KEYS.user,
+      generateUser("admin@gmail.com", "admin", "123456")
+    );
   }
 
   formatResponse(data) {
@@ -42,14 +70,6 @@ class MockApi {
     return new Promise((resolve) => {
       delay(() => {
         resolve(this.formatResponse(this.branchList));
-      }, 500);
-    });
-  }
-
-  getHomeRoomList() {
-    return new Promise((resolve) => {
-      delay(() => {
-        resolve(this.roomList.slice(0, 6));
       }, 500);
     });
   }
