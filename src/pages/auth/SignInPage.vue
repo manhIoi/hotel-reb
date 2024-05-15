@@ -6,9 +6,11 @@ import { ROUTES_PATH } from "src/router/routes";
 import { useUserStore } from "stores/user-store";
 import server from "src/server";
 import { useToast } from "src/composables";
+import { useI18n } from "vue-i18n";
 
 const userStore = useUserStore();
 const { showToast } = useToast();
+const { t } = useI18n();
 
 const formData = ref({
   email: "",
@@ -33,20 +35,24 @@ async function onSignIn() {
 
 <template>
   <q-page class="flex flex-center">
-    <auth-form-container title="Sign In" btn-title="Sign Up" @submit="onSignIn">
+    <auth-form-container
+      :title="t('auth.signIn')"
+      :btn-title="t('auth.formBtn.signIn')"
+      @submit="onSignIn"
+    >
       <template #header>
         <p class="q-mb-md">
-          New to RoomB?
+          {{ t("auth.labelSignIn") }}
           <RouterLink
             :to="{ path: ROUTES_PATH.signUp }"
             class="text-primary text-weight-bolder"
           >
-            Sign Up
+            {{ t("auth.labelLinkSignUp") }}
           </RouterLink>
         </p>
       </template>
       <q-input
-        label="Email"
+        :label="t('auth.formLabel.email')"
         class="q-mb-md"
         v-model="formData.email"
         outlined
@@ -54,7 +60,7 @@ async function onSignIn() {
         hide-bottom-space
       />
       <q-input
-        label="Password"
+        :label="t('auth.formLabel.password')"
         v-model="formData.password"
         outlined
         type="password"

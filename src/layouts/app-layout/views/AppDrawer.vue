@@ -1,6 +1,6 @@
 <script setup>
 import { drawerNavigationList } from "layouts/NavigationRoutes";
-import { ref, watch, watchEffect } from "vue";
+import { ref, watchEffect } from "vue";
 import { ROUTES_PATH } from "src/router/routes";
 import { useRoute, useRouter } from "vue-router";
 import { useUserStore } from "stores/user-store";

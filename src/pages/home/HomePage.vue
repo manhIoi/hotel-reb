@@ -1,8 +1,7 @@
 <script setup>
 import { useI18n } from "vue-i18n";
-import { computed, onMounted, ref, watch } from "vue";
+import { onMounted, ref } from "vue";
 import MainWrapper from "layouts/MainWrapper.vue";
-import SectionTitle from "components/SectionTitle.vue";
 import OutStandingInfomation from "pages/home/view/OutStandingInfomation.vue";
 import FavoritveRoomList from "pages/home/view/FavoritveRoomList.vue";
 import RecommendPlaceNearbyList from "pages/home/view/RecommendPlaceNearbyList.vue";

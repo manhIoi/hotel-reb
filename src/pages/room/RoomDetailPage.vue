@@ -1,13 +1,8 @@
 <script setup>
 import MainWrapper from "layouts/MainWrapper.vue";
 import { useRoute, useRouter } from "vue-router";
-import SectionTitle from "components/SectionTitle.vue";
-import { computed, onMounted, ref, watchEffect } from "vue";
+import { onMounted, ref, watch } from "vue";
 import RoomDetailBookingForm from "pages/room/views/RoomDetailBookingForm.vue";
-import server, {
-  generateRoomBooking,
-  generateRoomBookingList,
-} from "src/server";
 import RoomDetailImageList from "pages/room/views/RoomDetailImageList.vue";
 import RoomDetailInformation from "pages/room/views/RoomDetailInformation.vue";
 import RoomDetailSuggestList from "pages/room/views/RoomDetailSuggestList.vue";
@@ -19,23 +14,31 @@ const router = useRouter();
 const route = useRoute();
 
 const roomData = ref(null);
-const { hideLoading, showLoading, isLoading } = useLoading(true);
-
-watchEffect(async () => {
-  if (route.params?.id) {
-    try {
-      showLoading();
-      const response = await server.getRoomBookingDetail(route.params?.id);
-      roomData.value = response.data;
-    } catch (e) {
-    } finally {
-      hideLoading();
-    }
-  }
-});
-
 const dialogBooking = ref(false);
 const fabRight = ref(false);
+const { hideLoading, showLoading, isLoading } = useLoading(true);
+
+onMounted(() => {
+  loadDetailData();
+});
+
+watch(
+  () => route.query,
+  () => {
+    loadDetailData();
+  }
+);
+
+async function loadDetailData() {
+  try {
+    showLoading();
+    const response = await server.getRoomBookingDetail(route.params?.id);
+    roomData.value = response.data;
+  } catch (e) {
+  } finally {
+    hideLoading();
+  }
+}
 </script>
 
 <template>

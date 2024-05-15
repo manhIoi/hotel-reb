@@ -1,7 +1,7 @@
-import { computed, onMounted, ref, watch, watchEffect } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import server from "src/server";
 import { formatDate, formatMoney } from "src/utils";
-import { debounce, isEmpty } from "lodash";
+import { debounce } from "lodash";
 import { useRoute, useRouter } from "vue-router";
 import { useLoading } from "src/composables";
 
@@ -99,15 +99,33 @@ export default function useRoomBookingHistoryTable() {
     });
   });
 
-  onMounted(async () => {
+  async function getRoomBookingHistoryData() {
     try {
-      const response = await server.getRoomBookingHistory();
+      showLoading();
+      const response = await server.getRoomBookingHistory(route.query);
       roomBookingHistoryList.value = response.data;
     } catch (e) {
     } finally {
       hideLoading();
     }
+  }
+
+  onMounted(() => {
+    getRoomBookingHistoryData();
   });
+
+  watch(
+    () => route.query,
+    () => {
+      filterData.value.type = typeOptions?.find?.(
+        (item) => item?.status === parseInt(route.query?.type)
+      ) || {
+        status: "",
+        name: "",
+      };
+      getRoomBookingHistoryData();
+    }
+  );
 
   watch(filterData.value, () => {
     debounce(() => {
@@ -118,26 +136,6 @@ export default function useRoomBookingHistoryTable() {
         },
       });
     }, 1000)();
-  });
-
-  watchEffect(async () => {
-    if (!isEmpty(route.query)) {
-      const { type } = route.query;
-      filterData.value.type = typeOptions?.find?.(
-        (item) => item?.status === parseInt(type)
-      ) || {
-        status: "",
-        name: "",
-      };
-      try {
-        showLoading();
-        const response = await server.getRoomBookingHistory(route.query);
-        roomBookingHistoryList.value = response.data;
-      } catch (e) {
-      } finally {
-        hideLoading();
-      }
-    }
   });
 
   function getColorByStatus(status) {

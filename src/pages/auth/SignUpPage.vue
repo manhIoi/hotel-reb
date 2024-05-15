@@ -6,9 +6,11 @@ import { useUserStore } from "stores/user-store";
 import server from "src/server";
 import { useToast } from "src/composables";
 import { ROUTES_PATH } from "src/router/routes";
+import { useI18n } from "vue-i18n";
 
 const userStore = useUserStore();
 const { showToast } = useToast();
+const { t } = useI18n();
 
 const formData = ref({
   email: "",
@@ -36,20 +38,24 @@ async function onSignUp() {
 
 <template>
   <q-page class="flex flex-center">
-    <auth-form-container title="Sign Up" btn-title="Sign Up" @submit="onSignUp">
+    <auth-form-container
+      :title="t('auth.signUp')"
+      :btn-title="t('auth.formBtn.signUp')"
+      @submit="onSignUp"
+    >
       <template #header>
         <p class="q-mb-md">
-          Have an account?
+          {{ t("auth.labelSignUp") }}
           <RouterLink
             :to="{ path: ROUTES_PATH.signIn }"
             class="text-primary text-weight-bolder"
           >
-            Sign In
+            {{ t("auth.labelLinkSignIn") }}
           </RouterLink>
         </p>
       </template>
       <q-input
-        label="Email"
+        :label="t('auth.formLabel.email')"
         class="q-mb-md"
         v-model="formData.email"
         outlined
@@ -57,7 +63,7 @@ async function onSignUp() {
         hide-bottom-space
       />
       <q-input
-        label="Full Name"
+        :label="t('auth.formLabel.fullName')"
         class="q-mb-md"
         v-model="formData.fullName"
         outlined
@@ -65,7 +71,7 @@ async function onSignUp() {
         hide-bottom-space
       />
       <q-input
-        label="Password"
+        :label="t('auth.formLabel.password')"
         class="q-mb-md"
         v-model="formData.password"
         outlined
@@ -76,7 +82,7 @@ async function onSignUp() {
         <template v-slot:error> Please use maximum 6 characters.</template>
       </q-input>
       <q-input
-        label="Confirm password"
+        :label="t('auth.formLabel.confirmPassword')"
         v-model="formData.confirmPassword"
         outlined
         type="password"

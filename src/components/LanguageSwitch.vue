@@ -1,39 +1,34 @@
 <script setup>
-import { useQuasar } from "quasar";
-import languages from "quasar/lang/index.json";
-import { ref, watch } from "vue";
+import { useI18n } from "vue-i18n";
+import { computed, ref, watch } from "vue";
 
-const appLanguages = languages.filter((lang) =>
-  ["de", "en-US"].includes(lang.isoName)
-);
+const localesName = {
+  "en-US": "English",
+  vi: "Vietnamese",
+};
+const { locale, availableLocales } = useI18n({
+  useScope: "global",
+});
+const lang = ref({ name: localesName[locale.value], locale: locale.value });
+const _localesOptions = computed(() => {
+  return availableLocales.map((locale) => ({
+    name: localesName[locale],
+    locale,
+  }));
+});
 
-const langOptions = appLanguages.map((lang) => ({
-  label: lang.nativeName,
-  value: lang.isoName,
-}));
-
-const $q = useQuasar();
-const lang = ref($q.lang.isoName);
-
-watch(lang, (val) => {
-  // dynamic import, so loading on demand only
-  import(
-    /* webpackInclude: /(de|en-US)\.js$/ */
-    "quasar/lang/" + val
-  ).then((lang) => {
-    $q.lang.set(lang.default);
-  });
+watch(lang, () => {
+  locale.value = lang.value.locale;
 });
 </script>
 
 <template>
   <q-select
     v-model="lang"
-    :options="langOptions"
-    dense
+    :options="_localesOptions"
+    option-value="locale"
+    option-label="name"
     borderless
-    emit-value
-    map-options
     options-dense
     style="min-width: 150px"
   />

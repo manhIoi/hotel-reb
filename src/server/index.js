@@ -165,6 +165,17 @@ class MockApi {
     });
   }
 
+  getRoomBookingHistoryNew() {
+    return new Promise((resolve) => {
+      delay(() => {
+        const result = this.historyBookingList.filter(
+          (item) => item.status === 0
+        );
+        resolve(this.formatResponse(result));
+      }, 1000);
+    });
+  }
+
   getRoomBookingHistory(params) {
     const adultNumber = parseInt(params?.adultNumber || 0);
     const childrenNumber = parseInt(params?.childrenNumber || 0);

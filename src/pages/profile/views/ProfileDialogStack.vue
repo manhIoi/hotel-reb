@@ -52,6 +52,7 @@ function onSubmitChangePassword() {}
             v-model="formData.fullName"
             autofocus
             :rules="[validators.required]"
+            hide-bottom-space
           />
         </q-card-section>
 
@@ -77,6 +78,7 @@ function onSubmitChangePassword() {}
             class="q-mb-md"
             type="password"
             :rules="[validators.required, validators.length(6)]"
+            hide-bottom-space
           />
           <q-input
             label="New password"
@@ -85,6 +87,7 @@ function onSubmitChangePassword() {}
             type="password"
             v-model="formData.newPassword"
             :rules="[validators.required, validators.length(6)]"
+            hide-bottom-space
           />
         </q-card-section>
 

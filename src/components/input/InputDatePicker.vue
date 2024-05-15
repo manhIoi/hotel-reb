@@ -9,6 +9,10 @@ const model = defineModel({
   type: true,
   required: true,
 });
+
+function clear() {
+  model.value = "";
+}
 </script>
 
 <template>
@@ -19,7 +23,7 @@ const model = defineModel({
     mask="date"
     v-bind="inputProps"
   >
-    <template v-slot:append>
+    <template v-slot:prepend>
       <q-icon name="event" class="cursor-pointer">
         <q-popup-proxy cover transition-show="scale" transition-hide="scale">
           <q-date v-model="model" v-bind="datePickerProps">
@@ -29,6 +33,9 @@ const model = defineModel({
           </q-date>
         </q-popup-proxy>
       </q-icon>
+    </template>
+    <template v-if="model" v-slot:append>
+      <q-icon name="close" @click="clear" class="cursor-pointer" />
     </template>
   </q-input>
 </template>
