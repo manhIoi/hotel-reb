@@ -175,9 +175,9 @@ watch(
       <section-title center-title :title="t('search.searchResult')">
         <div v-if="isLoading" class="flex column flex-center q-pa-md">
           <q-spinner-gears color="primary" size="100px" />
-          <p class="q-mt-md">
+          <q-item-label class="q-mt-md">
             {{ t("search.searchLoading") }}
-          </p>
+          </q-item-label>
         </div>
 
         <div v-else class="row q-gutter-lg">

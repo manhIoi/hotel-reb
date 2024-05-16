@@ -12,12 +12,14 @@ const { nearbyItem } = defineProps({
     >
       <q-img :src="nearbyItem.image" class="full-width full-height" />
       <div class="absolute-bottom column q-pa-sm card-info q-ma-sm">
-        <p class="text-body1 text-weight-medium text-white text-no-wrap">
+        <q-item-label
+          class="text-body1 text-weight-medium text-white text-no-wrap"
+        >
           {{ nearbyItem.name }}
-        </p>
-        <p class="text-subtitle2 text-weight-bolder text-primary">
+        </q-item-label>
+        <q-item-label class="text-subtitle2 text-weight-bolder text-primary">
           {{ nearbyItem.distance }}m
-        </p>
+        </q-item-label>
         <div class="overlay"></div>
       </div>
     </q-card>

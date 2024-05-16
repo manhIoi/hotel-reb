@@ -5,7 +5,9 @@ const { label } = defineProps(InputBaseProps);
 </script>
 
 <template>
-  <p v-if="label" class="q-mb-sm text-weight-medium text-body1">{{ label }}</p>
+  <q-item-label v-if="label" class="q-mb-sm text-weight-medium text-body1">
+    {{ label }}
+  </q-item-label>
   <slot />
 </template>
 

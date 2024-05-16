@@ -60,7 +60,9 @@ function events(date) {
   <div class="row q-col-gutter-lg">
     <div class="col-md-6 col-xs-12">
       <section-title title="Overview">
-        <p class="text-subtitle1 text-gey-9">{{ room.description }}</p>
+        <q-item-label class="text-subtitle1 text-gey-9">
+          {{ room.description }}
+        </q-item-label>
       </section-title>
       <section-title title="Free Amenities">
         <div class="row q-col-gutter-lg">

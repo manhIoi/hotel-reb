@@ -10,32 +10,38 @@ const { t } = useI18n();
   <main-wrapper class="footer">
     <div class="row q-col-gutter-lg">
       <div class="col-md-4 col-xs-12">
-        <p class="text-weight-bolder text-h6 q-mb-md">
+        <q-item-label class="text-weight-bolder text-h6 q-mb-md">
           {{ t("appFooter.about") }}
-        </p>
+        </q-item-label>
         <div class="row items-center q-mb-md">
           <q-icon name="fa-solid fa-envelope" size="24px" />
-          <p class="text-subtitle1 text-white q-ml-sm text-weight-regular">
+          <q-item-label
+            class="text-subtitle1 text-white q-ml-sm text-weight-regular"
+          >
             roomb@gmail.com
-          </p>
+          </q-item-label>
         </div>
         <div class="row items-center q-mb-md">
           <q-icon name="fa-solid fa-phone" size="24px" />
-          <p class="text-subtitle1 text-white q-ml-sm text-weight-regular">
+          <q-item-label
+            class="text-subtitle1 text-white q-ml-sm text-weight-regular"
+          >
             +8412345677
-          </p>
+          </q-item-label>
         </div>
         <div class="row items-center">
           <q-icon name="fa-solid fa-location-dot" size="24px" />
-          <p class="text-subtitle1 text-white q-ml-sm text-weight-regular">
+          <q-item-label
+            class="text-subtitle1 text-white q-ml-sm text-weight-regular"
+          >
             189 Thai Phien Street, Ho Chi Minh City
-          </p>
+          </q-item-label>
         </div>
       </div>
       <div class="col-md-4 col-xs-12">
-        <p class="text-weight-bolder text-h6 q-mb-md">
+        <q-item-label class="text-weight-bolder text-h6 q-mb-md">
           {{ t("appFooter.stayInTouch") }}
-        </p>
+        </q-item-label>
         <div class="row">
           <q-btn size="lg" flat icon="fa-brands fa-facebook" />
           <q-btn size="lg" flat icon="fa-brands fa-instagram" />
@@ -43,9 +49,9 @@ const { t } = useI18n();
         </div>
       </div>
       <div class="col-md-4 col-xs-12">
-        <p class="text-weight-bolder text-h6 q-mb-md">
+        <q-item-label class="text-weight-bolder text-h6 q-mb-md">
           {{ t("appFooter.links") }}
-        </p>
+        </q-item-label>
         <div class="flex full-width">
           <div
             v-for="item in footerNavigationList"
@@ -60,7 +66,7 @@ const { t } = useI18n();
       </div>
     </div>
     <q-separator class="q-my-lg" color="grey-8" />
-    <p>{{ t("appFooter.copyRight") }}</p>
+    <q-item-label>{{ t("appFooter.copyRight") }}</q-item-label>
   </main-wrapper>
 </template>
 

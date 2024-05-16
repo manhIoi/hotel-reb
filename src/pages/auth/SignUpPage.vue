@@ -44,7 +44,7 @@ async function onSignUp() {
       @submit="onSignUp"
     >
       <template #header>
-        <p class="q-mb-md">
+        <q-item-label class="q-mb-md">
           {{ t("auth.labelSignUp") }}
           <RouterLink
             :to="{ path: ROUTES_PATH.signIn }"
@@ -52,7 +52,7 @@ async function onSignUp() {
           >
             {{ t("auth.labelLinkSignIn") }}
           </RouterLink>
-        </p>
+        </q-item-label>
       </template>
       <q-input
         :label="t('auth.formLabel.email')"

@@ -19,6 +19,7 @@ function clear() {
   <q-input
     placeholder="dd/mm/yyyy"
     outlined
+    readonly
     v-model="model"
     mask="date"
     v-bind="inputProps"

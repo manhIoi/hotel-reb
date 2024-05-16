@@ -10,9 +10,12 @@ const { room } = defineProps({
       <q-img :src="room.images[0]" />
     </template>
 
-    <p class="text-white text-h2 text-weight-medium" style="z-index: 2">
+    <q-item-label
+      class="text-white text-h2 text-weight-medium"
+      style="z-index: 2"
+    >
       {{ room.name }}
-    </p>
+    </q-item-label>
     <div class="overlay" />
   </q-parallax>
 </template>

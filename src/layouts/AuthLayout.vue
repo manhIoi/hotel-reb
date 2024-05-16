@@ -35,9 +35,9 @@ onMounted(() => {
               src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg"
             />
             <h2 class="text-weight-bolder q-mb-md">RoomB</h2>
-            <p class="text-body1 text-weight-medium">
+            <q-item-label class="text-body1 text-weight-medium">
               Booking your room becomes easy
-            </p>
+            </q-item-label>
           </div>
         </div>
         <div class="col-md-8 col-xs-12 bg-white">

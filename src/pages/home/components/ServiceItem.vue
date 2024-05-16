@@ -11,8 +11,8 @@ const { service } = defineProps({
       :name="service.icon"
       :style="{ color: service.color }"
     />
-    <p class="text-subtitle1">{{ service.title }}</p>
-    <p class="text-grey-8">{{ service.desc }}</p>
+    <q-item-label class="text-subtitle1"> {{ service.title }}</q-item-label>
+    <q-item-label class="text-grey-8"> {{ service.desc }}</q-item-label>
   </div>
 </template>
 

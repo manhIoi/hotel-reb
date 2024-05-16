@@ -22,9 +22,9 @@ const _title = title.toUpperCase();
         centerTitle ? 'justify-center' : 'justify-between',
       ]"
     >
-      <p class="text-h4 text-weight-bold text-grey-9 title">
+      <q-item-label class="text-h4 text-weight-bold text-grey-9 title">
         {{ _title }}
-      </p>
+      </q-item-label>
       <slot name="right-title" />
     </div>
     <slot />

@@ -9,6 +9,7 @@ import RoomDetailSuggestList from "pages/room/views/RoomDetailSuggestList.vue";
 import RoomDetailHeader from "pages/room/views/RoomDetailHeader.vue";
 import SectionTitleSkeleton from "components/skeleton/SectionTitleSkeleton.vue";
 import { useLoading } from "src/composables";
+import server from "src/server";
 
 const router = useRouter();
 const route = useRoute();

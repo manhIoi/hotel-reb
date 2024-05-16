@@ -105,7 +105,7 @@ async function handleSubmit() {
 <template>
   <q-card>
     <q-card-section>
-      <p class="text-weight-bold">Book now</p>
+      <q-item-label class="text-weight-bold">Book now</q-item-label>
     </q-card-section>
 
     <q-separator />

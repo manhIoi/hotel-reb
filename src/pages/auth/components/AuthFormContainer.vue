@@ -8,7 +8,9 @@ const emit = defineEmits(["submit"]);
 
 <template>
   <div class="container">
-    <p class="text-weight-bolder text-h4 q-mb-md">{{ title }}</p>
+    <q-item-label class="text-weight-bolder text-h4 q-mb-md">
+      {{ title }}
+    </q-item-label>
     <slot name="header" />
     <q-form method="post" @submit.prevent="emit('submit')">
       <slot />

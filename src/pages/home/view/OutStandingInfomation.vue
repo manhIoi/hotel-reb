@@ -15,15 +15,17 @@ const slide = ref(0);
   <div class="row q-col-gutter-lg">
     <div class="col-md-6 col-xs-12">
       <div class="fit flex items-center">
-        <p class="text-primary text-weight-bold text-subtitle1 q-mb-lg">
+        <q-item-label
+          class="text-primary text-weight-bold text-subtitle1 q-mb-lg"
+        >
           {{ t("home.welcome") }}
-        </p>
-        <p class="text-weight-bold text-h3 q-mb-lg">
+        </q-item-label>
+        <q-item-label class="text-weight-bold text-h3 q-mb-lg">
           {{ t("home.title") }}
-        </p>
-        <p class="text-h6 text-grey-8" style="line-height: 2.4rem">
+        </q-item-label>
+        <q-item-label class="text-h6 text-grey-8" style="line-height: 2.4rem">
           {{ t("home.description") }}
-        </p>
+        </q-item-label>
       </div>
     </div>
     <div class="col-md-6 col-xs-12">

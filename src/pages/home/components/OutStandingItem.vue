@@ -24,13 +24,15 @@ onMounted(() => {
 
 <template>
   <div class="q-pa-lg custom-shadow bg-white column flex-center br-md shadow-3">
-    <p
+    <q-item-label
       class="text-h3 text-weight-bold text-primary"
       :style="{ animation: `count ${2}s ease-in-out` }"
     >
       {{ counterValue }}+
-    </p>
-    <p class="text-subtitle1 text-weight-medium text-grey-7">{{ _title }}</p>
+    </q-item-label>
+    <q-item-label class="text-subtitle1 text-weight-medium text-grey-7">
+      {{ _title }}
+    </q-item-label>
   </div>
 </template>
 

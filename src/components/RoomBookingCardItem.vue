@@ -15,21 +15,21 @@ const background = bookingItem.images[0];
     <q-img :src="background" class="full-width full-height">
       <div class="absolute-top-left q-pa-md bg-transparent">
         <div class="bg-white br-xs">
-          <p class="text-weight-medium text-primary q-px-md q-py-sm">
+          <q-item-label class="text-weight-medium text-primary q-px-md q-py-sm">
             ${{ bookingItem.amount }}/night
-          </p>
+          </q-item-label>
         </div>
       </div>
       <div class="card-info absolute-bottom text-subtitle2">
-        <p class="text-weight-medium text-white text-h6">
+        <q-item-label class="text-weight-medium text-white text-h6">
           {{ bookingItem.name }}
-        </p>
+        </q-item-label>
         <div class="row flex wrap">
           <div class="row flex-center q-mr-sm">
             <q-icon name="fa-solid fa-person" size="18px" class="q-mr-xs" />
-            <p class="text-subtitle2 text-weight-regular">
+            <q-item-label class="text-subtitle2 text-weight-regular">
               {{ bookingItem.information.adultNumber }} Adults
-            </p>
+            </q-item-label>
           </div>
           <div class="row flex-center q-mr-sm">
             <q-icon
@@ -37,15 +37,15 @@ const background = bookingItem.images[0];
               size="18px"
               class="q-mr-xs"
             />
-            <p class="text-subtitle2 text-weight-regular">
+            <q-item-label class="text-subtitle2 text-weight-regular">
               {{ bookingItem.information.childrenNumber }} Children
-            </p>
+            </q-item-label>
           </div>
           <div class="row flex-center q-mr-sm">
             <q-icon name="fa-solid fa-expand" size="18px" class="q-mr-xs" />
-            <p class="text-subtitle2 text-weight-regular">
+            <q-item-label class="text-subtitle2 text-weight-regular">
               {{ bookingItem.information.acreage }} ft
-            </p>
+            </q-item-label>
           </div>
         </div>
       </div>

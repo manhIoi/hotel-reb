@@ -113,6 +113,13 @@ const enUS = {
       signIn: "Sign In",
     },
   },
+  roomBookingDetailItem: {
+    bookNowBtn: "Book Now",
+    perNight: "Per night",
+    adultNumber: "{value} Adults",
+    childNumber: "{value} Child",
+    acreageNumber: "{value} Acreage",
+  },
 };
 
 const vi = {
@@ -231,8 +238,14 @@ const vi = {
       signIn: "Đăng nhập",
     },
   },
+  roomBookingDetailItem: {
+    bookNowBtn: "Đặt ngay",
+    perNight: "Mỗi đêm",
+    adultNumber: "{value} Người lớn",
+    childNumber: "{value} Trẻ em",
+    acreageNumber: "{value} m",
+  },
 };
-
 
 export default {
   "en-US": enUS,

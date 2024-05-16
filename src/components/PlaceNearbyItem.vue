@@ -10,13 +10,15 @@ const { nearbyItem } = defineProps({
       <q-card-section
         class="flex absolute-bottom row items-center full-width no-wrap"
       >
-        <p class="text-h6 text-weight-medium text-white text-no-wrap">
+        <q-item-label
+          class="text-h6 text-weight-medium text-white text-no-wrap"
+        >
           {{ nearbyItem.name }}
-        </p>
+        </q-item-label>
         <q-separator size="2px" class="q-mx-sm" vertical color="grey-6" inset />
-        <p class="text-subtitle2 text-weight-bolder text-primary">
+        <q-item-label class="text-subtitle2 text-weight-bolder text-primary">
           {{ nearbyItem.distance }}m
-        </p>
+        </q-item-label>
       </q-card-section>
     </q-img>
   </q-card>

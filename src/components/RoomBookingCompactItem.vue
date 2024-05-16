@@ -20,19 +20,21 @@ const background = bookingItem.images?.[0];
     />
     <q-card-section class="full-width">
       <div class="row justify-between items-center q-mb-md no-wrap">
-        <p class="text-h6 text-weight-medium ellipsis q-mr-md">
+        <q-item-label class="text-h6 text-weight-medium ellipsis q-mr-md">
           {{ bookingItem.name }}
-        </p>
+        </q-item-label>
         <div class="q-pa-xs flex-center booking-item-content_btn text-primary">
-          <p class="text-weight-medium text-subtitle1 text-no-wrap">
+          <q-item-label class="text-weight-medium text-subtitle1 text-no-wrap">
             ${{ bookingItem.amount }}/Per night
-          </p>
+          </q-item-label>
         </div>
       </div>
       <div class="row">
         <div class="row flex-center q-pa-sm q-mr-xs text-grey-9">
           <q-icon name="fa-solid fa-person" class="q-mr-xs" size="24px" />
-          <p>{{ bookingItem.information.adultNumber }} Adults</p>
+          <q-item-label>
+            {{ bookingItem.information.adultNumber }} Adults
+          </q-item-label>
         </div>
         <div class="row flex-center q-pa-sm q-mr-xs text-grey-9">
           <q-icon
@@ -40,11 +42,13 @@ const background = bookingItem.images?.[0];
             class="q-mr-xs"
             size="24px"
           />
-          <p>{{ bookingItem.information.childrenNumber }} Children</p>
+          <q-item-label>
+            {{ bookingItem.information.childrenNumber }} Children
+          </q-item-label>
         </div>
         <div class="row flex-center q-pa-sm q-mr-xs text-grey-9">
           <q-icon name="fa-solid fa-expand" class="q-mr-xs" size="24px" />
-          <p>{{ bookingItem.information.acreage }} ft</p>
+          <q-item-label> {{ bookingItem.information.acreage }} ft</q-item-label>
         </div>
       </div>
     </q-card-section>

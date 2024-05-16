@@ -78,7 +78,7 @@ function onClickProfileItem(item) {
         :class="[selectedNavIndex === index ? 'text-primary' : 'text-grey-7']"
         @click="() => onClickNavItem(item)"
       >
-        <p
+        <q-item-label
           class="text-uppercase text-weight-bold text-overline q-mr-xs"
           :class="[
             selectedNavIndex === index
@@ -87,11 +87,13 @@ function onClickProfileItem(item) {
           ]"
         >
           {{ t(item.title) }}
-        </p>
+        </q-item-label>
       </q-item>
     </q-list>
     <q-btn color="primary" class="q-mx-md" @click="onClickSearch">
-      <p class="text-weight-bold">{{ t("appHeader.btnReservation") }}</p>
+      <q-item-label class="text-weight-bold">
+        {{ t("appHeader.btnReservation") }}
+      </q-item-label>
     </q-btn>
     <q-avatar
       v-if="$q.screen.gt.sm"
@@ -103,7 +105,7 @@ function onClickProfileItem(item) {
         v-if="userStore.user?.avatar"
         src="https://cdn.quasar.dev/img/avatar.png"
       />
-      <p v-else>{{ userStore.user?.fullName?.[0] }}</p>
+      <q-item-label v-else>{{ userStore.user?.fullName?.[0] }}</q-item-label>
       <q-menu>
         <q-list style="min-width: 200px">
           <q-item
@@ -114,7 +116,7 @@ function onClickProfileItem(item) {
             @click="() => onClickProfileItem(item)"
           >
             <q-icon :name="item.icon" class="q-mr-xs" />
-            <p>{{ t(item.title) }}</p>
+            <q-item-label>{{ t(item.title) }}</q-item-label>
           </q-item>
           <q-separator />
           <q-item
@@ -123,7 +125,7 @@ function onClickProfileItem(item) {
             @click="onClickLogout"
           >
             <q-icon name="logout" class="q-mr-xs" />
-            <p>{{ t("appHeader.btnLogout") }}</p>
+            <q-item-label>{{ t("appHeader.btnLogout") }}</q-item-label>
           </q-item>
         </q-list>
       </q-menu>

@@ -49,13 +49,15 @@ function onClickLogout() {
           alt="logo_app"
         />
       </q-avatar>
-      <p class="text-weight-bolder text-overline q-ml-sm text-white">RoomB</p>
+      <q-item-label class="text-weight-bolder text-overline q-ml-sm text-white">
+        RoomB
+      </q-item-label>
     </div>
     <div>
       <div class="flex justify-center items-center q-mt-sm">
-        <p class="text-weight-bold text-body1 text-white">
+        <q-item-label class="text-weight-bold text-body1 text-white">
           {{ t("appDrawer.welcome", { fullName: userStore.user.fullName }) }}
-        </p>
+        </q-item-label>
       </div>
     </div>
   </div>
@@ -70,9 +72,11 @@ function onClickLogout() {
       ]"
       @click="() => onClickNavItem(item)"
     >
-      <p class="text-uppercase text-weight-bold text-overline q-mr-xs">
+      <q-item-label
+        class="text-uppercase text-weight-bold text-overline q-mr-xs"
+      >
         {{ t(item.title) }}
-      </p>
+      </q-item-label>
     </q-item>
     <q-btn
       v-if="userStore.isUserLogin"
