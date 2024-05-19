@@ -7,6 +7,11 @@ const enUS = {
     },
     btnReservation: "Reservation",
     btnLogout: "Logout",
+    profileList: {
+      payment: "Payment",
+      profile: "Profile",
+      history: "History",
+    },
   },
   appFooter: {
     about: "About RoomB",
@@ -28,6 +33,7 @@ const enUS = {
     profile: "Profile",
     btnLogout: "Logout",
     welcome: "Welcome, {fullName}",
+    payment: "Payment",
   },
   home: {
     welcome: "Welcome to RoomB",
@@ -137,129 +143,149 @@ const enUS = {
 };
 
 const vi = {
-  appHeader: {
-    navbarList: {
+    appHeader: {
+      navbarList: {
+        search: "Tìm kiếm",
+        branch: "Chi nhánh",
+        contact: "Liên hệ",
+      },
+      btnReservation: "Đặt phòng",
+      btnLogout: "Đăng xuất",
+      profileList: {
+        payment: "Thanh toán",
+        profile: "Hồ sơ",
+        history: "Lịch sử",
+      },
+    },
+    appFooter: {
+      about: "Về RoomB",
+      stayInTouch: "GIỮ LIÊN LẠC",
+      links: "LIÊN KẾT HỮU ÍCH",
+      linkList: {
+        home: "Trang chủ",
+        branch: "Chi nhánh",
+        contact: "Liên hệ",
+        search: "Tìm kiếm",
+      },
+      copyRight: "© 2022 RoomB Thiết kế bởi p.manhloi",
+    },
+    appDrawer: {
       search: "Tìm kiếm",
       branch: "Chi nhánh",
       contact: "Liên hệ",
+      history: "Lịch sử",
+      profile: "Hồ sơ",
+      btnLogout: "Đăng xuất",
+      welcome: "Chào mừng, {fullName}",
+      payment: "Thanh toán"
     },
-    btnReservation: "Đặt phòng",
-    btnLogout: "Đăng xuất",
-  },
-  appFooter: {
-    about: "Về RoomB",
-    stayInTouch: "GIỮ LIÊN LẠC",
-    links: "LIÊN KẾT HỮU ÍCH",
-    linkList: {
-      home: "Trang chủ",
-      branch: "Chi nhánh",
-      contact: "Liên hệ",
-      search: "Tìm kiếm",
+    home: {
+      welcome: "Chào mừng đến RoomB",
+      title: "Thế giới của chúng tôi là sân chơi của bạn",
+      description:
+        "Hãy cảm thấy như ở nhà trong các phòng khách sang trọng của chúng tôi, ngắm nhìn những cảnh đẹp tuyệt vời và tận hưởng không khí trong lành từ thành phố biển xinh đẹp của chúng tôi.",
+      ourFavoriteRoom: "Phòng yêu thích của chúng tôi",
+      ourService: "Dịch vụ của chúng tôi",
+      ourGuestLoveUs: "Khách hàng của chúng tôi yêu thích chúng tôi",
+      viewMore: "Xem thêm",
+      categoriesTitle: {
+        spa: "SPA & SỨC KHỎE",
+        restaurant: "NHÀ HÀNG HÀNG ĐẦU",
+        suite: "PHÒNG SUITE TỐT NHẤT",
+        swim: "HỒ BƠI",
+      },
+      categoriesDesc: {
+        spa: "Mở cửa hàng ngày",
+        restaurant: "Bữa sáng & Bữa tối",
+        suite: "Tầm nhìn đẹp",
+        swim: "Mở cửa hàng ngày",
+      },
+      placeNearBy: "Địa điểm gần đó",
     },
-    copyRight: "© 2022 RoomB Thiết kế bởi p.manhloi",
-  },
-  appDrawer: {
-    search: "Tìm kiếm",
-    branch: "Chi nhánh",
-    contact: "Liên hệ",
-    history: "Lịch sử",
-    profile: "Hồ sơ",
-    btnLogout: "Đăng xuất",
-    welcome: "Chào mừng, {fullName}",
-  },
-  home: {
-    welcome: "Chào mừng đến RoomB",
-    title: "Thế giới của chúng tôi là sân chơi của bạn",
-    description:
-      "Hãy cảm thấy như ở nhà trong các phòng khách tinh tế của chúng tôi, tận hưởng những cảnh quan tuyệt đẹp và không khí trong lành từ thành phố biển xinh đẹp của chúng tôi.",
-    ourFavoriteRoom: "Phòng yêu thích của chúng tôi",
-    viewMore: "Xem thêm",
-    categoriesTitle: {
-      spa: "SPA & SỨC KHỎE",
-      restaurant: "NHÀ HÀNG HÀNG ĐẦU",
-      suite: "SUITES TỐT NHẤT",
-      swim: "HỒ BƠI",
+    search: {
+      searchPicker: "Bộ chọn tìm kiếm",
+      searchResult: "Kết quả tìm kiếm",
+      selectBranch: "Chọn chi nhánh",
+      dateCheckIn: "Ngày nhận phòng",
+      dateCheckOut: "Ngày trả phòng",
+      adultNumber: "Số người lớn",
+      childNumber: "Số trẻ em",
+      bedNumber: "Số giường",
+      searchLoading: "Đang tải phòng ...",
     },
-    categoriesDesc: {
-      spa: "Mở cửa hàng ngày",
-      restaurant: "Bữa sáng & Bữa tối",
-      suite: "Cảnh đẹp",
-      swim: "Mở cửa hàng ngày",
+    branch: {
+      ourFavoriteRoom: "Phòng yêu thích của chúng tôi",
+      placeNearBy: "Địa điểm gần đó",
+      ourGuestLoveUs: "Khách hàng yêu thích chúng tôi",
     },
-    placeNearBy: "Địa điểm gần đây",
-  },
-  search: {
-    searchPicker: "Trình chọn tìm kiếm",
-    searchResult: "Kết quả tìm kiếm",
-    selectBranch: "Chọn chi nhánh",
-    dateCheckIn: "Ngày nhận phòng",
-    dateCheckOut: "Ngày trả phòng",
-    adultNumber: "Số lượng người lớn",
-    childNumber: "Số lượng trẻ em",
-    bedNumber: "Số lượng giường",
-    searchLoading: "Đang tải phòng ...",
-  },
-  branch: {
-    ourFavoriteRoom: "Phòng yêu thích của chúng tôi",
-    placeNearBy: "Địa điểm gần đây",
-    ourGuestLoveUs: "Khách hàng yêu thích chúng tôi",
-  },
-  contact: {
-    title: "Liên hệ với RoomB",
-    contactInformation: "Thông tin liên hệ",
-    leaveYourMessage: "Để lại tin nhắn của bạn",
-    descMessage:
-      "Liên hệ với chúng tôi ngay hôm nay qua biểu mẫu này và chúng tôi sẽ liên hệ với bạn sớm nhất có thể",
-    formLabel: {
-      email: "Email",
-      fistName: "Tên",
-      lastName: "Họ",
-      phoneNumber: "Số điện thoại",
-      message: "Tin nhắn",
+    contact: {
+      title: "Liên hệ với RoomB",
+      contactInformation: "Thông tin liên hệ",
+      leaveYourMessage: "Để lại lời nhắn của bạn",
+      descMessage: "Liên hệ với chúng tôi ngay hôm nay qua mẫu này và chúng tôi sẽ liên lạc với bạn sớm nhất có thể",
+      formLabel: {
+        email: "Email",
+        fistName: "Tên",
+        lastName: "Họ",
+        phoneNumber: "Số điện thoại",
+        message: "Lời nhắn",
+      },
+      btnConfirm: "Gửi",
+      messageDialog: "Bạn có chắc chắn muốn gửi lời nhắn này không?",
+      toastSuccess: "Cảm ơn bạn đã gửi lời nhắn",
     },
-    btnConfirm: "Gửi",
-    messageDialog: "Bạn có chắc chắn muốn gửi tin nhắn này không?",
-    toastSuccess: "Cảm ơn bạn vì tin nhắn của bạn",
-  },
-  profile: {
-    title: "Hồ sơ",
-    cardLabel: {
-      name: "Họ tên",
-      email: "Email",
-      password: "Mật khẩu",
+    profile: {
+      title: "Hồ sơ",
+      cardLabel: {
+        name: "Họ và tên",
+        email: "Email",
+        password: "Mật khẩu",
+      },
+      cardBtn: {
+        edit: "Chỉnh sửa",
+        changePassword: "Đổi mật khẩu",
+      },
     },
-    cardBtn: {
-      edit: "Chỉnh sửa",
-      changePassword: "Đổi mật khẩu",
-    },
-  },
-  auth: {
-    description: "Đặt phòng trở nên dễ dàng",
-    signIn: "Đăng nhập",
-    signUp: "Đăng ký",
-    labelSignIn: "Mới đến RoomB?",
-    labelSignUp: "Đã có tài khoản?",
-    labelLinkSignIn: "Đăng nhập",
-    labelLinkSignUp: "Đăng ký",
-    formLabel: {
-      email: "Email",
-      password: "Mật khẩu",
-      fullName: "Họ tên",
-      confirmPassword: "Xác nhận mật khẩu",
-    },
-    formBtn: {
-      signUp: "Đăng ký",
+    auth: {
+      description: "Đặt phòng của bạn trở nên dễ dàng",
       signIn: "Đăng nhập",
+      signUp: "Đăng ký",
+      labelSignIn: "Mới sử dụng RoomB?",
+      labelSignUp: "Đã có tài khoản?",
+      labelLinkSignIn: "Đăng nhập",
+      labelLinkSignUp: "Đăng ký",
+      formLabel: {
+        email: "Email",
+        password: "Mật khẩu",
+        fullName: "Họ và tên",
+        confirmPassword: "Xác nhận mật khẩu",
+      },
+      formBtn: {
+        signUp: "Đăng ký",
+        signIn: "Đăng nhập",
+      },
     },
-  },
-  roomBookingDetailItem: {
-    bookNowBtn: "Đặt ngay",
-    perNight: "Mỗi đêm",
-    adultNumber: "{value} Người lớn",
-    childNumber: "{value} Trẻ em",
-    acreageNumber: "{value} m",
-  },
-};
+    roomDetail: {
+      titleLabel: {
+        overview: "Tổng quan",
+        roomAvailable: "Phòng có sẵn",
+        roomServicePrice: "Giá dịch vụ phòng",
+        freeAmenities: "Tiện nghi miễn phí",
+      },
+      tableLabel: {
+        extraService: "Dịch vụ bổ sung",
+        room: "Phòng",
+      },
+    },
+    roomBookingDetailItem: {
+      bookNowBtn: "Đặt ngay",
+      perNight: "Mỗi đêm",
+      adultNumber: "{value} Người lớn",
+      childNumber: "{value} Trẻ em",
+      acreageNumber: "{value} Diện tích",
+    },
+  }
+;
 
 export default {
   "en-US": enUS,

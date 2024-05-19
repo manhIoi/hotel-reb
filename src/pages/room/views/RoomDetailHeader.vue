@@ -1,4 +1,6 @@
 <script setup>
+import MainWrapper from "layouts/MainWrapper.vue";
+
 const { room } = defineProps({
   room: Object,
 });
@@ -9,13 +11,11 @@ const { room } = defineProps({
     <template v-slot:media>
       <q-img :src="room.images[0]" />
     </template>
-
-    <q-item-label
-      class="text-white text-h2 text-weight-medium"
-      style="z-index: 2"
-    >
-      {{ room.name }}
-    </q-item-label>
+    <main-wrapper style="z-index: 2">
+      <q-item-label class="text-white text-h2 text-weight-medium text-center">
+        {{ room.name }}
+      </q-item-label>
+    </main-wrapper>
     <div class="overlay" />
   </q-parallax>
 </template>

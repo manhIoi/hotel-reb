@@ -71,6 +71,14 @@ p {
 }
 
 /* Apply zoom-in effect on hover */
+.icon-zoom:hover {
+  animation: zoomIn 0.3s forwards !important;
+}
+
+.icon-zoom:not(:hover) {
+  animation: zoomOut 0.3s forwards !important;
+}
+
 .card-custom {
   overflow: hidden;
 }

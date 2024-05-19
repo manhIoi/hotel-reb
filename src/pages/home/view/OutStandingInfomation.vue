@@ -20,10 +20,13 @@ const slide = ref(0);
         >
           {{ t("home.welcome") }}
         </q-item-label>
-        <q-item-label class="text-weight-bold text-h3 q-mb-lg">
+        <q-item-label class="text-weight-bold text-h3 q-mb-lg text-grey-9">
           {{ t("home.title") }}
         </q-item-label>
-        <q-item-label class="text-h6 text-grey-8" style="line-height: 2.4rem">
+        <q-item-label
+          class="text-h6 text-grey-8"
+          style="line-height: 2.2rem !important"
+        >
           {{ t("home.description") }}
         </q-item-label>
       </div>

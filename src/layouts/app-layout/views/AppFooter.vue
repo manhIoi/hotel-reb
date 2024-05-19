@@ -43,9 +43,21 @@ const { t } = useI18n();
           {{ t("appFooter.stayInTouch") }}
         </q-item-label>
         <div class="row">
-          <q-btn size="lg" flat icon="fa-brands fa-facebook" />
-          <q-btn size="lg" flat icon="fa-brands fa-instagram" />
-          <q-btn size="lg" flat icon="fa-brands fa-twitch" />
+          <q-icon
+            class="q-mr-md cursor-pointer icon-zoom"
+            size="md"
+            name="fa-brands fa-facebook"
+          />
+          <q-icon
+            class="q-mr-md cursor-pointer icon-zoom"
+            size="md"
+            name="fa-brands fa-instagram"
+          />
+          <q-icon
+            class="q-mr-md cursor-pointer icon-zoom"
+            size="md"
+            name="fa-brands fa-twitch"
+          />
         </div>
       </div>
       <div class="col-md-4 col-xs-12">

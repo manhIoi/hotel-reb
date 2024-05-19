@@ -66,7 +66,7 @@ function onClickLogout() {
       clickable
       v-for="(item, index) in drawerNavigationList"
       :key="item.title"
-      class="justify-center"
+      class="justify-center items-center"
       :class="[
         selectedDrawerItemIndex === index ? 'text-primary' : 'text-grey-7',
       ]"

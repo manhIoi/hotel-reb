@@ -1,7 +1,7 @@
 <script setup>
 import ServiceItem from "pages/home/components/ServiceItem.vue";
 import ServiceImageList from "pages/home/components/ServiceImageList.vue";
-import { computed, ref, watch } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import SectionTitle from "components/SectionTitle.vue";
 import { useI18n } from "vue-i18n";
 
@@ -58,6 +58,14 @@ const serviceCategoryList = [
 ];
 
 const selectedServiceIndex = ref(0);
+
+onMounted(() => {
+  setInterval(() => {
+    const nextSelected = selectedServiceIndex.value + 1;
+    selectedServiceIndex.value =
+      nextSelected === serviceCategoryList.length ? 0 : nextSelected;
+  }, 3000);
+});
 
 function onClickServiceItem(index) {
   selectedServiceIndex.value = index;

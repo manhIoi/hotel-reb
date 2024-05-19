@@ -1,5 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { isEmpty } from "lodash";
+import hotels from "./database/hotels.json";
 
 export const roomImages = [
   "https://demo.ovatheme.com/hotelft/wp-content/uploads/2022/02/luxe-room.jpg",
@@ -18,6 +19,14 @@ export const roomImages = [
 ];
 
 export function generateRoomBooking(branchList) {
+  const _hotels = hotels.map((item) => {
+    const { overview, rates_from } = item || {};
+    return {
+      name: item?.hotel_name,
+      overview,
+      amount: rates_from,
+    };
+  });
   const branch = isEmpty(branchList)
     ? null
     : branchList[faker.number.int({ min: 0, max: branchList.length - 1 })];
@@ -25,12 +34,14 @@ export function generateRoomBooking(branchList) {
     faker.image.urlLoremFlickr({ category: "city" })
   );
 
+  const hotel = faker.helpers.arrayElement(_hotels);
+
   return {
     id: faker.string.uuid(),
     images: faker.helpers.arrayElements(roomImages, 5),
-    amount: faker.number.int({ min: 50, max: 2000 }),
-    name: faker.lorem.words({ min: 2, max: 4 }),
-    description: faker.lorem.paragraph({ min: 5, max: 10 }),
+    amount: hotel.amount,
+    name: hotel.name,
+    description: hotel.overview,
     information: {
       adultNumber: faker.number.int({ min: 1, max: 10 }),
       childrenNumber: faker.number.int({ min: 1, max: 10 }),

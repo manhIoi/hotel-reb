@@ -11,6 +11,10 @@ import {
   generateRoomBookingHistory,
   generateRoomBookingHistoryList,
 } from "src/server/room-booking-history";
+import {
+  generatePaymentCard,
+  generatePaymentCardList,
+} from "src/server/payment-card";
 
 class MockApi {
   constructor() {
@@ -239,6 +243,14 @@ class MockApi {
         }
         resolve(this.formatResponse(this.user));
       }, 500);
+    });
+  }
+
+  getPaymentCardList() {
+    return new Promise((resolve) => {
+      delay(() => {
+        resolve(this.formatResponse(generatePaymentCardList(3)))
+      }, 1000);
     });
   }
 }

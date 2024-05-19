@@ -6,8 +6,11 @@ const { commentItem } = defineProps({
 
 <template>
   <q-card flat class="custom-shadow">
-    <q-card-section>
-      <q-item-label class="text-weight-medium text-subtitle1 text-grey-8">
+    <q-card-section class="q-mb-sm">
+      <q-item-label
+        class="text-weight-medium text-subtitle1 text-grey-8"
+        style="max-height: 3.6rem"
+      >
         {{ commentItem.content }}
       </q-item-label>
     </q-card-section>

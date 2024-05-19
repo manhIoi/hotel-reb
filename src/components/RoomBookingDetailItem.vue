@@ -31,12 +31,12 @@ const { information } = bookingItem;
             <div
               class="q-pa-sm row flex-center booking-item-content_btn text-primary q-mb-lg custom-shadow"
             >
-              <q-item-label class="text-weight-bolder text-subtitle1 q-mr-xs">
+              <p class="text-weight-bolder text-subtitle1 q-mr-xs">
                 ${{ bookingItem.amount }}
-              </q-item-label>
-              <q-item-label class="text-weight-medium text-body-2">
+              </p>
+              <p class="text-weight-medium text-body-2">
                 {{ t("roomBookingDetailItem.perNight") }}
-              </q-item-label>
+              </p>
             </div>
             <q-item-label class="text-h4 text-weight-bold q-mb-lg">
               {{ bookingItem.name }}

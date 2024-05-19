@@ -17,37 +17,46 @@ export const navbarNavigationList = [
 
 export const drawerNavigationList = [
   {
-    title: "Branch",
+    title: "appDrawer.branch",
     link: "branch",
   },
   {
     link: "search",
-    title: "Search",
+    title: "appDrawer.search",
   },
   {
-    title: "Contact",
+    title: "appDrawer.contact",
     link: "contact",
   },
   {
-    title: "History",
+    title: "appDrawer.history",
     link: "room-booking-history",
   },
   {
-    title: "Profile",
+    title: "appDrawer.profile",
     link: "profile",
+  },
+  {
+    title: "appDrawer.payment",
+    link: "card-management",
   },
 ];
 
 export const profileNavigationList = [
   {
-    title: "Profile",
+    title: "appHeader.profileList.profile",
     link: "profile",
     icon: "person",
   },
   {
-    title: "History",
+    title: "appHeader.profileList.history",
     link: "room-booking-history",
     icon: "history",
+  },
+  {
+    title: "appHeader.profileList.payment",
+    link: "card-management",
+    icon: "payment",
   },
 ];
 
