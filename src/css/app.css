@@ -8,7 +8,7 @@
 p {
   margin: 0;
   padding: 0;
-  font-family: "Lato", sans-serif !important;
+  font-family: "Roboto", sans-serif !important;
 }
 
 :root {
@@ -49,3 +49,37 @@ p {
     0 12px 4px rgba(1, 146, 243, 0.06),
     0 12px 100px -4px rgba(1, 146, 243, 0.06) !important;
 }
+
+/** custom animation  */
+/* Define keyframes for zoom-in effect */
+@keyframes zoomIn {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes zoomOut {
+  from {
+    transform: scale(1.05);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Apply zoom-in effect on hover */
+.card-custom {
+  overflow: hidden;
+}
+
+.card-custom:not(:hover) .card-custom_image {
+  animation: zoomOut 0.3s forwards !important;
+}
+
+.card-custom:hover .card-custom_image {
+  animation: zoomIn 0.3s forwards !important;
+}
+

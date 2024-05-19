@@ -7,6 +7,7 @@ const { service } = defineProps({
 <template>
   <div class="cursor-pointer q-pa-md br-sm">
     <q-icon
+      class="q-mb-sm"
       size="32px"
       :name="service.icon"
       :style="{ color: service.color }"

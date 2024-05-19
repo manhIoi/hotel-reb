@@ -1,5 +1,8 @@
 <script setup>
 import { formatMoney } from "src/utils";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 
 const tablePriceDayByWeek = {
   columns: [
@@ -49,7 +52,7 @@ const tablePriceService = {
 
 <template>
   <q-table
-    title="Price day in week"
+    :title="t('roomDetail.tableLabel.room')"
     :rows="tablePriceDayByWeek.rows"
     :columns="tablePriceDayByWeek.columns"
     row-key="name"
@@ -58,7 +61,7 @@ const tablePriceService = {
     class="custom-shadow table-price q-mb-lg"
   />
   <q-table
-    title="Service price of room"
+    :title="t('roomDetail.tableLabel.extraService')"
     :rows="tablePriceService.rows"
     :columns="tablePriceService.columns"
     row-key="name"

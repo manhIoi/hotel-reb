@@ -65,7 +65,7 @@ function onClickServiceItem(index) {
 </script>
 
 <template>
-  <section-title title="OUR SERVICE">
+  <section-title :title="t('home.ourService')">
     <div class="row q-col-gutter-lg">
       <div
         class="col-md-3 col-xs-6"

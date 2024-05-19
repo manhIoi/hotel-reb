@@ -8,9 +8,12 @@ const { nearbyItem } = defineProps({
   <q-responsive :ratio="1">
     <q-card
       flat
-      class="my-card full-width full-height flex overflow-hidden cursor-pointer"
+      class="my-card full-width full-height flex overflow-hidden cursor-pointer card-custom"
     >
-      <q-img :src="nearbyItem.image" class="full-width full-height" />
+      <q-img
+        :src="nearbyItem.image"
+        class="full-width full-height card-custom_image"
+      />
       <div class="absolute-bottom column q-pa-sm card-info q-ma-sm">
         <q-item-label
           class="text-body1 text-weight-medium text-white text-no-wrap"

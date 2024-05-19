@@ -4,10 +4,14 @@ import { onMounted, ref } from "vue";
 import AmenityItem from "pages/room/components/AmenityItem.vue";
 import RoomDetailServicePrice from "pages/room/views/RoomDetailServicePrice.vue";
 import { formatDate, getRangeDate } from "src/utils";
+import { useI18n } from "vue-i18n";
 
 const { room } = defineProps({
   room: Object,
 });
+
+const { t } = useI18n();
+
 const amenityList = [
   {
     icon: "fa-solid fa-snowflake",
@@ -59,12 +63,12 @@ function events(date) {
 <template>
   <div class="row q-col-gutter-lg">
     <div class="col-md-6 col-xs-12">
-      <section-title title="Overview">
+      <section-title :title="t('roomDetail.titleLabel.overview')">
         <q-item-label class="text-subtitle1 text-gey-9">
           {{ room.description }}
         </q-item-label>
       </section-title>
-      <section-title title="Free Amenities">
+      <section-title :title="t('roomDetail.titleLabel.freeAmenities')">
         <div class="row q-col-gutter-lg">
           <div
             class="col-xs-6 col-sm-4 col-md-3"
@@ -77,7 +81,7 @@ function events(date) {
       </section-title>
     </div>
     <div class="col-md-6 col-xs-12">
-      <section-title title="Room Availability">
+      <section-title :title="t('roomDetail.titleLabel.roomAvailable')">
         <div class="q-pb-sm row">
           <q-badge color="primary" class="q-mr-sm q-py-xs q-py-sm">
             Today
@@ -101,7 +105,7 @@ function events(date) {
           />
         </div>
       </section-title>
-      <section-title title="Room Service Price">
+      <section-title :title="t('roomDetail.titleLabel.roomServicePrice')">
         <room-detail-service-price />
       </section-title>
     </div>

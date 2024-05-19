@@ -10,14 +10,16 @@ const background = bookingItem.images?.[0];
 <template>
   <q-card
     flat
-    class="booking-item-container bg-white row cursor-pointer"
+    class="booking-item-container bg-white row cursor-pointer card-custom"
     @click="emit('clickItem', bookingItem)"
   >
-    <q-img
-      class="full-width full-height"
-      :src="background"
-      :alt="`booking_item_${bookingItem.id}`"
-    />
+    <div class="fit overflow-hidden">
+      <q-img
+        class="fit card-custom_image"
+        :src="background"
+        :alt="`booking_item_${bookingItem.id}`"
+      />
+    </div>
     <q-card-section class="full-width">
       <div class="row justify-between items-center q-mb-md no-wrap">
         <q-item-label class="text-h6 text-weight-medium ellipsis q-mr-md">

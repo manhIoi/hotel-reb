@@ -35,6 +35,8 @@ const enUS = {
     description:
       "Make yourself at home in our sophisticated guest rooms, take in the incredible views and enjoy fresh air from our beautiful sea city.",
     ourFavoriteRoom: "Our favorite room",
+    ourService: "Our Service",
+    ourGuestLoveUs: "Our Guest Love Us",
     viewMore: "View more",
     categoriesTitle: {
       spa: "SPA & WELLNESS",
@@ -111,6 +113,18 @@ const enUS = {
     formBtn: {
       signUp: "Sign Up",
       signIn: "Sign In",
+    },
+  },
+  roomDetail: {
+    titleLabel: {
+      overview: "OverView",
+      roomAvailable: "Rom available",
+      roomServicePrice: "Room service price",
+      freeAmenities: "Free Amenities",
+    },
+    tableLabel: {
+      extraService: "Extra Service",
+      room: "Room",
     },
   },
   roomBookingDetailItem: {

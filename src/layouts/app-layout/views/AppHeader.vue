@@ -79,10 +79,10 @@ function onClickProfileItem(item) {
         @click="() => onClickNavItem(item)"
       >
         <q-item-label
-          class="text-uppercase text-weight-bold text-overline q-mr-xs"
+          class="text-uppercase text-weight-medium q-mr-xs"
           :class="[
             selectedNavIndex === index
-              ? 'text-weight-bolder'
+              ? 'text-weight-bold'
               : 'text-weight-medium',
           ]"
         >
@@ -106,7 +106,7 @@ function onClickProfileItem(item) {
         src="https://cdn.quasar.dev/img/avatar.png"
       />
       <q-item-label v-else>{{ userStore.user?.fullName?.[0] }}</q-item-label>
-      <q-menu>
+      <q-menu class="no-shadow custom-shadow">
         <q-list style="min-width: 200px">
           <q-item
             v-for="item in profileNavigationList"
@@ -115,7 +115,7 @@ function onClickProfileItem(item) {
             class="cursor-pointer row items-center text-primary text-weight-medium"
             @click="() => onClickProfileItem(item)"
           >
-            <q-icon :name="item.icon" class="q-mr-xs" />
+            <q-icon size="20px" :name="item.icon" class="q-mr-xs" />
             <q-item-label>{{ t(item.title) }}</q-item-label>
           </q-item>
           <q-separator />
@@ -124,7 +124,7 @@ function onClickProfileItem(item) {
             class="row items-center text-primary text-weight-medium"
             @click="onClickLogout"
           >
-            <q-icon name="logout" class="q-mr-xs" />
+            <q-icon size="20px" name="logout" class="q-mr-xs" />
             <q-item-label>{{ t("appHeader.btnLogout") }}</q-item-label>
           </q-item>
         </q-list>
