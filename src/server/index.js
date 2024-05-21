@@ -24,6 +24,7 @@ class MockApi {
       placeNearbyList: "api_place_nearby_list",
       historyBookingList: "api_history_booking_list",
       user: "api_user",
+      cardList: "api_card_list",
     };
 
     const getDataByKey = (key, defaultData) => {
@@ -52,6 +53,7 @@ class MockApi {
       KEYS.user,
       generateUser("admin@gmail.com", "admin", "123456")
     );
+    this.cardList = getDataByKey(KEYS.cardList, generatePaymentCardList(3));
   }
 
   formatResponse(data) {
@@ -249,7 +251,7 @@ class MockApi {
   getPaymentCardList() {
     return new Promise((resolve) => {
       delay(() => {
-        resolve(this.formatResponse(generatePaymentCardList(3)))
+        resolve(this.formatResponse(this.cardList));
       }, 1000);
     });
   }

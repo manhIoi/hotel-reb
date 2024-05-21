@@ -3,20 +3,24 @@ import MainWrapper from "layouts/MainWrapper.vue";
 import MyCards from "pages/card-management/views/MyCards.vue";
 import { onMounted, ref, watch } from "vue";
 import server from "src/server";
+import CardFormDialog from "pages/card-management/views/CardFormDialog.vue";
 
 export default {
-  components: { MainWrapper, MyCards },
+  components: { CardFormDialog, MainWrapper, MyCards },
   setup() {
     const dialog = ref(false);
+    const selectedCard = ref(null);
 
     function onShowDialog(card) {
       console.log("LOG_IT:: card", card);
+      selectedCard.value = card;
       dialog.value = true;
     }
 
     return {
       onShowDialog,
       dialog,
+      selectedCard,
     };
   },
 };
@@ -27,7 +31,7 @@ export default {
     <main-wrapper>
       <my-cards @show-dialog="onShowDialog" />
     </main-wrapper>
-    <h1 v-if="dialog">show dialog</h1>
+    <card-form-dialog v-model:dialog="dialog" :default-card="selectedCard" />
   </q-page>
 </template>
 

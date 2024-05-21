@@ -3,16 +3,19 @@ import { onMounted, ref, watch } from "vue";
 import server from "src/server";
 
 export const useCardPaymentStore = defineStore("card-payment", () => {
-  const cardList = ref([]);
+  const cardList = ref(JSON.parse(localStorage.getItem("cardList") || "[]"));
 
   onMounted(() => {
     getCardPaymentData();
   });
 
+  watch(cardList, () => {
+    localStorage.setItem("cardList", JSON.stringify(cardList.value));
+  });
+
   async function getCardPaymentData() {
     try {
       const response = await server.getPaymentCardList();
-      console.log("LOG_IT:: response", response);
       if (response.data) {
         cardList.value = response.data;
       }
