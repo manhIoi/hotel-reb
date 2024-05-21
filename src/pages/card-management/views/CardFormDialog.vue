@@ -1,30 +1,12 @@
-<!--<script>-->
-<!--export default {-->
-<!--  props: {-->
-<!--    dialog: Boolean,-->
-<!--  },-->
-<!--  emits: ["update:dialog"],-->
-<!--  setup(props) {-->
-<!--    function onSubmit() {}-->
-
-<!--    return {-->
-<!--      onSubmit,-->
-<!--    };-->
-<!--  },-->
-<!--};-->
-<!--</script>-->
-
 <script setup>
-import { computed, ref, toRefs } from "vue";
-import { isEmpty } from "lodash";
-
-const props = defineProps({
-  defaultCard: {
-    type: Object,
-  },
-});
-const { defaultCard } = toRefs(props);
+import { ref, toRefs, watch } from "vue";
+import { validators } from "src/utils";
+import { useCardPaymentStore } from "stores/card-payment-store";
+import server from "src/server";
+import { useDialog, useLoading, useToast } from "src/composables";
 const dialog = defineModel("dialog");
+const form = defineModel("form");
+
 const cardOptions = [
   {
     name: "VISA",
@@ -35,27 +17,68 @@ const cardOptions = [
     type: "mastercard",
   },
 ];
-const form = computed(() => {
-  return {
-    cardName: defaultCard.value?.name || "",
-    cardType: cardOptions.find(
-      (card) => defaultCard.value?.type === card.type
+
+const cardPaymentStore = useCardPaymentStore();
+const { showDialog } = useDialog();
+const { showToast } = useToast();
+
+const cardValue = ref(
+  cardOptions.find((option) => option?.type === form.value.cardType) || {
+    name: "",
+    type: "",
+  }
+);
+
+watch(cardValue, () => {
+  form.value.cardType = cardValue.value?.type;
+});
+
+watch(
+  () => form.value.cardType,
+  () => {
+    cardValue.value = cardOptions.find(
+      (option) => option?.type === form.value.cardType
     ) || {
       name: "",
       type: "",
-    },
-    cardNumber: defaultCard.value?.cardNumber || "",
-    cardExpire: defaultCard.value?.expire || "",
-  };
-});
+    };
+  }
+);
 
 function onSubmit() {
-  if (isEmpty(defaultCard.value)) {
-    alert("add card");
-  } else {
-    alert("edit card");
+  const newCard = {
+    id: form.value.id,
+    name: form.value.cardName,
+    type: form.value.cardType,
+    cardNumber: form.value.cardNumber,
+    expire: form.value.cardExpire,
+  };
+  handleSubmitByType(form.value.actionType, newCard);
+}
+
+async function handleSubmitByType(type, data) {
+  const dialogLoading = showDialog("loading");
+  const response =
+    type === "add"
+      ? await server.addPaymentCard(data)
+      : await server.editPaymentCard(data);
+  try {
+    if (response.data) {
+      console.info("LOG_IT:: response", response);
+      if (type === "add") {
+        cardPaymentStore.addCard(response.data);
+      } else {
+        cardPaymentStore.editCard(response.data);
+      }
+      const toastMessage =
+        type === "add" ? "Add successfully" : "Edit successfully";
+      showToast("success", toastMessage);
+      dialog.value = false;
+    }
+  } catch (e) {
+  } finally {
+    dialogLoading.hide();
   }
-  console.log("LOG_IT:: form.value", form.value);
 }
 </script>
 
@@ -71,16 +94,20 @@ function onSubmit() {
             outlined
             class="q-mb-md"
             label="Account name"
+            :rules="[validators.required]"
+            hide-bottom-space
           />
           <q-select
-            v-model="form.cardType"
             dense
+            v-model="cardValue"
             outlined
             class="q-mb-md"
             label="Account number"
             :options="cardOptions"
             option-value="type"
             option-label="name"
+            :rules="[validators.required]"
+            hide-bottom-space
           />
           <q-input
             v-model="form.cardNumber"
@@ -88,13 +115,19 @@ function onSubmit() {
             outlined
             class="q-mb-md"
             label="Account number"
+            mask="#####-####-####"
+            :rules="[validators.required, validators.length(11)]"
+            hide-bottom-space
           />
           <q-input
             v-model="form.cardExpire"
             dense
             outlined
             class="q-mb-md"
+            mask="##/##"
             label="Expire Date"
+            :rules="[validators.required]"
+            hide-bottom-space
           />
         </q-card-section>
         <q-card-actions align="right" class="text-primary">

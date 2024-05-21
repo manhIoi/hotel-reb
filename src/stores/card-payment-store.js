@@ -23,21 +23,26 @@ export const useCardPaymentStore = defineStore("card-payment", () => {
   }
 
   function addCard(newCard) {
-    cardList.value.push(newCard);
+    cardList.value = [...cardList.value, newCard];
+  }
+
+  function editCard(newCard) {
+    cardList.value = cardList.value.map((item) => {
+      if (item.id === newCard.id) {
+        return newCard;
+      }
+      return item;
+    });
   }
 
   function removeCard(card) {
-    const cardIndex = cardList.value.findIndex(
-      (item) => item.cardNumber === card.cardNumber
-    );
-    if (cardIndex !== -1) {
-      cardList.value.splice(cardIndex, 1);
-    }
+    cardList.value = cardList.value.filter((item) => item?.id !== card.id);
   }
 
   return {
     cardList,
     addCard,
+    editCard,
     removeCard,
   };
 });

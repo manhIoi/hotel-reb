@@ -27,6 +27,8 @@ class MockApi {
       cardList: "api_card_list",
     };
 
+    this.schemas = KEYS;
+
     const getDataByKey = (key, defaultData) => {
       const result = localStorage.getItem(key);
       if (!result) {
@@ -251,7 +253,55 @@ class MockApi {
   getPaymentCardList() {
     return new Promise((resolve) => {
       delay(() => {
-        resolve(this.formatResponse(this.cardList));
+        resolve(this.formatResponse([...this.cardList]));
+      }, 1000);
+    });
+  }
+
+  addPaymentCard(params) {
+    return new Promise((resolve) => {
+      delay(() => {
+        const newCard = {
+          ...params,
+          id: faker.string.uuid(),
+        };
+        this.cardList.push(newCard);
+        localStorage.setItem(
+          this.schemas.cardList,
+          JSON.stringify(this.cardList)
+        );
+        resolve(this.formatResponse(newCard));
+      }, 1000);
+    });
+  }
+
+  editPaymentCard(params) {
+    return new Promise((resolve) => {
+      delay(() => {
+        this.cardList = this.cardList?.map((item) => {
+          if (item?.id === params?.id) return params;
+          return item;
+        });
+        localStorage.setItem(
+          this.schemas.cardList,
+          JSON.stringify(this.cardList)
+        );
+        resolve(this.formatResponse(params));
+      }, 1000);
+    });
+  }
+
+  removePaymentCard(params) {
+    return new Promise((resolve) => {
+      delay(() => {
+        this.cardList = this.cardList.filter((item) => {
+          if (item?.id !== params?.id) return item;
+        });
+        localStorage.setItem(
+          this.schemas.cardList,
+          JSON.stringify(this.cardList)
+        );
+        resolve(this.formatResponse(params));
       }, 1000);
     });
   }

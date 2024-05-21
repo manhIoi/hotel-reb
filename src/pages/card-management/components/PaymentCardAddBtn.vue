@@ -25,7 +25,7 @@ export default {
       <q-card-actions>
         <q-btn
           color="primary"
-          label="Add Card"
+          :label="t('cardManagement.myCards.addBtn')"
           @click="$emit('clickAddBtn')"
           padding="8px 20px"
         />

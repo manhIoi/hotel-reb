@@ -5,8 +5,9 @@ export function generatePaymentCard() {
   const day = String(expire.getDate()).padStart(2, "0");
   const month = String(expire.getMonth() + 1).padStart(2, "0");
   return {
+    id: faker.string.uuid(),
     name: faker.finance.accountName(),
-    cardNumber: faker.finance.creditCardNumber(),
+    cardNumber: faker.finance.creditCardNumber("visa"),
     expire: `${day}/${month}`,
     ccv: faker.finance.creditCardCVV(),
     type: "visa",

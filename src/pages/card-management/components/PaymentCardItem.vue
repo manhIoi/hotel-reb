@@ -1,10 +1,10 @@
 <script>
-import { toRefs } from "vue";
+import { onMounted, toRefs } from "vue";
 import { useI18n } from "vue-i18n";
 
 export default {
   name: "PaymentCardItem",
-  emits: ["clickEditCard"],
+  emits: ["clickEditCard", "clickDeleteCard"],
   props: {
     paymentCard: {
       type: Object,
@@ -14,6 +14,11 @@ export default {
   setup(props) {
     const { paymentCard } = toRefs(props);
     const { t } = useI18n();
+
+    onMounted(() => {
+      console.info("LOG_IT:: paymentCard", paymentCard.value.expire);
+    });
+
     return {
       t,
     };
@@ -43,7 +48,7 @@ export default {
             <div class="text-caption text-grey">
               {{
                 t("cardManagement.cardItem.expireDate", {
-                  date: paymentCard.expire,
+                  value: paymentCard.expire,
                 })
               }}
             </div>
@@ -56,11 +61,17 @@ export default {
           outline
           flat
           color="primary"
-          label="Edit"
+          :label="t('cardManagement.myCards.editBtn')"
           padding="6px 18px"
           @click="$emit('clickEditCard', paymentCard)"
         />
-        <q-btn outline flat color="red-6" icon="delete" />
+        <q-btn
+          outline
+          flat
+          color="red-6"
+          icon="delete"
+          @click="$emit('clickDeleteCard', paymentCard)"
+        />
       </q-card-actions>
     </q-card-section>
   </q-card>
