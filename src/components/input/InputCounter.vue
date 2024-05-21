@@ -22,7 +22,13 @@ function decrease() {
 </script>
 
 <template>
-  <q-input outlined v-bind="inputProps" v-model="model" type="number">
+  <q-input
+    outlined
+    v-bind="inputProps"
+    v-model="model"
+    type="number"
+    hide-bottom-space
+  >
     <template v-slot:append>
       <q-btn
         round

@@ -24,6 +24,7 @@ export default {
       </q-card-section>
       <q-card-actions>
         <q-btn
+          class="q-mr-sm"
           color="primary"
           :label="t('cardManagement.myCards.addBtn')"
           @click="$emit('clickAddBtn')"

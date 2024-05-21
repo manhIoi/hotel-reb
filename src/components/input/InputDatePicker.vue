@@ -17,6 +17,7 @@ function clear() {
 
 <template>
   <q-input
+    hide-bottom-space
     placeholder="dd/mm/yyyy"
     outlined
     readonly

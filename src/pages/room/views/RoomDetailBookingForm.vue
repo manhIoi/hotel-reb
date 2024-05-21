@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import InputCounter from "components/input/InputCounter.vue";
 import InputDatePicker from "components/input/InputDatePicker.vue";
 import InputBase from "components/input/InputBase.vue";
@@ -9,11 +9,13 @@ import { useToast } from "src/composables/useToast";
 import server from "src/server";
 import { useRouter } from "vue-router";
 import { ROUTES_PATH } from "src/router/routes";
+import { useCardPaymentStore } from "stores/card-payment-store";
 
 const { room } = defineProps({
   room: Object,
 });
 const dialog = defineModel("dialog");
+const cardPaymentStore = useCardPaymentStore();
 
 const formData = ref({
   dateCheckIn: "",
@@ -26,8 +28,14 @@ const formData = ref({
 
 const { showDialog } = useDialog();
 const { showToast } = useToast();
-const router = useRouter();
+const selectedCard = ref("");
 
+const stepBooking = ref({
+  stepNumber: 1,
+  formInputted: false,
+  selectedPayment: false,
+});
+const router = useRouter();
 const formInputProps = computed(() => {
   return {
     checkIn: {
@@ -73,10 +81,24 @@ const datePickerProps = computed(() => {
   };
 });
 
+function onNextPayment() {
+  stepBooking.value.stepNumber = 2;
+  stepBooking.value.formInputted = true;
+}
+
+function onPreviousPayment() {
+  stepBooking.value.stepNumber = 1;
+  stepBooking.value.formInputted = false;
+}
+
 function onSubmit() {
   showDialog("confirm", { message: "Are you sure booking this room?" }).onOk(
     handleSubmit
   );
+}
+
+function onBookingSuccess() {
+  router.replace({ name: ROUTES_PATH.home });
 }
 
 async function handleSubmit() {
@@ -92,8 +114,8 @@ async function handleSubmit() {
         .onDismiss(() =>
           showToast("success", "Book room successfully submitted")
         );
-      dialog.value = false;
-      await router.push({ name: ROUTES_PATH.roomBookingHistory });
+      stepBooking.value.stepNumber = 3;
+      stepBooking.value.selectedPayment = true;
     }
   } catch (e) {
   } finally {
@@ -110,67 +132,112 @@ async function handleSubmit() {
 
     <q-separator />
 
-    <q-form method="post" @submit.prevent="onSubmit">
-      <q-card-section style="max-height: 50vh" class="scroll">
-        <div class="row q-col-gutter-lg">
-          <div class="col-6">
-            <input-date-picker
-              v-model="formData.dateCheckIn"
-              :input-props="formInputProps.checkIn"
-              :date-picker-props="datePickerProps.checkIn"
-            />
+    <q-stepper
+      v-model="stepBooking.stepNumber"
+      ref="stepper"
+      color="primary"
+      animated
+    >
+      <q-step
+        :name="1"
+        title="Input"
+        icon="settings"
+        :done="stepBooking.formInputted"
+      >
+        <q-form method="post" @submit.prevent="onNextPayment">
+          <div style="max-height: 50vh" class="scroll">
+            <div class="row q-col-gutter-lg">
+              <div class="col-6">
+                <input-date-picker
+                  v-model="formData.dateCheckIn"
+                  :input-props="formInputProps.checkIn"
+                  :date-picker-props="datePickerProps.checkIn"
+                />
+              </div>
+              <div class="col-6">
+                <input-date-picker
+                  v-model="formData.dateCheckOut"
+                  :input-props="formInputProps.checkOut"
+                  :date-picker-props="datePickerProps.checkOut"
+                />
+              </div>
+              <div class="col-6">
+                <input-counter
+                  v-model="formData.adultNumber"
+                  :input-props="formInputProps.adults"
+                  label="Adult Number"
+                />
+              </div>
+              <div class="col-6">
+                <input-counter
+                  v-model="formData.childrenNumber"
+                  :input-props="formInputProps.childrens"
+                  label="Children Number"
+                />
+              </div>
+              <div class="col-6">
+                <input-counter
+                  v-model="formData.bedNumber"
+                  :input-props="formInputProps.beds"
+                  label="Bed Number"
+                />
+              </div>
+              <div class="col-12">
+                <q-input
+                  outlined
+                  v-model="formData.message"
+                  type="textarea"
+                  label="Message"
+                />
+              </div>
+            </div>
           </div>
-          <div class="col-6">
-            <input-date-picker
-              v-model="formData.dateCheckOut"
-              :input-props="formInputProps.checkOut"
-              :date-picker-props="datePickerProps.checkOut"
-            />
-          </div>
-          <div class="col-6">
-            <input-counter
-              v-model="formData.adultNumber"
-              :input-props="formInputProps.adults"
-              label="Adult Number"
-            />
-          </div>
-          <div class="col-6">
-            <input-counter
-              v-model="formData.childrenNumber"
-              :input-props="formInputProps.childrens"
-              label="Children Number"
-            />
-          </div>
-          <div class="col-6">
-            <input-counter
-              v-model="formData.bedNumber"
-              :input-props="formInputProps.beds"
-              label="Bed Number"
-            />
-          </div>
-          <div class="col-12">
-            <q-input
-              outlined
-              v-model="formData.message"
-              type="textarea"
-              label="Message"
-            />
-          </div>
-        </div>
-      </q-card-section>
+          <q-stepper-navigation>
+            <q-btn size="md" color="primary" label="BOOK NOW" type="submit" />
+          </q-stepper-navigation>
+        </q-form>
+      </q-step>
 
-      <q-separator />
+      <q-step
+        :name="2"
+        title="Select payment"
+        icon="create_new_folder"
+        :done="stepBooking.selectedPayment"
+      >
+        <q-form method="post" @submit.prevent="onSubmit">
+          <q-select
+            outlined
+            v-model="selectedCard"
+            :options="cardPaymentStore.cardList"
+            option-label="name"
+            option-value="cardNumber"
+            :rules="[validators.required]"
+            hide-bottom-space
+          />
+          <q-stepper-navigation>
+            <q-btn type="submit" color="primary" label="Confirm" />
+            <q-btn
+              flat
+              @click="onPreviousPayment"
+              color="primary"
+              label="Back"
+              class="q-ml-sm"
+            />
+          </q-stepper-navigation>
+        </q-form>
+      </q-step>
 
-      <q-card-actions>
-        <q-btn
-          size="md"
-          color="primary"
-          label="BOOK NOW"
-          type="submit"
-          class="fit q-ma-xs"
-        />
-      </q-card-actions>
-    </q-form>
+      <q-step :name="3" title="Booking Result" icon="create_new_folder">
+        <q-item-label
+          class="text-weight-bolder text-h5 text-positive text-center q-pa-md"
+        >
+          Booking successfully 🎉
+        </q-item-label>
+        <q-stepper-navigation>
+          <q-btn @click="onBookingSuccess" color="primary" label="Go Home" />
+        </q-stepper-navigation>
+      </q-step>
+    </q-stepper>
   </q-card>
 </template>
 
