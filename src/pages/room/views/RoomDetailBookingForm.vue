@@ -92,7 +92,7 @@ function onPreviousPayment() {
 }
 
 function onSubmit() {
-  showDialog("confirm", { message: "Are you sure booking this room?" }).onOk(
+  showDialog("confirm", { message: "Are you sure booking this room ?" }).onOk(
     handleSubmit
   );
 }
