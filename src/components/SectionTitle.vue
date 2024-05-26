@@ -33,9 +33,9 @@ const _title = title.toUpperCase();
 
 <style scoped lang="css">
 .container {
-  padding: 44px 0 60px 0;
+  padding: 44px 0 44px 0;
 }
 .title-container {
-  padding-bottom: 60px;
+  padding-bottom: 44px;
 }
 </style>

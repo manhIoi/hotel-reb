@@ -5,6 +5,7 @@ import { ROUTES_PATH } from "src/router/routes";
 import { useRoute, useRouter } from "vue-router";
 import { useUserStore } from "stores/user-store";
 import { useI18n } from "vue-i18n";
+import Logo from "../../../assets/logo-white.svg";
 
 const router = useRouter();
 const route = useRoute();
@@ -39,19 +40,13 @@ function onClickLogout() {
 <template>
   <div class="q-pa-lg bg-primary full-width">
     <div class="flex flex-center">
-      <q-avatar
-        size="32px"
+      <q-img
+        :src="Logo"
+        alt="logo_app"
         @click="onClickLogo"
-        class="bg-primary cursor-pointer"
-      >
-        <q-img
-          src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg"
-          alt="logo_app"
-        />
-      </q-avatar>
-      <q-item-label class="text-weight-bolder text-overline q-ml-sm text-white">
-        RoomB
-      </q-item-label>
+        width="120px"
+        height="120px"
+      />
     </div>
     <div>
       <div class="flex justify-center items-center q-mt-sm">

@@ -10,68 +10,62 @@ const { t } = useI18n();
   <main-wrapper class="footer">
     <div class="row q-col-gutter-lg">
       <div class="col-md-4 col-xs-12">
-        <q-item-label class="text-weight-bolder text-h6 q-mb-md">
+        <q-item-label class="text-weight-bolder text-h5 q-mb-lg">
           {{ t("appFooter.about") }}
         </q-item-label>
         <div class="row items-center q-mb-md">
-          <q-icon name="fa-solid fa-envelope" size="24px" />
-          <q-item-label
-            class="text-subtitle1 text-white q-ml-sm text-weight-regular"
-          >
+          <q-icon name="fa-solid fa-envelope" size="18px" />
+          <q-item-label class="text-white q-ml-sm text-weight-regular">
             roomb@gmail.com
           </q-item-label>
         </div>
         <div class="row items-center q-mb-md">
-          <q-icon name="fa-solid fa-phone" size="24px" />
-          <q-item-label
-            class="text-subtitle1 text-white q-ml-sm text-weight-regular"
-          >
+          <q-icon name="fa-solid fa-phone" size="18px" />
+          <q-item-label class="text-white q-ml-sm text-weight-regular">
             +8412345677
           </q-item-label>
         </div>
         <div class="row items-center">
-          <q-icon name="fa-solid fa-location-dot" size="24px" />
-          <q-item-label
-            class="text-subtitle1 text-white q-ml-sm text-weight-regular"
-          >
+          <q-icon name="fa-solid fa-location-dot" size="18px" />
+          <q-item-label class="text-white q-ml-sm text-weight-regular">
             189 Thai Phien Street, Ho Chi Minh City
           </q-item-label>
         </div>
       </div>
       <div class="col-md-4 col-xs-12">
-        <q-item-label class="text-weight-bolder text-h6 q-mb-md">
+        <q-item-label class="text-weight-bolder text-h5 q-mb-lg">
           {{ t("appFooter.stayInTouch") }}
         </q-item-label>
         <div class="row">
           <q-icon
-            class="q-mr-md cursor-pointer icon-zoom"
-            size="md"
+            class="cursor-pointer icon-zoom q-mr-lg"
+            size="24px"
             name="fa-brands fa-facebook"
           />
           <q-icon
-            class="q-mr-md cursor-pointer icon-zoom"
-            size="md"
+            class="cursor-pointer icon-zoom q-mr-lg"
+            size="24px"
             name="fa-brands fa-instagram"
           />
           <q-icon
-            class="q-mr-md cursor-pointer icon-zoom"
-            size="md"
+            class="cursor-pointer icon-zoom q-mr-lg"
+            size="24px"
             name="fa-brands fa-twitch"
           />
         </div>
       </div>
       <div class="col-md-4 col-xs-12">
-        <q-item-label class="text-weight-bolder text-h6 q-mb-md">
+        <q-item-label class="text-weight-bolder text-h5 q-mb-lg">
           {{ t("appFooter.links") }}
         </q-item-label>
         <div class="flex full-width">
           <div
             v-for="item in footerNavigationList"
             v-bind:key="item.link"
-            class="q-py-md link-item"
+            class="q-mb-md link-item"
           >
-            <router-link class="text-white text-body1" :to="item.link"
-              >{{ t(item.title) }}
+            <router-link class="text-white" :to="item.link">
+              {{ t(item.title) }}
             </router-link>
           </div>
         </div>

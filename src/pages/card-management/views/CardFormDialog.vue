@@ -12,10 +12,6 @@ const cardOptions = [
     name: "VISA",
     type: "visa",
   },
-  {
-    name: "Master Card",
-    type: "mastercard",
-  },
 ];
 
 const cardPaymentStore = useCardPaymentStore();

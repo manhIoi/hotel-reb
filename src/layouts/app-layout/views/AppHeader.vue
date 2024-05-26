@@ -9,6 +9,7 @@ import { ref, watchEffect } from "vue";
 import { useUserStore } from "stores/user-store";
 import { ROUTES_PATH } from "src/router/routes";
 import { useI18n } from "vue-i18n";
+import Logo from "../../../assets/logo-no-background.svg";
 
 const leftDrawerOpen = defineModel("leftDrawerOpen");
 const router = useRouter();
@@ -54,16 +55,14 @@ function onClickProfileItem(item) {
 
 <template>
   <q-toolbar class="header q-mx-auto q-py-sm q-px-md justify-between">
-    <q-avatar
-      size="32px"
+    <q-img
+      class="q-mr-md cursor-pointer"
+      :src="Logo"
+      alt="logo_app"
+      width="52px"
+      height="52px"
       @click="onClickLogo"
-      class="bg-primary q-mx-md cursor-pointer"
-    >
-      <img
-        src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg"
-        alt="logo_app"
-      />
-    </q-avatar>
+    />
     <q-separator color="grey-3" inset vertical />
     <div class="q-mx-md">
       <language-switch />

@@ -1,6 +1,6 @@
 <script setup>
 import SectionTitle from "components/SectionTitle.vue";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import AmenityItem from "pages/room/components/AmenityItem.vue";
 import RoomDetailServicePrice from "pages/room/views/RoomDetailServicePrice.vue";
 import { formatDate, getRangeDate } from "src/utils";
@@ -46,17 +46,24 @@ const amenityList = [
     name: "Hairdryer",
   },
 ];
-const date = ref(formatDate(new Date()));
-const yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
+const dateModel = ref(new Date());
+const yesterday = computed(() => {
+  return new Date().setDate(new Date().getDate() - 1);
+});
 
 function events(date) {
-  return (
-    date === "2024/05/01" ||
-    date === "2024/05/05" ||
-    date === "2024/05/06" ||
-    date === "2024/05/09" ||
-    date === "2024/05/23"
-  );
+  if (formatDate(date) === formatDate(dateModel.value)) return true;
+  const isSunday = new Date(date).getDay() === 6;
+  const isThursday = new Date(date).getDay() === 3;
+  return isSunday || isThursday;
+}
+
+function eventColor(date) {
+  if (formatDate(date) === formatDate(dateModel.value)) return "primary";
+  const isSunday = new Date(date).getDay() === 6;
+  const isThursday = new Date(date).getDay() === 3;
+  if (isSunday) return "negative";
+  if (isThursday) return "positive";
 }
 </script>
 
@@ -64,9 +71,9 @@ function events(date) {
   <div class="row q-col-gutter-lg">
     <div class="col-md-6 col-xs-12">
       <section-title :title="t('roomDetail.titleLabel.overview')">
-        <q-item-label class="text-subtitle1 text-gey-9">
+        <p class="text-subtitle1 text-gey-9">
           {{ room.description }}
-        </q-item-label>
+        </p>
       </section-title>
       <section-title :title="t('roomDetail.titleLabel.freeAmenities')">
         <div class="row q-col-gutter-lg">
@@ -95,12 +102,10 @@ function events(date) {
         </div>
         <div>
           <q-date
+            v-model="dateModel"
             class="fit shadow-0 custom-shadow"
-            v-model="date"
             :events="events"
-            :event-color="
-              (date) => (date[9] % 2 === 0 ? 'positive' : 'negative')
-            "
+            :event-color="eventColor"
             :options="getRangeDate(yesterday, null)"
           />
         </div>

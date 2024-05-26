@@ -14,7 +14,7 @@ const enUS = {
     },
   },
   appFooter: {
-    about: "About RoomB",
+    about: "ABOUT REB",
     stayInTouch: "STAY IN TOUCH",
     links: "USEFUL LINKS",
     linkList: {
@@ -23,7 +23,7 @@ const enUS = {
       contact: "Contact",
       search: "Search",
     },
-    copyRight: "© 2022 RoomB Designed by p.manhloi",
+    copyRight: "© 2022 REB Designed by p.manhloi",
   },
   appDrawer: {
     search: "Search",
@@ -36,7 +36,7 @@ const enUS = {
     payment: "Payment",
   },
   home: {
-    welcome: "Welcome to RoomB",
+    welcome: "Welcome to REB",
     title: "Our world is your playground",
     description:
       "Make yourself at home in our sophisticated guest rooms, take in the incredible views and enjoy fresh air from our beautiful sea city.",
@@ -75,7 +75,7 @@ const enUS = {
     ourGuestLoveUs: "Our guest love us",
   },
   contact: {
-    title: "Contact with RoomB",
+    title: "Contact with REB",
     contactInformation: "Contact information",
     leaveYourMessage: "Leave your message",
     descMessage: "Contact us today using this form and we will reach you asap",
@@ -106,7 +106,7 @@ const enUS = {
     description: "Booking your room becomes easy",
     signIn: "Sign In",
     signUp: "Sign Up",
-    labelSignIn: "New to RoomB?",
+    labelSignIn: "New to REB ?",
     labelSignUp: "Have an account?",
     labelLinkSignIn: "Sign In",
     labelLinkSignUp: "Sign Up",
@@ -125,7 +125,7 @@ const enUS = {
     myCards: {
       title: "My Cards",
       addBtnTitle: "Add new card",
-      addBtnDescription: "Add new card to earn more benefit in RoomB",
+      addBtnDescription: "Add new card to earn more benefit in REB",
       editBtn: "Edit",
       addBtn: "Add Card",
     },
@@ -170,7 +170,7 @@ const vi = {
     },
   },
   appFooter: {
-    about: "Về RoomB",
+    about: "Về REB",
     stayInTouch: "GIỮ LIÊN LẠC",
     links: "LIÊN KẾT HỮU ÍCH",
     linkList: {
@@ -179,7 +179,7 @@ const vi = {
       contact: "Liên hệ",
       search: "Tìm kiếm",
     },
-    copyRight: "© 2022 RoomB Thiết kế bởi p.manhloi",
+    copyRight: "© 2022 REB Thiết kế bởi p.manhloi",
   },
   appDrawer: {
     search: "Tìm kiếm",
@@ -192,7 +192,7 @@ const vi = {
     payment: "Thanh toán",
   },
   home: {
-    welcome: "Chào mừng đến RoomB",
+    welcome: "Chào mừng đến REB",
     title: "Thế giới của chúng tôi là sân chơi của bạn",
     description:
       "Hãy cảm thấy như ở nhà trong các phòng khách sang trọng của chúng tôi, ngắm nhìn những cảnh đẹp tuyệt vời và tận hưởng không khí trong lành từ thành phố biển xinh đẹp của chúng tôi.",
@@ -231,7 +231,7 @@ const vi = {
     ourGuestLoveUs: "Khách hàng yêu thích chúng tôi",
   },
   contact: {
-    title: "Liên hệ với RoomB",
+    title: "Liên hệ với REB",
     contactInformation: "Thông tin liên hệ",
     leaveYourMessage: "Để lại lời nhắn của bạn",
     descMessage:
@@ -263,7 +263,7 @@ const vi = {
     description: "Đặt phòng của bạn trở nên dễ dàng",
     signIn: "Đăng nhập",
     signUp: "Đăng ký",
-    labelSignIn: "Mới sử dụng RoomB?",
+    labelSignIn: "Mới sử dụng REB ?",
     labelSignUp: "Đã có tài khoản?",
     labelLinkSignIn: "Đăng nhập",
     labelLinkSignUp: "Đăng ký",
@@ -282,7 +282,7 @@ const vi = {
     myCards: {
       title: "Thẻ của bạn",
       addBtnTitle: "Thêm thẻ mới",
-      addBtnDescription: "Tạo thẻ để nhận nhiều ưu đãi từ RoomB",
+      addBtnDescription: "Tạo thẻ để nhận nhiều ưu đãi từ REB",
       editBtn: "Chỉnh sửa",
       addBtn: "Thêm thẻ",
     },

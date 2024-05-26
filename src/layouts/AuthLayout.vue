@@ -4,6 +4,7 @@ import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { isEmpty } from "lodash";
 import { useRouter } from "vue-router";
+import Logo from "../assets/logo-white.svg";
 
 const userStore = useUserStore();
 const { user } = storeToRefs(userStore);
@@ -29,13 +30,8 @@ onMounted(() => {
       <div class="row fit">
         <div class="col-md-4 col-xs-0">
           <div class="fit bg-primary flex-center flex text-white column">
-            <q-img
-              width="100px"
-              height="100px"
-              src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg"
-            />
-            <h2 class="text-weight-bolder q-mb-md">RoomB</h2>
-            <q-item-label class="text-body1 text-weight-medium">
+            <q-img width="120px" height="120px" :src="Logo" />
+            <q-item-label class="text-subtitle1 text-weight-medium">
               Booking your room becomes easy
             </q-item-label>
           </div>
