@@ -55,7 +55,7 @@ class MockApi {
       KEYS.user,
       generateUser("admin@gmail.com", "admin", "123456")
     );
-    this.cardList = getDataByKey(KEYS.cardList, generatePaymentCardList(3));
+    this.cardList = getDataByKey(KEYS.cardList, []);
   }
 
   formatResponse(data) {
