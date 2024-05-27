@@ -13,6 +13,10 @@ export const navbarNavigationList = [
     title: "appHeader.navbarList.contact",
     link: "contact",
   },
+  {
+    title: "appHeader.navbarList.support",
+    link: "support",
+  },
 ];
 
 export const drawerNavigationList = [

@@ -3,6 +3,12 @@ import { useI18n } from "vue-i18n";
 
 export default {
   emits: ["clickAddBtn"],
+  props: {
+    bgColor: {
+      type: String,
+      default: "bg-grey-3",
+    },
+  },
   setup(props) {
     const { t } = useI18n();
     return {
@@ -12,7 +18,7 @@ export default {
 };
 </script>
 <template>
-  <q-card class="fit add-card-btn bg-grey-3" flat bordered>
+  <q-card class="fit add-card-btn" :class="bgColor" flat bordered>
     <q-card-section horizontal class="fit">
       <q-card-section class="flex column justify-center col">
         <q-item-label class="text-weight-bold text-h6">

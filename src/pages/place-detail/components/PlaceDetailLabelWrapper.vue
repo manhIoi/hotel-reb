@@ -8,9 +8,9 @@ export default {
 </script>
 
 <template>
-  <q-item-label class="q-mb-sm text-weight-bold text-grey-9">{{
-    label
-  }}</q-item-label>
+  <q-item-label class="q-mb-md text-weight-bold text-grey-9">
+    {{ label }}
+  </q-item-label>
   <slot />
 </template>
 

@@ -5,10 +5,12 @@ import { storeToRefs } from "pinia";
 import { isEmpty } from "lodash";
 import { useRouter } from "vue-router";
 import Logo from "../assets/logo-white.svg";
+import { useQuasar } from "quasar";
 
 const userStore = useUserStore();
 const { user } = storeToRefs(userStore);
 const router = useRouter();
+const $q = useQuasar();
 
 const handleChangeRouteByUserProfile = (userValue) => {
   if (!isEmpty(userValue)) {
@@ -28,7 +30,7 @@ onMounted(() => {
   <q-layout>
     <div class="container">
       <div class="row fit">
-        <div class="col-md-4 col-xs-0">
+        <div class="col-md-4 col-xs-0" v-show="$q.screen.gt.sm">
           <div class="fit bg-primary flex-center flex text-white column">
             <q-img width="120px" height="120px" :src="Logo" />
             <q-item-label class="text-subtitle1 text-weight-medium">

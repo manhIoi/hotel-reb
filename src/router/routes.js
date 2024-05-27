@@ -11,6 +11,7 @@ import SignUpPage from "pages/auth/SignUpPage.vue";
 import ProfilePage from "pages/profile/ProfilePage.vue";
 import CardManagementPage from "pages/card-management/CardManagementPage.vue";
 import PlaceDetail from "pages/place-detail/PlaceDetail.vue";
+import SupportPage from "pages/support/SupportPage.vue";
 
 export const ROUTES_PATH = {
   home: "home",
@@ -24,6 +25,7 @@ export const ROUTES_PATH = {
   profile: "profile",
   cardManagement: "card-management",
   placeDetail: "place-detail",
+  support: "support",
 };
 
 const routes = [
@@ -42,6 +44,11 @@ const routes = [
         name: ROUTES_PATH.contact,
         path: ROUTES_PATH.contact,
         component: ContactPage,
+      },
+      {
+        name: ROUTES_PATH.support,
+        path: ROUTES_PATH.support,
+        component: SupportPage,
       },
       {
         name: ROUTES_PATH.branch,

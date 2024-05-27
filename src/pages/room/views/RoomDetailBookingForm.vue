@@ -15,6 +15,7 @@ const { room } = defineProps({
   room: Object,
 });
 const dialog = defineModel("dialog");
+const router = useRouter();
 const cardPaymentStore = useCardPaymentStore();
 
 const formData = ref({
@@ -35,7 +36,6 @@ const stepBooking = ref({
   formInputted: false,
   selectedPayment: false,
 });
-const router = useRouter();
 const formInputProps = computed(() => {
   return {
     checkIn: {
@@ -122,6 +122,10 @@ async function handleSubmit() {
     dialogLoading.hide();
   }
 }
+
+function navigateCreateCard() {
+  router.push({ name: ROUTES_PATH.cardManagement });
+}
 </script>
 
 <template>
@@ -204,7 +208,11 @@ async function handleSubmit() {
         icon="create_new_folder"
         :done="stepBooking.selectedPayment"
       >
-        <q-form method="post" @submit.prevent="onSubmit">
+        <q-form
+          v-if="cardPaymentStore.cardList?.length > 0"
+          method="post"
+          @submit.prevent="onSubmit"
+        >
           <q-select
             outlined
             v-model="selectedCard"
@@ -225,6 +233,19 @@ async function handleSubmit() {
             />
           </q-stepper-navigation>
         </q-form>
+        <div v-else>
+          <q-item class="items-center">
+            <q-item-label class="q-mr-md">
+              Create your payment card to process booking
+            </q-item-label>
+            <q-btn
+              color="primary"
+              label="Create now"
+              class="no-shadow"
+              @click="navigateCreateCard"
+            />
+          </q-item>
+        </div>
       </q-step>
 
       <q-step :name="3" title="Booking Result" icon="create_new_folder">

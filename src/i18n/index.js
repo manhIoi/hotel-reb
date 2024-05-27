@@ -4,6 +4,7 @@ const enUS = {
       search: "Search",
       branch: "Branch",
       contact: "Contact",
+      support: "Support",
     },
     btnReservation: "Reservation",
     btnLogout: "Logout",
@@ -128,6 +129,8 @@ const enUS = {
       addBtnDescription: "Add new card to earn more benefit in REB",
       editBtn: "Edit",
       addBtn: "Add Card",
+      addCardSuggestLabel:
+        "Start add your credit card and enjoy pay your booking in one single tap!",
     },
     cardItem: {
       expireDate: "Expire in: {value}",
@@ -160,6 +163,7 @@ const vi = {
       search: "Tìm kiếm",
       branch: "Chi nhánh",
       contact: "Liên hệ",
+      support: "Hỗ trợ",
     },
     btnReservation: "Đặt phòng",
     btnLogout: "Đăng xuất",
@@ -285,6 +289,8 @@ const vi = {
       addBtnDescription: "Tạo thẻ để nhận nhiều ưu đãi từ REB",
       editBtn: "Chỉnh sửa",
       addBtn: "Thêm thẻ",
+      addCardSuggestLabel:
+        "Thêm thẻ thanh toán để đặt phòng dễ dàng hơn với một chạm!",
     },
     cardItem: {
       expireDate: "Hết hạn: {value}",

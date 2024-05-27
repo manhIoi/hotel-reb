@@ -64,7 +64,7 @@ export default {
 
 <template>
   <section-title :title="t('cardManagement.myCards.title')">
-    <div class="row q-col-gutter-md">
+    <div v-if="cardList?.length > 0" class="row q-col-gutter-md">
       <div
         class="col-md-6 col-xs-12"
         v-for="item in cardList"
@@ -78,6 +78,24 @@ export default {
       </div>
       <div class="col-md-6 col-xs-12">
         <payment-card-add-btn @click-add-btn="onClickAddCard" />
+      </div>
+    </div>
+    <div v-else>
+      <div class="flex column flex-center">
+        <payment-card-add-btn
+          @click-add-btn="onClickAddCard"
+          class="q-mb-md"
+          bg-color="bg-white"
+          style="max-width: 400px"
+        />
+        <q-img
+          src="https://ik.imagekit.io/tvlk/image/imageResource/2017/10/17/1508251430548-cc0b74447a44db0366327a7945859134.png?tr=q-75"
+          width="250px"
+          class="q-mb-md"
+        />
+        <q-item-label>
+          {{ t("cardManagement.myCards.addCardSuggestLabel") }}
+        </q-item-label>
       </div>
     </div>
   </section-title>
